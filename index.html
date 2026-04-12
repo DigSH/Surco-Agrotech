@@ -1,0 +1,587 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Surco â€” TecnologÃ­a que siembra</title>
+  <meta name="description" content="Surco es la plataforma de IA para la agricultura colombiana. GestiÃ³n de fincas, detecciÃ³n de enfermedades, riego inteligente y asesor agronÃ³mico con Claude y Gemini.">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="container nav-inner">
+    <a href="#" class="nav-logo">
+      <img src="assets/img/logo.png" alt="Surco" onerror="this.style.display='none'">
+      <span class="nav-logo-name">Surco</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#features">Funciones</a></li>
+      <li><a href="#ai">Asistentes IA</a></li>
+      <li><a href="#how">CÃ³mo funciona</a></li>
+      <li><a href="#screenshots">App</a></li>
+      <li><a href="#crops">Cultivos</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="#cta" class="btn btn-outline" style="padding:10px 20px;font-size:.88rem;">Descargar</a>
+      <a href="#cta" class="btn btn-primary" style="padding:10px 20px;font-size:.88rem;">Empezar gratis</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="reveal-l">
+        <div class="hero-badge">IA para la Agricultura 4.0</div>
+        <h1>TecnologÃ­a<br/>que <em>siembra</em><br/>resultados.</h1>
+        <p class="hero-desc">
+          Surco lleva inteligencia artificial a tu finca colombiana. Detecta enfermedades, gestiona riego, registra labores y consulta a tu asesor agronÃ³mico â€” todo desde tu celular.
+        </p>
+        <div class="hero-actions">
+          <a href="#cta" class="btn btn-primary">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>
+            Descargar la app
+          </a>
+          <a href="#features" class="btn btn-ghost">Ver funciones â†’</a>
+        </div>
+        <div class="hero-stats">
+          <div><div class="stat-num">145</div><div class="stat-label">Municipios colombianos</div></div>
+          <div><div class="stat-num">20+</div><div class="stat-label">Cultivos soportados</div></div>
+          <div><div class="stat-num">96%</div><div class="stat-label">PrecisiÃ³n detector IA</div></div>
+        </div>
+      </div>
+
+      <div class="hero-visual reveal-r">
+
+        <!-- Burbuja 1: Estado de riego -->
+        <div class="hbubble hb-1">
+          <div class="hb-label">Estado de riego</div>
+          <div class="hb-val" style="color:var(--verde-surco);">â— Ã“ptimo</div>
+        </div>
+
+        <!-- Burbuja 2: Plaga detectada -->
+        <div class="hbubble hb-2">
+          <div class="hb-label">Plaga detectada</div>
+          <div class="hb-val" style="color:var(--arcilla);">Monilia 72%</div>
+          <div class="hb-sub">Cacao Â· Lote Sur</div>
+        </div>
+
+        <!-- Burbuja 3: GDD acumulados -->
+        <div class="hbubble hb-3">
+          <div class="hb-label">GDD acumulados</div>
+          <div class="hb-val">847 Â°CÂ·dÃ­a</div>
+          <div class="hb-sub">Etapa: floraciÃ³n</div>
+        </div>
+
+        <!-- Burbuja 4: FenologÃ­a -->
+        <div class="hbubble hb-4">
+          <div class="hb-label">FenologÃ­a activa</div>
+          <div class="hb-val">FloraciÃ³n <span style="font-size:.78rem;font-weight:500;color:rgba(28,16,8,.5);">55%</span></div>
+          <div class="hb-sub">Tomate cherry</div>
+        </div>
+
+        <!-- Burbuja 5: Lluvia prevista -->
+        <div class="hbubble hb-5">
+          <div class="hb-label">Lluvia prevista</div>
+          <div class="hb-val" style="color:var(--azul-dato);">12 mm</div>
+          <div class="hb-sub">MaÃ±ana Â· No aplicar</div>
+        </div>
+
+        <!-- Burbuja 6: Clorofila SPAD -->
+        <div class="hbubble hb-6">
+          <div class="hb-label">Clorofila SPAD</div>
+          <div class="hb-val" style="color:var(--arcilla);">42.3</div>
+          <div class="hb-sub">Nivel adecuado</div>
+        </div>
+
+        <!-- Burbuja 7: Alerta IIH -->
+        <div class="hbubble hb-7">
+          <div class="hb-label">âš ï¸ Alerta IIH</div>
+          <div class="hb-val" style="color:var(--arcilla);">Umbral superado</div>
+          <div class="hb-sub">Papa Â· Lote Norte</div>
+        </div>
+
+        <!-- Burbuja 8: Nuevo reporte -->
+        <div class="hbubble hb-8">
+          <div class="hb-label">Reporte generado</div>
+          <div class="hb-val" style="color:var(--verde-surco);">âœ“ PDF listo</div>
+          <div class="hb-sub">BPA Â· Finca El Progreso</div>
+        </div>
+
+        <div class="hero-slider" id="heroSlider">
+          <img src="assets/img/app-screenshot-cacao.jpg"     alt="Surco â€” DetecciÃ³n en cacao"  class="active">
+          <img src="assets/img/app-screenshot-06.jpg"      alt="Surco App">
+          <img src="assets/img/app-screenshot-10.jpg"          alt="Surco App">
+          <img src="assets/img/app-screenshot-09.jpg"          alt="Surco App">
+          <img src="assets/img/app-screenshot-13.jpg"          alt="Surco App">
+          <img src="assets/img/app-screenshot-08.jpg"      alt="Surco App">
+          <img src="assets/img/app-screenshot-12.jpg"      alt="Surco App">
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES: BENTO GRID -->
+<section id="features">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="tag tag-green">Funcionalidades</div>
+      <h2>Todo lo que necesita<br/>tu finca en un solo lugar</h2>
+      <p style="color:rgba(28,16,8,.6);font-size:1.05rem;max-width:480px;margin:16px auto 0;">Desde el diagnÃ³stico en campo hasta el anÃ¡lisis econÃ³mico al final de la temporada.</p>
+    </div>
+
+    <div class="bento">
+
+      <!-- AI Advisor â€” tall left card -->
+      <div class="bc b-ai reveal-l" style="background:linear-gradient(160deg,var(--verde-surco) 0%,#0e2418 100%);padding:22px 18px;overflow:hidden;">
+        <!-- header -->
+        <div style="margin-bottom:14px;flex-shrink:0;">
+          <div style="font-size:1.4rem;margin-bottom:6px;">ðŸŒ¿</div>
+          <h3 style="color:var(--verde-brote);font-size:.98rem;margin:0;">Asesor IA con contexto</h3>
+        </div>
+        <!-- chat -->
+        <div style="flex:1;min-height:0;position:relative;">
+          <!-- watermark -->
+          <div style="
+            position:absolute; inset:0;
+            display:flex; align-items:center; justify-content:center;
+            pointer-events:none; z-index:0;
+          ">
+            <img src="assets/img/logo.png" alt="" style="
+              width:72%; max-width:160px; opacity:.18;
+              mix-blend-mode: screen;
+              user-select:none;
+            ">
+          </div>
+          <div id="aichat" style="position:relative;z-index:1;height:100%;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;gap:7px;"></div>
+        </div>
+      </div>
+
+      <!-- 96% stat -->
+      <div class="bc b-s96 reveal" style="justify-content:center;">
+        <div class="big-stat" style="color:var(--arcilla);">96%</div>
+        <div class="big-stat-sub" style="color:rgba(28,16,8,.55);">PrecisiÃ³n detector IA tomate y arÃ¡ndano</div>
+      </div>
+
+      <!-- Disease detection -->
+      <div class="bc bc-clay b-det reveal">
+        <div class="icon">ðŸ”¬</div>
+        <h3>DetecciÃ³n de enfermedades</h3>
+        <p>Modelos TFLite YOLOv8. DiagnÃ³stico sin internet.</p>
+      </div>
+
+      <!-- Irrigation -->
+      <div class="bc b-irrig reveal">
+        <div class="icon">ðŸ’§</div>
+        <h3>Riego inteligente</h3>
+        <p>Balance hÃ­drico ETcÃ—Kc por cultivo y etapa fenolÃ³gica.</p>
+      </div>
+
+      <!-- Phenology -->
+      <div class="bc b-pheno reveal">
+        <div class="icon">ðŸ“ˆ</div>
+        <h3>FenologÃ­a por GDD</h3>
+        <p>Grados-dÃ­a acumulados para tomate, papa, maÃ­z, lechuga y frÃ­jol.</p>
+      </div>
+
+      <!-- Chlorophyll -->
+      <div class="bc b-chloro reveal">
+        <div class="icon">ðŸŒ±</div>
+        <h3>AnÃ¡lisis de clorofila</h3>
+        <p>Estima SPAD con solo una foto. RegresiÃ³n RGB calibrada.</p>
+      </div>
+
+      <!-- Field notebook -->
+      <div class="bc b-field reveal">
+        <div class="icon">ðŸ“‹</div>
+        <h3>Cuaderno de campo</h3>
+        <p>Registra con IIH y PHI. PDF firmado para BPA/BPM.</p>
+      </div>
+
+      <!-- 62 stat â€” dark -->
+      <div class="bc bc-dark b-s62 reveal" style="justify-content:center;">
+        <div class="big-stat" style="color:var(--verde-brote);">62</div>
+        <div class="big-stat-sub" style="color:rgba(255,255,255,.5);">Plagas registradas por municipio</div>
+      </div>
+
+      <!-- Economics -->
+      <div class="bc b-eco reveal">
+        <div class="icon">ðŸ’°</div>
+        <h3>EconomÃ­a agrÃ­cola</h3>
+        <p>Costos por actividad. Presupuesto vs. ejecutado.</p>
+      </div>
+
+      <!-- Multi-user â€” green -->
+      <div class="bc bc-green b-multi reveal">
+        <div class="icon">ðŸ‘¥</div>
+        <h3>Multi-usuario</h3>
+        <p>TÃ©cnicos, trabajadores y admins con roles diferenciados.</p>
+      </div>
+
+      <!-- Monitoring â€” 2 cols wide, horizontal layout -->
+      <div class="bc bc-h b-mon reveal">
+        <div class="bc-h-icon">ðŸ”</div>
+        <div class="bc-h-text">
+          <h3>Monitoreo fitosanitario</h3>
+          <p>Escala EPPO 0â€“9. Incidencia, presiÃ³n y tendencia. Alertas automÃ¡ticas al superar umbral de acciÃ³n.</p>
+        </div>
+      </div>
+
+      <!-- Smart Alerts â€” 2 cols wide, horizontal layout -->
+      <div class="bc bc-h b-alrt reveal" style="background:var(--tierra);">
+        <div class="bc-h-icon">âš ï¸</div>
+        <div class="bc-h-text">
+          <h3 style="color:#fff;">Alertas inteligentes</h3>
+          <p style="color:rgba(255,255,255,.55);">Panel cross-finca: IIH, fenologÃ­a, condiciones de clima para aplicaciÃ³n y recordatorios de monitoreo.</p>
+        </div>
+      </div>
+
+      <!-- Weather â€” 3 cols wide -->
+      <div class="bc bc-h b-wx reveal" style="background:linear-gradient(135deg,var(--azul-dato) 0%,#0e2030 100%);">
+        <div class="bc-h-icon">ðŸŒ¦ï¸</div>
+        <div class="bc-h-text">
+          <h3 style="color:#fff;">Clima agrÃ­cola en tiempo real</h3>
+          <p style="color:rgba(255,255,255,.55);">IntegraciÃ³n meteorolÃ³gica: alertas de viento y precipitaciÃ³n antes de aplicar fitosanitarios. Datos en tiempo real para cada lote.</p>
+        </div>
+      </div>
+
+      <!-- Zone data â€” 1 col -->
+      <div class="bc b-zone reveal">
+        <div class="icon">ðŸ—ºï¸</div>
+        <h3>Zonas agroecolÃ³gicas</h3>
+        <p>145 municipios con aptitud de cultivo, plagas comunes y zonas tÃ©rmicas IGAC.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- DEMO: DISEASE DETECTION -->
+<section id="demo">
+  <div class="container">
+    <div class="demo-header reveal">
+      <div class="tag tag-clay">DetecciÃ³n en acciÃ³n</div>
+      <h2>Ve el detector de enfermedades<br/>trabajar en tiempo real</h2>
+      <p>Surco identifica enfermedades en cacao, tomate y arÃ¡ndano directamente desde la cÃ¡mara â€” sin conexiÃ³n a internet.</p>
+    </div>
+
+    <div class="demo-inner">
+      <!-- Photo -->
+      <div class="demo-photo-wrap reveal-l">
+        <img
+          src="assets/img/app-screenshot-cacao.jpg"
+          alt="Surco detectando enfermedades en cacao"
+          class="demo-photo"
+        >
+        <div class="demo-photo-badge">
+          <div class="demo-photo-badge-dot"></div>
+          <div class="demo-photo-badge-text">DetecciÃ³n activa â€” Cacao</div>
+        </div>
+      </div>
+
+      <!-- Video -->
+      <div class="reveal-r">
+        <div class="demo-video-wrap">
+          <video
+            autoplay
+            loop
+            muted
+            playsinline
+            preload="metadata"
+          >
+            <source src="assets/video/surco_demo_silent.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="demo-caption">
+          <div class="demo-caption-icon">ðŸ”¬</div>
+          <div>
+            <h3>Identificador de enfermedades en cacao</h3>
+            <p>El modelo TFLite YOLOv8 detecta FitÃ³ftora y Monilia en tiempo real con un 96% de precisiÃ³n (mAP50). Funciona completamente offline â€” ideal para zonas rurales sin seÃ±al.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AI ASSISTANTS -->
+<section id="ai">
+  <div class="container">
+    <div class="ai-header reveal">
+      <div class="tag tag-dark">Asistentes de IA</div>
+      <h2>Impulsado por los mejores<br/>modelos de IA del mundo</h2>
+      <p>Surco integra dos de los modelos mÃ¡s avanzados para darte recomendaciones agronÃ³micas de nivel experto.</p>
+    </div>
+
+    <div class="ai-grid">
+      <!-- Claude -->
+      <div class="ai-card ai-claude reveal-l">
+        <div class="ai-badge">
+          <span class="dot dot-claude"></span>
+          <div>
+            <div class="ai-badge-name">Claude Sonnet</div>
+            <div class="ai-badge-company">por Anthropic</div>
+          </div>
+        </div>
+        <h3>Tu asesor agronÃ³mico principal</h3>
+        <p>
+          Claude es el motor conversacional de Surco. Con acceso al historial completo de tu finca, lote, labores, fenologÃ­a y los 92 000 registros de suelo del IGAC, genera recomendaciones precisas y contextualizadas â€” no respuestas genÃ©ricas de internet.
+        </p>
+        <div class="ai-tags">
+          <span class="ai-tag">Contexto completo de finca</span>
+          <span class="ai-tag">Dosis y momentos de aplicaciÃ³n</span>
+          <span class="ai-tag">Alertas fitosanitarias</span>
+          <span class="ai-tag">BPA/BPM compliance</span>
+        </div>
+      </div>
+
+      <!-- Gemini -->
+      <div class="ai-card ai-gemini reveal-r">
+        <div class="ai-badge">
+          <span class="dot dot-gemini"></span>
+          <div>
+            <div class="ai-badge-name">Gemini</div>
+            <div class="ai-badge-company">por Google DeepMind</div>
+          </div>
+        </div>
+        <h3>AnÃ¡lisis visual e inteligencia multimodal</h3>
+        <p>
+          Gemini potencia la capacidad de anÃ¡lisis visual de Surco. Procesa imÃ¡genes de hojas, frutos y suelos para complementar la detecciÃ³n TFLite on-device, aportando una segunda capa de inteligencia que enriquece el diagnÃ³stico fitosanitario.
+        </p>
+        <div class="ai-tags">
+          <span class="ai-tag">AnÃ¡lisis de imÃ¡genes</span>
+          <span class="ai-tag">DiagnÃ³stico visual</span>
+          <span class="ai-tag">Segunda opiniÃ³n IA</span>
+          <span class="ai-tag">Multimodal nativo</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="tag tag-green">CÃ³mo funciona</div>
+      <h2>De la foto al consejo<br/>en segundos</h2>
+      <p style="color:rgba(28,16,8,.6);font-size:1.05rem;max-width:460px;margin:16px auto 0;">El pipeline de IA de Surco analiza tu imagen con mÃºltiples modelos antes de responder.</p>
+    </div>
+    <div class="steps reveal">
+      <div class="step">
+        <div class="step-circle"><span>ðŸ“·</span></div>
+        <div class="step-n">01</div>
+        <h3>Toma una foto</h3>
+        <p>Desde cualquier hoja, fruto o Ã¡rea. Sin equipos especiales.</p>
+      </div>
+      <div class="step">
+        <div class="step-circle"><span>âš¡</span></div>
+        <div class="step-n">02</div>
+        <h3>AnÃ¡lisis on-device</h3>
+        <p>ML Kit + TFLite clasifican enfermedades y estiman SPAD sin internet.</p>
+      </div>
+      <div class="step">
+        <div class="step-circle"><span>ðŸ—ºï¸</span></div>
+        <div class="step-n">03</div>
+        <h3>Contexto de finca</h3>
+        <p>Historial de labores, fenologÃ­a, suelo IGAC y clima se aÃ±aden al prompt.</p>
+      </div>
+      <div class="step">
+        <div class="step-circle"><span>ðŸ¤–</span></div>
+        <div class="step-n">04</div>
+        <h3>RecomendaciÃ³n IA</h3>
+        <p>Claude y Gemini responden con dosis, momentos de aplicaciÃ³n y alertas especÃ­ficas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCREENSHOTS CAROUSEL -->
+<section id="screenshots">
+  <div class="container">
+    <div class="screenshots-header reveal">
+      <div class="tag tag-clay">La app en acciÃ³n</div>
+      <h2>DiseÃ±ada para el campo,<br/>no para el escritorio</h2>
+      <p style="color:rgba(28,16,8,.6);font-size:1.05rem;max-width:460px;margin:16px auto 0;">Interfaz intuitiva que funciona con guantes, bajo el sol y sin seÃ±al.</p>
+    </div>
+  </div>
+  <div class="track-wrap">
+    <div class="track">
+      <div class="ss-item"><img src="assets/img/app-screenshot-01.jpg"     alt="Screen 1"  loading="lazy"></div>
+      <div class="ss-item"><img src="assets/img/app-screenshot-02.jpg" alt="Screen 2"  loading="lazy"></div>
+      <div class="ss-item"><img src="assets/img/app-screenshot-03.jpg" alt="Screen 3"  loading="lazy"></div>
+      <div class="ss-item"><img src="assets/img/app-screenshot-04.jpg"     alt="Screen 4"  loading="lazy"></div>
+      <div class="ss-item"><img src="assets/img/app-screenshot-05.jpg"     alt="Screen 5"  loading="lazy"></div>
+      <div class="ss-item"><img src="assets/img/app-screenshot-06.jpg" alt="Screen 6"  loading="lazy"></div>
+      <div class="ss-item"><img src="assets/img/app-screenshot-07.jpg" alt="Screen 7"  loading="lazy"></div>
+      <div class="ss-item"><img src="assets/img/app-screenshot-08.jpg" alt="Screen 8"  loading="lazy"></div>
+      <div class="ss-item"><img src="assets/img/app-screenshot-09.jpg"     alt="Screen 9"  loading="lazy"></div>
+      <div class="ss-item"><img src="assets/img/app-screenshot-10.jpg"     alt="Screen 10" loading="lazy"></div>
+      <div class="ss-item"><img src="assets/img/app-screenshot-11.jpg" alt="Screen 11" loading="lazy"></div>
+      <div class="ss-item"><img src="assets/img/app-screenshot-12.jpg" alt="Screen 12" loading="lazy"></div>
+      <div class="ss-item"><img src="assets/img/app-screenshot-13.jpg"     alt="Screen 13" loading="lazy"></div>
+      <!-- duplicate for seamless loop -->
+      <div class="ss-item"><img src="assets/img/app-screenshot-01.jpg"     alt="Screen 1"  loading="lazy"></div>
+      <div class="ss-item"><img src="assets/img/app-screenshot-02.jpg" alt="Screen 2"  loading="lazy"></div>
+      <div class="ss-item"><img src="assets/img/app-screenshot-03.jpg" alt="Screen 3"  loading="lazy"></div>
+      <div class="ss-item"><img src="assets/img/app-screenshot-04.jpg"     alt="Screen 4"  loading="lazy"></div>
+      <div class="ss-item"><img src="assets/img/app-screenshot-05.jpg"     alt="Screen 5"  loading="lazy"></div>
+      <div class="ss-item"><img src="assets/img/app-screenshot-06.jpg" alt="Screen 6"  loading="lazy"></div>
+      <div class="ss-item"><img src="assets/img/app-screenshot-07.jpg" alt="Screen 7"  loading="lazy"></div>
+      <div class="ss-item"><img src="assets/img/app-screenshot-08.jpg" alt="Screen 8"  loading="lazy"></div>
+      <div class="ss-item"><img src="assets/img/app-screenshot-09.jpg"     alt="Screen 9"  loading="lazy"></div>
+      <div class="ss-item"><img src="assets/img/app-screenshot-10.jpg"     alt="Screen 10" loading="lazy"></div>
+      <div class="ss-item"><img src="assets/img/app-screenshot-11.jpg" alt="Screen 11" loading="lazy"></div>
+      <div class="ss-item"><img src="assets/img/app-screenshot-12.jpg" alt="Screen 12" loading="lazy"></div>
+      <div class="ss-item"><img src="assets/img/app-screenshot-13.jpg"     alt="Screen 13" loading="lazy"></div>
+    </div>
+  </div>
+</section>
+
+<!-- CROPS -->
+<section id="crops">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="tag tag-green">Cultivos soportados</div>
+      <h2>DiseÃ±ado para el<br/>campo colombiano</h2>
+      <p style="color:rgba(28,16,8,.6);font-size:1.05rem;max-width:460px;margin:16px auto 0;">Modelos fenolÃ³gicos y tablas hÃ­dricas calibradas para las principales especies cultivadas en Colombia.</p>
+    </div>
+    <div class="chips reveal">
+      <div class="chip">ðŸ… Tomate</div>
+      <div class="chip">ðŸ¥” Papa</div>
+      <div class="chip">ðŸŒ½ MaÃ­z</div>
+      <div class="chip">ðŸ¥¬ Lechuga</div>
+      <div class="chip">ðŸ«˜ FrÃ­jol</div>
+      <div class="chip">ðŸ« ArÃ¡ndano</div>
+      <div class="chip">ðŸŒ¿ Cultivos genÃ©ricos</div>
+      <div class="chip">âž• MÃ¡s prÃ³ximamente</div>
+    </div>
+    <div class="cov-grid reveal">
+      <div class="cov-card">
+        <div class="cov-icon">ðŸ—ºï¸</div>
+        <h3>32 departamentos</h3>
+        <p>Cobertura completa Colombia continental + BogotÃ¡ D.C. con altitud, zona IGAC y rÃ©gimen hÃ­drico.</p>
+      </div>
+      <div class="cov-card">
+        <div class="cov-icon">ðŸª²</div>
+        <h3>62 plagas registradas</h3>
+        <p>Fitosanidad regional cruzada con municipio y cultivo para alertas mÃ¡s relevantes.</p>
+      </div>
+      <div class="cov-card">
+        <div class="cov-icon">ðŸŒ¡ï¸</div>
+        <h3>4 zonas tÃ©rmicas</h3>
+        <p>Caliente, templada, frÃ­a y pÃ¡ramo. ClasificaciÃ³n automÃ¡tica por altitud y zona Holdridge.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TECH STACK -->
+<section id="tech">
+  <div class="container">
+    <div class="tech-header reveal">
+      <div class="tag tag-dark">TecnologÃ­a</div>
+      <h2>IA de vanguardia para<br/>el agricultor moderno</h2>
+      <p>Los mejores modelos de IA con infraestructura confiable para que la tecnologÃ­a no sea un obstÃ¡culo.</p>
+    </div>
+    <div class="tech-grid reveal">
+      <div class="tech-card">
+        <div class="tech-icon">ðŸ¤–</div>
+        <h3>Claude (Anthropic)</h3>
+        <p>Asesor conversacional con contexto completo de finca, lote e historial de labores.</p>
+      </div>
+      <div class="tech-card">
+        <div class="tech-icon">âœ¨</div>
+        <h3>Gemini (Google)</h3>
+        <p>AnÃ¡lisis visual multimodal para diagnÃ³stico fitosanitario desde imÃ¡genes de campo.</p>
+      </div>
+      <div class="tech-card">
+        <div class="tech-icon">ðŸ“±</div>
+        <h3>Flutter</h3>
+        <p>App nativa Android e iOS desde un Ãºnico cÃ³digo base optimizado para campo.</p>
+      </div>
+      <div class="tech-card">
+        <div class="tech-icon">âš¡</div>
+        <h3>TFLite on-device</h3>
+        <p>Inferencia YOLOv8 directamente en tu telÃ©fono. Sin internet, sin demora.</p>
+      </div>
+      <div class="tech-card">
+        <div class="tech-icon">ðŸ”¥</div>
+        <h3>Firebase</h3>
+        <p>AutenticaciÃ³n segura, sincronizaciÃ³n en la nube y Crashlytics para mÃ¡xima estabilidad.</p>
+      </div>
+      <div class="tech-card">
+        <div class="tech-icon">ðŸ—„ï¸</div>
+        <h3>Hive + SQLite</h3>
+        <p>Persistencia local robusta. Trabaja offline y sincroniza cuando tengas seÃ±al.</p>
+      </div>
+      <div class="tech-card">
+        <div class="tech-icon">ðŸŒ</div>
+        <h3>Datos IGAC</h3>
+        <p>92K registros de suelo pre-procesados para contexto agronÃ³mico preciso.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="container">
+    <div class="reveal">
+      <div class="tag tag-light">Disponible ahora</div>
+      <h2>Empieza a sembrar<br/>con inteligencia</h2>
+      <p>Descarga Surco gratis y lleva el primer asesor agronÃ³mico con IA a tu finca colombiana.</p>
+      <div class="store-btns">
+        <a href="#" class="store-btn">
+          <svg viewBox="0 0 24 24"><path d="M3.18 23.76c.37.2.8.21 1.2-.01l12.18-7.03-2.64-2.64-10.74 9.68zM.5 1.12A1.49 1.49 0 0 0 0 2.28v19.44c0 .46.18.88.5 1.16l.06.06 10.89-10.89v-.26L.56 1.06.5 1.12zM20.34 10.27l-2.96-1.71-2.96 2.95 2.96 2.95 2.97-1.71c.85-.49.85-1.99-.01-2.48zM4.38.25L16.56 7.27l-2.64 2.64L3.18.23c.4-.22.83-.21 1.2.02z"/></svg>
+          <div><div class="sb-label">Disponible en</div><div class="sb-name">Google Play</div></div>
+        </a>
+        <a href="#" class="store-btn">
+          <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+          <div><div class="sb-label">PrÃ³ximamente en</div><div class="sb-name">App Store</div></div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <a href="#" class="foot-logo">
+          <img src="assets/img/logo.png" alt="Surco" onerror="this.style.display='none'">
+          <span class="foot-logo-name">Surco</span>
+        </a>
+        <p>Herramientas de IA para la agricultura colombiana. TecnologÃ­a que siembra resultados reales.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Producto</h4>
+        <a href="#features">Funciones</a>
+        <a href="#crops">Cultivos</a>
+        <a href="#tech">TecnologÃ­a</a>
+        <a href="#cta">Descargar</a>
+      </div>
+      <div class="foot-col">
+        <h4>Legal</h4>
+        <a href="privacy-policy-surco.html">PolÃ­tica de privacidad</a>
+        <a href="#">TÃ©rminos de uso</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <p>Â© 2025 Surco. Todos los derechos reservados.</p>
+      <p>Hecho con â¤ï¸ para el campo colombiano</p>
+    </div>
+  </div>
+</footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
