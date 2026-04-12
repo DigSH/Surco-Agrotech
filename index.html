@@ -1,12 +1,530 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Surco â€” TecnologÃ­a que siembra</title>
-  <meta name="description" content="Surco es la plataforma de IA para la agricultura colombiana. GestiÃ³n de fincas, detecciÃ³n de enfermedades, riego inteligente y asesor agronÃ³mico con Claude y Gemini.">
+  <title>Surco — Tecnología que siembra</title>
+  <meta name="description" content="Surco es la plataforma de IA para la agricultura colombiana. Gestión de fincas, detección de enfermedades, riego inteligente y asesor agronómico con Claude y Gemini.">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/index.css">
+  <style>
+    :root {
+      --arcilla:     #C4501A;
+      --crema:       #F5EDD8;
+      --tierra:      #1C1008;
+      --verde-surco: #2A5C3F;
+      --verde-brote: #8DC49A;
+      --azul-dato:   #1A3D5C;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Outfit', sans-serif; background: var(--crema); color: var(--tierra); overflow-x: hidden; }
+
+    h1, h2, h3 { font-family: 'Playfair Display', serif; line-height: 1.1; }
+    h1 { font-size: clamp(3rem, 7vw, 6rem); font-weight: 900; letter-spacing: -.03em; }
+    h2 { font-size: clamp(2rem, 4.5vw, 3.5rem); font-weight: 700; letter-spacing: -.02em; }
+    h3 { font-size: 1.1rem; font-weight: 700; }
+    p  { line-height: 1.7; }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+
+    /* reveal */
+    .reveal, .reveal-l, .reveal-r {
+      opacity: 0; transition: opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1);
+    }
+    .reveal   { transform: translateY(32px); }
+    .reveal-l { transform: translateX(-32px); }
+    .reveal-r { transform: translateX(32px); }
+    .reveal.on, .reveal-l.on, .reveal-r.on { opacity: 1; transform: none; }
+
+    /* buttons */
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 28px; border-radius: 16px;
+      font-family: 'Outfit', sans-serif; font-size: 1rem; font-weight: 600;
+      cursor: pointer; text-decoration: none; border: none;
+      transition: transform .2s cubic-bezier(.34,1.56,.64,1), box-shadow .2s;
+    }
+    .btn:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 12px 32px rgba(0,0,0,.2); }
+    .btn-primary { background: var(--arcilla); color: #fff; }
+    .btn-ghost   { background: rgba(28,16,8,.07); color: var(--tierra); }
+    .btn-outline { background: transparent; color: var(--tierra); border: 2px solid rgba(28,16,8,.25); }
+
+    /* ─── NAV ──────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 12px 0; transition: background .3s, box-shadow .3s;
+    }
+    nav.scrolled {
+      background: rgba(245,237,216,.9);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 1px 0 rgba(28,16,8,.08);
+    }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 56px; }
+    .nav-logo  { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo img { height: 36px; width: auto; }
+    .nav-logo-name { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 900; color: var(--tierra); }
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a { text-decoration: none; color: var(--tierra); font-weight: 500; font-size: .9rem; opacity: .6; transition: opacity .2s; }
+    .nav-links a:hover { opacity: 1; }
+    .nav-cta { display: flex; gap: 12px; }
+    @media (max-width: 768px) { .nav-links, .nav-cta .btn-outline { display: none; } }
+
+    /* ─── HERO ─────────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      background:
+        radial-gradient(ellipse 90% 70% at 65% 40%, rgba(42,92,63,.13) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 60% at 5% 85%,  rgba(196,80,26,.1) 0%, transparent 55%),
+        var(--crema);
+      display: flex; align-items: center; padding-top: 100px; overflow: hidden;
+    }
+    .hero-inner {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: center; padding: 80px 0 100px;
+    }
+    @media (max-width: 900px) { .hero-inner { grid-template-columns: 1fr; } .hero-visual { display: none; } }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(196,80,26,.1); border: 1px solid rgba(196,80,26,.2);
+      color: var(--arcilla); border-radius: 100px;
+      padding: 6px 14px; font-size: .8rem; font-weight: 600;
+      letter-spacing: .04em; text-transform: uppercase; margin-bottom: 24px;
+    }
+    .hero-badge::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--arcilla); animation: pulse 2s infinite;
+    }
+    @keyframes pulse { 0%,100% { opacity:1; transform:scale(1); } 50% { opacity:.4; transform:scale(.7); } }
+
+    .hero h1 { color: var(--tierra); margin-bottom: 28px; }
+    .hero h1 em { font-style: italic; color: var(--arcilla); }
+    .hero-desc { font-size: 1.1rem; color: rgba(28,16,8,.65); max-width: 500px; margin-bottom: 44px; line-height: 1.75; }
+    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 60px; }
+    .hero-stats { display: flex; gap: 40px; padding-top: 36px; border-top: 1px solid rgba(28,16,8,.1); }
+    .stat-num { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 900; color: var(--arcilla); line-height: 1; }
+    .stat-label { font-size: .78rem; font-weight: 500; color: rgba(28,16,8,.5); margin-top: 4px; }
+
+    .hero-visual { position: relative; display: flex; justify-content: center; }
+    .hero-slider {
+      width: 260px; height: 520px; position: relative; flex-shrink: 0;
+      border-radius: 32px; overflow: hidden;
+      box-shadow: 0 48px 96px rgba(28,16,8,.28), 0 0 0 1px rgba(28,16,8,.06);
+      transform: perspective(1000px) rotateY(-5deg) rotateX(2deg);
+      transition: transform .5s cubic-bezier(.16,1,.3,1);
+    }
+    .hero-visual:hover .hero-slider { transform: perspective(1000px) rotateY(0deg) rotateX(0deg); }
+    .hero-slider img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%; object-fit: cover;
+      opacity: 0; transition: opacity .9s ease-in-out;
+      border-radius: 32px;
+    }
+    .hero-slider img.active { opacity: 1; }
+
+    /* ── Animated bubbles ─────────────────────────────── */
+    .hbubble {
+      position: absolute;
+      background: rgba(255,255,255,.9);
+      backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255,255,255,.95);
+      border-radius: 16px; padding: 11px 15px;
+      box-shadow: 0 12px 36px rgba(28,16,8,.16);
+      pointer-events: none; z-index: 2;
+      opacity: 0;
+      animation: hb-show 18s ease-in-out infinite;
+      min-width: 120px;
+    }
+    @keyframes hb-show {
+      0%          { opacity:0; transform: translateY(10px) scale(.93); }
+      7%          { opacity:1; transform: translateY(0)    scale(1);   }
+      55%         { opacity:1; transform: translateY(0)    scale(1);   }
+      65%         { opacity:0; transform: translateY(-8px) scale(.95); }
+      100%        { opacity:0; transform: translateY(-8px) scale(.95); }
+    }
+    .hb-label { font-size: .62rem; font-weight: 700; color: rgba(28,16,8,.42); text-transform: uppercase; letter-spacing: .07em; margin-bottom: 4px; }
+    .hb-val   { font-weight: 700; font-size: .95rem; line-height: 1.2; }
+    .hb-sub   { font-size: .68rem; color: rgba(28,16,8,.45); margin-top: 2px; }
+
+    /* individual positions + staggered delays (18s cycle, 8 bubbles → ~2.25s apart) */
+    .hb-1 { top: 8%;     left: -44px;  animation-delay:  0s;    } /* Estado de riego    */
+    .hb-2 { top: 6%;     right: -20px; animation-delay: -2.2s;  } /* Plaga detectada    */
+    .hb-3 { top: 35%;    left: -54px;  animation-delay: -4.5s;  } /* GDD acumulados     */
+    .hb-4 { top: 38%;    right: -32px; animation-delay: -6.7s;  } /* Fenología          */
+    .hb-5 { bottom: 28%; left: -30px;  animation-delay: -9s;    } /* Lluvia prevista    */
+    .hb-6 { bottom: 14%; right: -36px; animation-delay: -11.2s; } /* Clorofila SPAD     */
+    .hb-7 { bottom: 5%;  left: 5%;     animation-delay: -13.5s; } /* Alerta IIH         */
+    .hb-8 { top: 60%;    right: -28px; animation-delay: -15.7s; } /* Nuevo reporte      */
+
+    @media (max-width: 900px) { .hbubble { display: none; } }
+
+    /* ─── BENTO GRID ───────────────────────────────────── */
+    #features { background: #fff; padding: 100px 0; }
+    .section-header { text-align: center; margin-bottom: 56px; }
+    .tag {
+      display: inline-block; border-radius: 100px;
+      padding: 5px 14px; font-size: .72rem; font-weight: 700;
+      letter-spacing: .08em; text-transform: uppercase; margin-bottom: 16px;
+    }
+    .tag-green { background: var(--verde-brote); color: var(--verde-surco); }
+    .tag-clay  { background: rgba(196,80,26,.12); color: var(--arcilla); }
+    .tag-dark  { background: rgba(141,196,154,.15); color: var(--verde-brote); }
+    .tag-light { background: rgba(255,255,255,.2); color: #fff; }
+
+    /* ─── BENTO grid-template-areas (precise layout) ── */
+    .bento {
+      display: grid;
+      grid-template-columns: 1.65fr 1fr 1fr 1fr;
+      grid-template-rows: repeat(5, auto);
+      grid-template-areas:
+        "ai  s96   det    irrig"
+        "ai  pheno chloro field"
+        "ai  s62   eco    multi"
+        "mon mon   alrt   alrt "
+        "wx  wx    wx     zone ";
+      gap: 14px;
+      align-items: stretch;
+    }
+    .bc {
+      background: var(--crema); border-radius: 20px;
+      padding: 28px; border: 1px solid rgba(28,16,8,.06);
+      overflow: hidden; position: relative; min-height: 168px;
+      display: flex; flex-direction: column; justify-content: flex-start;
+      transition: transform .3s cubic-bezier(.34,1.56,.64,1), box-shadow .3s;
+    }
+    .bc:hover { transform: translateY(-4px) scale(1.005); box-shadow: 0 20px 60px rgba(28,16,8,.12); }
+    .bc h3 { font-size: .92rem; margin-bottom: 6px; }
+    .bc p  { font-size: .8rem; color: rgba(28,16,8,.6); line-height: 1.55; }
+    .bc .icon { font-size: 1.7rem; margin-bottom: 10px; }
+
+    /* area assignments */
+    .b-ai    { grid-area: ai; }
+    .b-s96   { grid-area: s96; }
+    .b-det   { grid-area: det; }
+    .b-irrig { grid-area: irrig; }
+    .b-pheno { grid-area: pheno; }
+    .b-chloro{ grid-area: chloro; }
+    .b-field { grid-area: field; }
+    .b-s62   { grid-area: s62; }
+    .b-eco   { grid-area: eco; }
+    .b-multi { grid-area: multi; }
+    .b-mon   { grid-area: mon; }
+    .b-alrt  { grid-area: alrt; }
+    .b-wx    { grid-area: wx; }
+    .b-zone  { grid-area: zone; }
+
+    /* colour variants */
+    .bc-dark  { background: var(--tierra); }
+    .bc-dark h3 { color: #fff; }
+    .bc-dark p  { color: rgba(255,255,255,.55); }
+    .bc-green { background: var(--verde-surco); }
+    .bc-green h3 { color: var(--verde-brote); }
+    .bc-green p  { color: rgba(141,196,154,.65); }
+    .bc-clay  { background: var(--arcilla); }
+    .bc-clay h3 { color: #fff; }
+    .bc-clay p  { color: rgba(255,255,255,.75); }
+
+    /* stat display */
+    .big-stat { font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 900; line-height: 1; margin-bottom: 6px; }
+    .big-stat-sub { font-size: .76rem; font-weight: 500; line-height: 1.4; }
+
+    /* horizontal cards (mon, alrt, wx, zone) */
+    .bc-h { flex-direction: row; align-items: center; gap: 20px; }
+    .bc-h .bc-h-text { flex: 1; }
+    .bc-h .bc-h-icon { font-size: 2.4rem; flex-shrink: 0; }
+
+    @media (max-width: 900px) {
+      .bento {
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+          "ai    ai   "
+          "s96   det  "
+          "irrig pheno"
+          "chloro field"
+          "s62   eco  "
+          "multi mon  "
+          "alrt  alrt "
+          "wx    zone ";
+      }
+      .bc { min-height: 140px; }
+    }
+    @media (max-width: 540px) {
+      .bento {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+          "ai" "s96" "det" "irrig" "pheno" "chloro"
+          "field" "s62" "eco" "multi" "mon" "alrt" "wx" "zone";
+      }
+      .bc-h { flex-direction: column; align-items: flex-start; gap: 10px; }
+    }
+
+    /* ─── DEMO SECTION ─────────────────────────────────── */
+    #demo { background: var(--tierra); padding: 100px 0; overflow: hidden; }
+    .demo-header { text-align: center; margin-bottom: 64px; }
+    .demo-header h2 { color: #fff; }
+    .demo-header p  { color: rgba(255,255,255,.55); font-size: 1.05rem; max-width: 520px; margin: 16px auto 0; }
+    .demo-inner {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 40px; align-items: center;
+    }
+    @media (max-width: 860px) { .demo-inner { grid-template-columns: 1fr; } }
+
+    /* photo side */
+    .demo-photo-wrap { position: relative; }
+    .demo-photo {
+      width: 100%; border-radius: 28px; display: block;
+      box-shadow: 0 40px 80px rgba(0,0,0,.5);
+      border: 1px solid rgba(255,255,255,.06);
+      object-fit: cover;
+    }
+    .demo-photo-badge {
+      position: absolute; bottom: 24px; left: 24px;
+      background: rgba(196,80,26,.9);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 14px; padding: 12px 18px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .demo-photo-badge-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: #fff; animation: pulse 2s infinite;
+    }
+    .demo-photo-badge-text { font-size: .8rem; font-weight: 700; color: #fff; }
+
+    /* video side */
+    .demo-video-wrap {
+      border-radius: 28px; overflow: hidden;
+      box-shadow: 0 40px 80px rgba(0,0,0,.5);
+      border: 1px solid rgba(255,255,255,.08);
+      background: #000; position: relative;
+    }
+    .demo-video-wrap video {
+      width: 100%; display: block;
+      border-radius: 28px;
+    }
+    .demo-caption {
+      margin-top: 20px; display: flex; align-items: flex-start; gap: 14px;
+    }
+    .demo-caption-icon {
+      width: 40px; height: 40px; border-radius: 12px;
+      background: rgba(196,80,26,.2); border: 1px solid rgba(196,80,26,.3);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; flex-shrink: 0;
+    }
+    .demo-caption h3 { color: #fff; font-size: 1rem; margin-bottom: 4px; }
+    .demo-caption p  { color: rgba(255,255,255,.5); font-size: .82rem; line-height: 1.6; }
+
+    /* ─── AI SECTION ───────────────────────────────────── */
+    #ai { background: var(--tierra); padding: 100px 0; }
+    .ai-header { text-align: center; margin-bottom: 64px; }
+    .ai-header h2 { color: #fff; }
+    .ai-header p { color: rgba(255,255,255,.55); font-size: 1.05rem; max-width: 540px; margin: 16px auto 0; }
+    .ai-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    @media (max-width: 768px) { .ai-grid { grid-template-columns: 1fr; } }
+
+    .ai-card {
+      border-radius: 24px; padding: 40px;
+      border: 1px solid rgba(255,255,255,.08);
+      position: relative; overflow: hidden;
+      transition: transform .4s cubic-bezier(.16,1,.3,1), box-shadow .4s;
+    }
+    .ai-card:hover { transform: translateY(-6px); box-shadow: 0 32px 80px rgba(0,0,0,.4); }
+    .ai-card::before {
+      content: ''; position: absolute;
+      width: 220px; height: 220px; border-radius: 50%;
+      top: -60px; right: -60px; opacity: .08;
+    }
+    .ai-claude { background: linear-gradient(135deg, rgba(196,80,26,.18) 0%, rgba(196,80,26,.04) 100%); }
+    .ai-claude::before { background: var(--arcilla); }
+    .ai-gemini { background: linear-gradient(135deg, rgba(26,61,92,.45) 0%, rgba(26,61,92,.12) 100%); }
+    .ai-gemini::before { background: #4285F4; }
+
+    .ai-badge {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.12);
+      border-radius: 100px; padding: 8px 16px; margin-bottom: 28px;
+    }
+    .dot { width: 8px; height: 8px; border-radius: 50%; }
+    .dot-claude { background: var(--arcilla); }
+    .dot-gemini { background: #4285F4; }
+    .ai-badge-name    { font-weight: 700; font-size: .88rem; color: #fff; }
+    .ai-badge-company { font-size: .72rem; color: rgba(255,255,255,.4); }
+
+    .ai-card h3 { color: #fff; font-size: 1.4rem; margin-bottom: 12px; }
+    .ai-card p  { color: rgba(255,255,255,.6); font-size: .93rem; line-height: 1.7; margin-bottom: 20px; }
+    .ai-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .ai-tag {
+      background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.1);
+      border-radius: 100px; padding: 5px 14px;
+      font-size: .76rem; color: rgba(255,255,255,.7); font-weight: 500;
+    }
+
+    /* ─── HOW ──────────────────────────────────────────── */
+    #how { background: var(--crema); padding: 100px 0; }
+    .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; position: relative; }
+    .steps::before {
+      content: ''; position: absolute;
+      top: 46px; left: 12.5%; right: 12.5%; height: 2px;
+      background: linear-gradient(90deg, var(--arcilla), var(--verde-surco));
+    }
+    @media (max-width: 768px) { .steps { grid-template-columns: 1fr 1fr; gap: 32px; } .steps::before { display: none; } }
+    @media (max-width: 480px) { .steps { grid-template-columns: 1fr; } }
+
+    .step { text-align: center; padding: 0 20px; position: relative; z-index: 1; }
+    .step-circle {
+      width: 60px; height: 60px; border-radius: 50%;
+      background: var(--crema); border: 2px solid rgba(28,16,8,.12);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 24px; font-size: 1.3rem;
+      transition: background .3s, border-color .3s, transform .3s;
+    }
+    .step:hover .step-circle { background: var(--arcilla); border-color: var(--arcilla); transform: scale(1.1); }
+    .step-n  { font-family: 'Playfair Display', serif; font-size: .82rem; font-weight: 700; color: var(--arcilla); margin-bottom: 6px; letter-spacing: .06em; }
+    .step h3 { font-size: .95rem; margin-bottom: 8px; }
+    .step p  { font-size: .82rem; color: rgba(28,16,8,.6); line-height: 1.6; }
+
+    /* ─── SCREENSHOTS CAROUSEL ─────────────────────────── */
+    #screenshots { background: #fff; padding: 100px 0 0; overflow: hidden; }
+    .screenshots-header { text-align: center; margin-bottom: 56px; }
+    .track-wrap { overflow: hidden; padding: 8px 0 80px; }
+    .track {
+      display: flex; gap: 14px; width: max-content;
+      animation: marquee 36s linear infinite;
+    }
+    .track:hover { animation-play-state: paused; }
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .ss-item {
+      width: 170px; flex-shrink: 0; border-radius: 22px; overflow: hidden;
+      box-shadow: 0 16px 48px rgba(28,16,8,.14);
+      border: 1px solid rgba(28,16,8,.06);
+      transition: transform .3s;
+    }
+    .ss-item:hover { transform: scale(1.04) translateY(-6px); }
+    .ss-item img { width: 100%; height: 340px; object-fit: cover; display: block; }
+
+    /* ─── CROPS ────────────────────────────────────────── */
+    #crops { background: var(--crema); padding: 100px 0; }
+    .chips { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; max-width: 780px; margin: 0 auto 48px; }
+    .chip {
+      background: #fff; border: 1.5px solid rgba(28,16,8,.1);
+      border-radius: 100px; padding: 12px 22px;
+      font-size: .92rem; font-weight: 500;
+      display: flex; align-items: center; gap: 8px;
+      transition: all .2s cubic-bezier(.34,1.56,.64,1);
+    }
+    .chip:hover { border-color: var(--arcilla); background: rgba(196,80,26,.04); transform: scale(1.05); }
+    .cov-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+    @media (max-width: 768px) { .cov-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 480px) { .cov-grid { grid-template-columns: 1fr; } }
+    .cov-card {
+      background: #fff; border-radius: 20px; padding: 28px;
+      border: 1px solid rgba(28,16,8,.07);
+      transition: transform .3s, box-shadow .3s;
+    }
+    .cov-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(28,16,8,.1); }
+    .cov-icon { font-size: 2rem; margin-bottom: 14px; }
+    .cov-card h3 { font-size: 1.05rem; margin-bottom: 8px; }
+    .cov-card p  { font-size: .85rem; color: rgba(28,16,8,.6); }
+
+    /* ─── TECH ─────────────────────────────────────────── */
+    #tech { background: linear-gradient(135deg, var(--verde-surco) 0%, #1a3d2a 100%); padding: 100px 0; }
+    .tech-header { text-align: center; margin-bottom: 56px; }
+    .tech-header h2 { color: #fff; }
+    .tech-header p { color: rgba(255,255,255,.55); font-size: 1.05rem; max-width: 500px; margin: 16px auto 0; }
+    .tech-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px; }
+    .tech-card {
+      background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.1);
+      border-radius: 20px; padding: 28px 22px; text-align: center;
+      transition: background .2s, transform .3s;
+    }
+    .tech-card:hover { background: rgba(255,255,255,.13); transform: translateY(-4px); }
+    .tech-icon { font-size: 2rem; margin-bottom: 12px; }
+    .tech-card h3 { color: #fff; font-size: .92rem; margin-bottom: 6px; }
+    .tech-card p  { color: rgba(255,255,255,.5); font-size: .8rem; }
+
+    /* ─── CTA ──────────────────────────────────────────── */
+    #cta { background: var(--arcilla); padding: 100px 0; text-align: center; }
+    #cta h2 { color: #fff; margin-bottom: 14px; }
+    #cta p  { color: rgba(255,255,255,.8); font-size: 1.05rem; max-width: 480px; margin: 0 auto 44px; }
+    .store-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .store-btn {
+      display: inline-flex; align-items: center; gap: 14px;
+      background: rgba(255,255,255,.1); border: 1.5px solid rgba(255,255,255,.25);
+      border-radius: 16px; padding: 16px 28px;
+      color: #fff; text-decoration: none;
+      transition: background .2s, transform .2s;
+    }
+    .store-btn:hover { background: rgba(255,255,255,.2); transform: translateY(-2px); }
+    .store-btn svg { width: 28px; height: 28px; fill: #fff; flex-shrink: 0; }
+    .sb-label { font-size: .7rem; opacity: .75; }
+    .sb-name  { font-size: 1.05rem; font-weight: 700; }
+
+    /* ─── FOOTER ───────────────────────────────────────── */
+    footer { background: var(--tierra); padding: 72px 0 36px; }
+    .foot-top {
+      display: grid; grid-template-columns: 2fr 1fr 1fr;
+      gap: 64px; padding-bottom: 48px;
+      border-bottom: 1px solid rgba(255,255,255,.07); margin-bottom: 32px;
+    }
+    @media (max-width: 768px) { .foot-top { grid-template-columns: 1fr; gap: 32px; } }
+    .foot-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; text-decoration: none; }
+    .foot-logo img { height: 30px; filter: brightness(0) invert(1); }
+    .foot-logo-name { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 900; color: #fff; }
+    .foot-brand p { font-size: .88rem; color: rgba(255,255,255,.4); max-width: 280px; line-height: 1.65; }
+    .foot-col h4 { font-size: .76rem; font-weight: 700; color: rgba(255,255,255,.3); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 18px; }
+    .foot-col a { display: block; font-size: .88rem; color: rgba(255,255,255,.55); text-decoration: none; margin-bottom: 10px; transition: color .15s; }
+    .foot-col a:hover { color: #fff; }
+    .foot-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+    .foot-bottom p { font-size: .78rem; color: rgba(255,255,255,.28); }
+
+    /* ─── AI CHAT SIMULATION ────────────────────────────── */
+    .cmsg {
+      max-width: 90%; line-height: 1.5; font-size: .76rem;
+      border-radius: 14px; padding: 8px 12px;
+      opacity: 0; transform: translateY(8px);
+      transition: opacity .35s ease, transform .35s ease;
+    }
+    .cmsg.show { opacity: 1; transform: none; }
+    .cmsg-user {
+      align-self: flex-end;
+      background: rgba(255,255,255,.14);
+      border: 1px solid rgba(255,255,255,.18);
+      color: #fff;
+      border-radius: 14px 14px 4px 14px;
+    }
+    .cmsg-ai {
+      align-self: flex-start;
+      background: rgba(0,0,0,.3);
+      border: 1px solid rgba(255,255,255,.07);
+      color: rgba(255,255,255,.88);
+      border-radius: 4px 14px 14px 14px;
+    }
+    .cmsg-ai-tag {
+      font-size: .58rem; font-weight: 800; color: var(--verde-brote);
+      letter-spacing: .08em; text-transform: uppercase; margin-bottom: 5px;
+      display: flex; align-items: center; gap: 5px;
+    }
+    .cmsg-ai-tag::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--verde-brote); flex-shrink: 0;
+    }
+    .ctyping {
+      align-self: flex-start;
+      display: flex; gap: 4px; align-items: center;
+      background: rgba(0,0,0,.25); border: 1px solid rgba(255,255,255,.06);
+      border-radius: 4px 14px 14px 14px; padding: 10px 13px;
+      opacity: 0; transition: opacity .3s;
+    }
+    .ctyping.show { opacity: 1; }
+    .ctyping span {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--verde-brote);
+      animation: ctb .7s ease-in-out infinite;
+    }
+    .ctyping span:nth-child(2) { animation-delay: .15s; }
+    .ctyping span:nth-child(3) { animation-delay: .30s; }
+    @keyframes ctb { 0%,100% { transform:translateY(0); opacity:.4; } 50% { transform:translateY(-4px); opacity:1; } }
+  </style>
 </head>
 <body>
 
@@ -20,7 +538,7 @@
     <ul class="nav-links">
       <li><a href="#features">Funciones</a></li>
       <li><a href="#ai">Asistentes IA</a></li>
-      <li><a href="#how">CÃ³mo funciona</a></li>
+      <li><a href="#how">Cómo funciona</a></li>
       <li><a href="#screenshots">App</a></li>
       <li><a href="#crops">Cultivos</a></li>
     </ul>
@@ -37,21 +555,21 @@
     <div class="hero-inner">
       <div class="reveal-l">
         <div class="hero-badge">IA para la Agricultura 4.0</div>
-        <h1>TecnologÃ­a<br/>que <em>siembra</em><br/>resultados.</h1>
+        <h1>Tecnología<br/>que <em>siembra</em><br/>resultados.</h1>
         <p class="hero-desc">
-          Surco lleva inteligencia artificial a tu finca colombiana. Detecta enfermedades, gestiona riego, registra labores y consulta a tu asesor agronÃ³mico â€” todo desde tu celular.
+          Surco lleva inteligencia artificial a tu finca colombiana. Detecta enfermedades, gestiona riego, registra labores y consulta a tu asesor agronómico — todo desde tu celular.
         </p>
         <div class="hero-actions">
           <a href="#cta" class="btn btn-primary">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>
             Descargar la app
           </a>
-          <a href="#features" class="btn btn-ghost">Ver funciones â†’</a>
+          <a href="#features" class="btn btn-ghost">Ver funciones →</a>
         </div>
         <div class="hero-stats">
           <div><div class="stat-num">145</div><div class="stat-label">Municipios colombianos</div></div>
           <div><div class="stat-num">20+</div><div class="stat-label">Cultivos soportados</div></div>
-          <div><div class="stat-num">96%</div><div class="stat-label">PrecisiÃ³n detector IA</div></div>
+          <div><div class="stat-num">96%</div><div class="stat-label">Precisión detector IA</div></div>
         </div>
       </div>
 
@@ -60,27 +578,27 @@
         <!-- Burbuja 1: Estado de riego -->
         <div class="hbubble hb-1">
           <div class="hb-label">Estado de riego</div>
-          <div class="hb-val" style="color:var(--verde-surco);">â— Ã“ptimo</div>
+          <div class="hb-val" style="color:var(--verde-surco);">● Óptimo</div>
         </div>
 
         <!-- Burbuja 2: Plaga detectada -->
         <div class="hbubble hb-2">
           <div class="hb-label">Plaga detectada</div>
           <div class="hb-val" style="color:var(--arcilla);">Monilia 72%</div>
-          <div class="hb-sub">Cacao Â· Lote Sur</div>
+          <div class="hb-sub">Cacao · Lote Sur</div>
         </div>
 
         <!-- Burbuja 3: GDD acumulados -->
         <div class="hbubble hb-3">
           <div class="hb-label">GDD acumulados</div>
-          <div class="hb-val">847 Â°CÂ·dÃ­a</div>
-          <div class="hb-sub">Etapa: floraciÃ³n</div>
+          <div class="hb-val">847 °C·día</div>
+          <div class="hb-sub">Etapa: floración</div>
         </div>
 
-        <!-- Burbuja 4: FenologÃ­a -->
+        <!-- Burbuja 4: Fenología -->
         <div class="hbubble hb-4">
-          <div class="hb-label">FenologÃ­a activa</div>
-          <div class="hb-val">FloraciÃ³n <span style="font-size:.78rem;font-weight:500;color:rgba(28,16,8,.5);">55%</span></div>
+          <div class="hb-label">Fenología activa</div>
+          <div class="hb-val">Floración <span style="font-size:.78rem;font-weight:500;color:rgba(28,16,8,.5);">55%</span></div>
           <div class="hb-sub">Tomate cherry</div>
         </div>
 
@@ -88,7 +606,7 @@
         <div class="hbubble hb-5">
           <div class="hb-label">Lluvia prevista</div>
           <div class="hb-val" style="color:var(--azul-dato);">12 mm</div>
-          <div class="hb-sub">MaÃ±ana Â· No aplicar</div>
+          <div class="hb-sub">Mañana · No aplicar</div>
         </div>
 
         <!-- Burbuja 6: Clorofila SPAD -->
@@ -100,20 +618,20 @@
 
         <!-- Burbuja 7: Alerta IIH -->
         <div class="hbubble hb-7">
-          <div class="hb-label">âš ï¸ Alerta IIH</div>
+          <div class="hb-label">⚠️ Alerta IIH</div>
           <div class="hb-val" style="color:var(--arcilla);">Umbral superado</div>
-          <div class="hb-sub">Papa Â· Lote Norte</div>
+          <div class="hb-sub">Papa · Lote Norte</div>
         </div>
 
         <!-- Burbuja 8: Nuevo reporte -->
         <div class="hbubble hb-8">
           <div class="hb-label">Reporte generado</div>
-          <div class="hb-val" style="color:var(--verde-surco);">âœ“ PDF listo</div>
-          <div class="hb-sub">BPA Â· Finca El Progreso</div>
+          <div class="hb-val" style="color:var(--verde-surco);">✓ PDF listo</div>
+          <div class="hb-sub">BPA · Finca El Progreso</div>
         </div>
 
         <div class="hero-slider" id="heroSlider">
-          <img src="assets/img/app-screenshot-cacao.jpg"     alt="Surco â€” DetecciÃ³n en cacao"  class="active">
+          <img src="assets/img/app-screenshot-cacao.jpg"     alt="Surco — Detección en cacao"  class="active">
           <img src="assets/img/app-screenshot-06.jpg"      alt="Surco App">
           <img src="assets/img/app-screenshot-10.jpg"          alt="Surco App">
           <img src="assets/img/app-screenshot-09.jpg"          alt="Surco App">
@@ -133,16 +651,16 @@
     <div class="section-header reveal">
       <div class="tag tag-green">Funcionalidades</div>
       <h2>Todo lo que necesita<br/>tu finca en un solo lugar</h2>
-      <p style="color:rgba(28,16,8,.6);font-size:1.05rem;max-width:480px;margin:16px auto 0;">Desde el diagnÃ³stico en campo hasta el anÃ¡lisis econÃ³mico al final de la temporada.</p>
+      <p style="color:rgba(28,16,8,.6);font-size:1.05rem;max-width:480px;margin:16px auto 0;">Desde el diagnóstico en campo hasta el análisis económico al final de la temporada.</p>
     </div>
 
     <div class="bento">
 
-      <!-- AI Advisor â€” tall left card -->
+      <!-- AI Advisor — tall left card -->
       <div class="bc b-ai reveal-l" style="background:linear-gradient(160deg,var(--verde-surco) 0%,#0e2418 100%);padding:22px 18px;overflow:hidden;">
         <!-- header -->
         <div style="margin-bottom:14px;flex-shrink:0;">
-          <div style="font-size:1.4rem;margin-bottom:6px;">ðŸŒ¿</div>
+          <div style="font-size:1.4rem;margin-bottom:6px;">🌿</div>
           <h3 style="color:var(--verde-brote);font-size:.98rem;margin:0;">Asesor IA con contexto</h3>
         </div>
         <!-- chat -->
@@ -166,45 +684,45 @@
       <!-- 96% stat -->
       <div class="bc b-s96 reveal" style="justify-content:center;">
         <div class="big-stat" style="color:var(--arcilla);">96%</div>
-        <div class="big-stat-sub" style="color:rgba(28,16,8,.55);">PrecisiÃ³n detector IA tomate y arÃ¡ndano</div>
+        <div class="big-stat-sub" style="color:rgba(28,16,8,.55);">Precisión detector IA tomate y arándano</div>
       </div>
 
       <!-- Disease detection -->
       <div class="bc bc-clay b-det reveal">
-        <div class="icon">ðŸ”¬</div>
-        <h3>DetecciÃ³n de enfermedades</h3>
-        <p>Modelos TFLite YOLOv8. DiagnÃ³stico sin internet.</p>
+        <div class="icon">🔬</div>
+        <h3>Detección de enfermedades</h3>
+        <p>Modelos TFLite YOLOv8. Diagnóstico sin internet.</p>
       </div>
 
       <!-- Irrigation -->
       <div class="bc b-irrig reveal">
-        <div class="icon">ðŸ’§</div>
+        <div class="icon">💧</div>
         <h3>Riego inteligente</h3>
-        <p>Balance hÃ­drico ETcÃ—Kc por cultivo y etapa fenolÃ³gica.</p>
+        <p>Balance hídrico ETc×Kc por cultivo y etapa fenológica.</p>
       </div>
 
       <!-- Phenology -->
       <div class="bc b-pheno reveal">
-        <div class="icon">ðŸ“ˆ</div>
-        <h3>FenologÃ­a por GDD</h3>
-        <p>Grados-dÃ­a acumulados para tomate, papa, maÃ­z, lechuga y frÃ­jol.</p>
+        <div class="icon">📈</div>
+        <h3>Fenología por GDD</h3>
+        <p>Grados-día acumulados para tomate, papa, maíz, lechuga y fríjol.</p>
       </div>
 
       <!-- Chlorophyll -->
       <div class="bc b-chloro reveal">
-        <div class="icon">ðŸŒ±</div>
-        <h3>AnÃ¡lisis de clorofila</h3>
-        <p>Estima SPAD con solo una foto. RegresiÃ³n RGB calibrada.</p>
+        <div class="icon">🌱</div>
+        <h3>Análisis de clorofila</h3>
+        <p>Estima SPAD con solo una foto. Regresión RGB calibrada.</p>
       </div>
 
       <!-- Field notebook -->
       <div class="bc b-field reveal">
-        <div class="icon">ðŸ“‹</div>
+        <div class="icon">📋</div>
         <h3>Cuaderno de campo</h3>
         <p>Registra con IIH y PHI. PDF firmado para BPA/BPM.</p>
       </div>
 
-      <!-- 62 stat â€” dark -->
+      <!-- 62 stat — dark -->
       <div class="bc bc-dark b-s62 reveal" style="justify-content:center;">
         <div class="big-stat" style="color:var(--verde-brote);">62</div>
         <div class="big-stat-sub" style="color:rgba(255,255,255,.5);">Plagas registradas por municipio</div>
@@ -212,50 +730,50 @@
 
       <!-- Economics -->
       <div class="bc b-eco reveal">
-        <div class="icon">ðŸ’°</div>
-        <h3>EconomÃ­a agrÃ­cola</h3>
+        <div class="icon">💰</div>
+        <h3>Economía agrícola</h3>
         <p>Costos por actividad. Presupuesto vs. ejecutado.</p>
       </div>
 
-      <!-- Multi-user â€” green -->
+      <!-- Multi-user — green -->
       <div class="bc bc-green b-multi reveal">
-        <div class="icon">ðŸ‘¥</div>
+        <div class="icon">👥</div>
         <h3>Multi-usuario</h3>
-        <p>TÃ©cnicos, trabajadores y admins con roles diferenciados.</p>
+        <p>Técnicos, trabajadores y admins con roles diferenciados.</p>
       </div>
 
-      <!-- Monitoring â€” 2 cols wide, horizontal layout -->
+      <!-- Monitoring — 2 cols wide, horizontal layout -->
       <div class="bc bc-h b-mon reveal">
-        <div class="bc-h-icon">ðŸ”</div>
+        <div class="bc-h-icon">🔍</div>
         <div class="bc-h-text">
           <h3>Monitoreo fitosanitario</h3>
-          <p>Escala EPPO 0â€“9. Incidencia, presiÃ³n y tendencia. Alertas automÃ¡ticas al superar umbral de acciÃ³n.</p>
+          <p>Escala EPPO 0–9. Incidencia, presión y tendencia. Alertas automáticas al superar umbral de acción.</p>
         </div>
       </div>
 
-      <!-- Smart Alerts â€” 2 cols wide, horizontal layout -->
+      <!-- Smart Alerts — 2 cols wide, horizontal layout -->
       <div class="bc bc-h b-alrt reveal" style="background:var(--tierra);">
-        <div class="bc-h-icon">âš ï¸</div>
+        <div class="bc-h-icon">⚠️</div>
         <div class="bc-h-text">
           <h3 style="color:#fff;">Alertas inteligentes</h3>
-          <p style="color:rgba(255,255,255,.55);">Panel cross-finca: IIH, fenologÃ­a, condiciones de clima para aplicaciÃ³n y recordatorios de monitoreo.</p>
+          <p style="color:rgba(255,255,255,.55);">Panel cross-finca: IIH, fenología, condiciones de clima para aplicación y recordatorios de monitoreo.</p>
         </div>
       </div>
 
-      <!-- Weather â€” 3 cols wide -->
+      <!-- Weather — 3 cols wide -->
       <div class="bc bc-h b-wx reveal" style="background:linear-gradient(135deg,var(--azul-dato) 0%,#0e2030 100%);">
-        <div class="bc-h-icon">ðŸŒ¦ï¸</div>
+        <div class="bc-h-icon">🌦️</div>
         <div class="bc-h-text">
-          <h3 style="color:#fff;">Clima agrÃ­cola en tiempo real</h3>
-          <p style="color:rgba(255,255,255,.55);">IntegraciÃ³n meteorolÃ³gica: alertas de viento y precipitaciÃ³n antes de aplicar fitosanitarios. Datos en tiempo real para cada lote.</p>
+          <h3 style="color:#fff;">Clima agrícola en tiempo real</h3>
+          <p style="color:rgba(255,255,255,.55);">Integración meteorológica: alertas de viento y precipitación antes de aplicar fitosanitarios. Datos en tiempo real para cada lote.</p>
         </div>
       </div>
 
-      <!-- Zone data â€” 1 col -->
+      <!-- Zone data — 1 col -->
       <div class="bc b-zone reveal">
-        <div class="icon">ðŸ—ºï¸</div>
-        <h3>Zonas agroecolÃ³gicas</h3>
-        <p>145 municipios con aptitud de cultivo, plagas comunes y zonas tÃ©rmicas IGAC.</p>
+        <div class="icon">🗺️</div>
+        <h3>Zonas agroecológicas</h3>
+        <p>145 municipios con aptitud de cultivo, plagas comunes y zonas térmicas IGAC.</p>
       </div>
 
     </div>
@@ -266,9 +784,9 @@
 <section id="demo">
   <div class="container">
     <div class="demo-header reveal">
-      <div class="tag tag-clay">DetecciÃ³n en acciÃ³n</div>
+      <div class="tag tag-clay">Detección en acción</div>
       <h2>Ve el detector de enfermedades<br/>trabajar en tiempo real</h2>
-      <p>Surco identifica enfermedades en cacao, tomate y arÃ¡ndano directamente desde la cÃ¡mara â€” sin conexiÃ³n a internet.</p>
+      <p>Surco identifica enfermedades en cacao, tomate y arándano directamente desde la cámara — sin conexión a internet.</p>
     </div>
 
     <div class="demo-inner">
@@ -281,7 +799,7 @@
         >
         <div class="demo-photo-badge">
           <div class="demo-photo-badge-dot"></div>
-          <div class="demo-photo-badge-text">DetecciÃ³n activa â€” Cacao</div>
+          <div class="demo-photo-badge-text">Detección activa — Cacao</div>
         </div>
       </div>
 
@@ -299,10 +817,10 @@
           </video>
         </div>
         <div class="demo-caption">
-          <div class="demo-caption-icon">ðŸ”¬</div>
+          <div class="demo-caption-icon">🔬</div>
           <div>
             <h3>Identificador de enfermedades en cacao</h3>
-            <p>El modelo TFLite YOLOv8 detecta FitÃ³ftora y Monilia en tiempo real con un 96% de precisiÃ³n (mAP50). Funciona completamente offline â€” ideal para zonas rurales sin seÃ±al.</p>
+            <p>El modelo TFLite YOLOv8 detecta Fitóftora y Monilia en tiempo real con un 96% de precisión (mAP50). Funciona completamente offline — ideal para zonas rurales sin señal.</p>
           </div>
         </div>
       </div>
@@ -316,7 +834,7 @@
     <div class="ai-header reveal">
       <div class="tag tag-dark">Asistentes de IA</div>
       <h2>Impulsado por los mejores<br/>modelos de IA del mundo</h2>
-      <p>Surco integra dos de los modelos mÃ¡s avanzados para darte recomendaciones agronÃ³micas de nivel experto.</p>
+      <p>Surco integra dos de los modelos más avanzados para darte recomendaciones agronómicas de nivel experto.</p>
     </div>
 
     <div class="ai-grid">
@@ -329,13 +847,13 @@
             <div class="ai-badge-company">por Anthropic</div>
           </div>
         </div>
-        <h3>Tu asesor agronÃ³mico principal</h3>
+        <h3>Tu asesor agronómico principal</h3>
         <p>
-          Claude es el motor conversacional de Surco. Con acceso al historial completo de tu finca, lote, labores, fenologÃ­a y los 92 000 registros de suelo del IGAC, genera recomendaciones precisas y contextualizadas â€” no respuestas genÃ©ricas de internet.
+          Claude es el motor conversacional de Surco. Con acceso al historial completo de tu finca, lote, labores, fenología y los 92 000 registros de suelo del IGAC, genera recomendaciones precisas y contextualizadas — no respuestas genéricas de internet.
         </p>
         <div class="ai-tags">
           <span class="ai-tag">Contexto completo de finca</span>
-          <span class="ai-tag">Dosis y momentos de aplicaciÃ³n</span>
+          <span class="ai-tag">Dosis y momentos de aplicación</span>
           <span class="ai-tag">Alertas fitosanitarias</span>
           <span class="ai-tag">BPA/BPM compliance</span>
         </div>
@@ -350,14 +868,14 @@
             <div class="ai-badge-company">por Google DeepMind</div>
           </div>
         </div>
-        <h3>AnÃ¡lisis visual e inteligencia multimodal</h3>
+        <h3>Análisis visual e inteligencia multimodal</h3>
         <p>
-          Gemini potencia la capacidad de anÃ¡lisis visual de Surco. Procesa imÃ¡genes de hojas, frutos y suelos para complementar la detecciÃ³n TFLite on-device, aportando una segunda capa de inteligencia que enriquece el diagnÃ³stico fitosanitario.
+          Gemini potencia la capacidad de análisis visual de Surco. Procesa imágenes de hojas, frutos y suelos para complementar la detección TFLite on-device, aportando una segunda capa de inteligencia que enriquece el diagnóstico fitosanitario.
         </p>
         <div class="ai-tags">
-          <span class="ai-tag">AnÃ¡lisis de imÃ¡genes</span>
-          <span class="ai-tag">DiagnÃ³stico visual</span>
-          <span class="ai-tag">Segunda opiniÃ³n IA</span>
+          <span class="ai-tag">Análisis de imágenes</span>
+          <span class="ai-tag">Diagnóstico visual</span>
+          <span class="ai-tag">Segunda opinión IA</span>
           <span class="ai-tag">Multimodal nativo</span>
         </div>
       </div>
@@ -369,34 +887,34 @@
 <section id="how">
   <div class="container">
     <div class="section-header reveal">
-      <div class="tag tag-green">CÃ³mo funciona</div>
+      <div class="tag tag-green">Cómo funciona</div>
       <h2>De la foto al consejo<br/>en segundos</h2>
-      <p style="color:rgba(28,16,8,.6);font-size:1.05rem;max-width:460px;margin:16px auto 0;">El pipeline de IA de Surco analiza tu imagen con mÃºltiples modelos antes de responder.</p>
+      <p style="color:rgba(28,16,8,.6);font-size:1.05rem;max-width:460px;margin:16px auto 0;">El pipeline de IA de Surco analiza tu imagen con múltiples modelos antes de responder.</p>
     </div>
     <div class="steps reveal">
       <div class="step">
-        <div class="step-circle"><span>ðŸ“·</span></div>
+        <div class="step-circle"><span>📷</span></div>
         <div class="step-n">01</div>
         <h3>Toma una foto</h3>
-        <p>Desde cualquier hoja, fruto o Ã¡rea. Sin equipos especiales.</p>
+        <p>Desde cualquier hoja, fruto o área. Sin equipos especiales.</p>
       </div>
       <div class="step">
-        <div class="step-circle"><span>âš¡</span></div>
+        <div class="step-circle"><span>⚡</span></div>
         <div class="step-n">02</div>
-        <h3>AnÃ¡lisis on-device</h3>
+        <h3>Análisis on-device</h3>
         <p>ML Kit + TFLite clasifican enfermedades y estiman SPAD sin internet.</p>
       </div>
       <div class="step">
-        <div class="step-circle"><span>ðŸ—ºï¸</span></div>
+        <div class="step-circle"><span>🗺️</span></div>
         <div class="step-n">03</div>
         <h3>Contexto de finca</h3>
-        <p>Historial de labores, fenologÃ­a, suelo IGAC y clima se aÃ±aden al prompt.</p>
+        <p>Historial de labores, fenología, suelo IGAC y clima se añaden al prompt.</p>
       </div>
       <div class="step">
-        <div class="step-circle"><span>ðŸ¤–</span></div>
+        <div class="step-circle"><span>🤖</span></div>
         <div class="step-n">04</div>
-        <h3>RecomendaciÃ³n IA</h3>
-        <p>Claude y Gemini responden con dosis, momentos de aplicaciÃ³n y alertas especÃ­ficas.</p>
+        <h3>Recomendación IA</h3>
+        <p>Claude y Gemini responden con dosis, momentos de aplicación y alertas específicas.</p>
       </div>
     </div>
   </div>
@@ -406,9 +924,9 @@
 <section id="screenshots">
   <div class="container">
     <div class="screenshots-header reveal">
-      <div class="tag tag-clay">La app en acciÃ³n</div>
-      <h2>DiseÃ±ada para el campo,<br/>no para el escritorio</h2>
-      <p style="color:rgba(28,16,8,.6);font-size:1.05rem;max-width:460px;margin:16px auto 0;">Interfaz intuitiva que funciona con guantes, bajo el sol y sin seÃ±al.</p>
+      <div class="tag tag-clay">La app en acción</div>
+      <h2>Diseñada para el campo,<br/>no para el escritorio</h2>
+      <p style="color:rgba(28,16,8,.6);font-size:1.05rem;max-width:460px;margin:16px auto 0;">Interfaz intuitiva que funciona con guantes, bajo el sol y sin señal.</p>
     </div>
   </div>
   <div class="track-wrap">
@@ -449,34 +967,34 @@
   <div class="container">
     <div class="section-header reveal">
       <div class="tag tag-green">Cultivos soportados</div>
-      <h2>DiseÃ±ado para el<br/>campo colombiano</h2>
-      <p style="color:rgba(28,16,8,.6);font-size:1.05rem;max-width:460px;margin:16px auto 0;">Modelos fenolÃ³gicos y tablas hÃ­dricas calibradas para las principales especies cultivadas en Colombia.</p>
+      <h2>Diseñado para el<br/>campo colombiano</h2>
+      <p style="color:rgba(28,16,8,.6);font-size:1.05rem;max-width:460px;margin:16px auto 0;">Modelos fenológicos y tablas hídricas calibradas para las principales especies cultivadas en Colombia.</p>
     </div>
     <div class="chips reveal">
-      <div class="chip">ðŸ… Tomate</div>
-      <div class="chip">ðŸ¥” Papa</div>
-      <div class="chip">ðŸŒ½ MaÃ­z</div>
-      <div class="chip">ðŸ¥¬ Lechuga</div>
-      <div class="chip">ðŸ«˜ FrÃ­jol</div>
-      <div class="chip">ðŸ« ArÃ¡ndano</div>
-      <div class="chip">ðŸŒ¿ Cultivos genÃ©ricos</div>
-      <div class="chip">âž• MÃ¡s prÃ³ximamente</div>
+      <div class="chip">🍅 Tomate</div>
+      <div class="chip">🥔 Papa</div>
+      <div class="chip">🌽 Maíz</div>
+      <div class="chip">🥬 Lechuga</div>
+      <div class="chip">🫘 Fríjol</div>
+      <div class="chip">🫐 Arándano</div>
+      <div class="chip">🌿 Cultivos genéricos</div>
+      <div class="chip">➕ Más próximamente</div>
     </div>
     <div class="cov-grid reveal">
       <div class="cov-card">
-        <div class="cov-icon">ðŸ—ºï¸</div>
+        <div class="cov-icon">🗺️</div>
         <h3>32 departamentos</h3>
-        <p>Cobertura completa Colombia continental + BogotÃ¡ D.C. con altitud, zona IGAC y rÃ©gimen hÃ­drico.</p>
+        <p>Cobertura completa Colombia continental + Bogotá D.C. con altitud, zona IGAC y régimen hídrico.</p>
       </div>
       <div class="cov-card">
-        <div class="cov-icon">ðŸª²</div>
+        <div class="cov-icon">🪲</div>
         <h3>62 plagas registradas</h3>
-        <p>Fitosanidad regional cruzada con municipio y cultivo para alertas mÃ¡s relevantes.</p>
+        <p>Fitosanidad regional cruzada con municipio y cultivo para alertas más relevantes.</p>
       </div>
       <div class="cov-card">
-        <div class="cov-icon">ðŸŒ¡ï¸</div>
-        <h3>4 zonas tÃ©rmicas</h3>
-        <p>Caliente, templada, frÃ­a y pÃ¡ramo. ClasificaciÃ³n automÃ¡tica por altitud y zona Holdridge.</p>
+        <div class="cov-icon">🌡️</div>
+        <h3>4 zonas térmicas</h3>
+        <p>Caliente, templada, fría y páramo. Clasificación automática por altitud y zona Holdridge.</p>
       </div>
     </div>
   </div>
@@ -486,45 +1004,45 @@
 <section id="tech">
   <div class="container">
     <div class="tech-header reveal">
-      <div class="tag tag-dark">TecnologÃ­a</div>
+      <div class="tag tag-dark">Tecnología</div>
       <h2>IA de vanguardia para<br/>el agricultor moderno</h2>
-      <p>Los mejores modelos de IA con infraestructura confiable para que la tecnologÃ­a no sea un obstÃ¡culo.</p>
+      <p>Los mejores modelos de IA con infraestructura confiable para que la tecnología no sea un obstáculo.</p>
     </div>
     <div class="tech-grid reveal">
       <div class="tech-card">
-        <div class="tech-icon">ðŸ¤–</div>
+        <div class="tech-icon">🤖</div>
         <h3>Claude (Anthropic)</h3>
         <p>Asesor conversacional con contexto completo de finca, lote e historial de labores.</p>
       </div>
       <div class="tech-card">
-        <div class="tech-icon">âœ¨</div>
+        <div class="tech-icon">✨</div>
         <h3>Gemini (Google)</h3>
-        <p>AnÃ¡lisis visual multimodal para diagnÃ³stico fitosanitario desde imÃ¡genes de campo.</p>
+        <p>Análisis visual multimodal para diagnóstico fitosanitario desde imágenes de campo.</p>
       </div>
       <div class="tech-card">
-        <div class="tech-icon">ðŸ“±</div>
+        <div class="tech-icon">📱</div>
         <h3>Flutter</h3>
-        <p>App nativa Android e iOS desde un Ãºnico cÃ³digo base optimizado para campo.</p>
+        <p>App nativa Android e iOS desde un único código base optimizado para campo.</p>
       </div>
       <div class="tech-card">
-        <div class="tech-icon">âš¡</div>
+        <div class="tech-icon">⚡</div>
         <h3>TFLite on-device</h3>
-        <p>Inferencia YOLOv8 directamente en tu telÃ©fono. Sin internet, sin demora.</p>
+        <p>Inferencia YOLOv8 directamente en tu teléfono. Sin internet, sin demora.</p>
       </div>
       <div class="tech-card">
-        <div class="tech-icon">ðŸ”¥</div>
+        <div class="tech-icon">🔥</div>
         <h3>Firebase</h3>
-        <p>AutenticaciÃ³n segura, sincronizaciÃ³n en la nube y Crashlytics para mÃ¡xima estabilidad.</p>
+        <p>Autenticación segura, sincronización en la nube y Crashlytics para máxima estabilidad.</p>
       </div>
       <div class="tech-card">
-        <div class="tech-icon">ðŸ—„ï¸</div>
+        <div class="tech-icon">🗄️</div>
         <h3>Hive + SQLite</h3>
-        <p>Persistencia local robusta. Trabaja offline y sincroniza cuando tengas seÃ±al.</p>
+        <p>Persistencia local robusta. Trabaja offline y sincroniza cuando tengas señal.</p>
       </div>
       <div class="tech-card">
-        <div class="tech-icon">ðŸŒ</div>
+        <div class="tech-icon">🌐</div>
         <h3>Datos IGAC</h3>
-        <p>92K registros de suelo pre-procesados para contexto agronÃ³mico preciso.</p>
+        <p>92K registros de suelo pre-procesados para contexto agronómico preciso.</p>
       </div>
     </div>
   </div>
@@ -536,7 +1054,7 @@
     <div class="reveal">
       <div class="tag tag-light">Disponible ahora</div>
       <h2>Empieza a sembrar<br/>con inteligencia</h2>
-      <p>Descarga Surco gratis y lleva el primer asesor agronÃ³mico con IA a tu finca colombiana.</p>
+      <p>Descarga Surco gratis y lleva el primer asesor agronómico con IA a tu finca colombiana.</p>
       <div class="store-btns">
         <a href="#" class="store-btn">
           <svg viewBox="0 0 24 24"><path d="M3.18 23.76c.37.2.8.21 1.2-.01l12.18-7.03-2.64-2.64-10.74 9.68zM.5 1.12A1.49 1.49 0 0 0 0 2.28v19.44c0 .46.18.88.5 1.16l.06.06 10.89-10.89v-.26L.56 1.06.5 1.12zM20.34 10.27l-2.96-1.71-2.96 2.95 2.96 2.95 2.97-1.71c.85-.49.85-1.99-.01-2.48zM4.38.25L16.56 7.27l-2.64 2.64L3.18.23c.4-.22.83-.21 1.2.02z"/></svg>
@@ -544,7 +1062,7 @@
         </a>
         <a href="#" class="store-btn">
           <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-          <div><div class="sb-label">PrÃ³ximamente en</div><div class="sb-name">App Store</div></div>
+          <div><div class="sb-label">Próximamente en</div><div class="sb-name">App Store</div></div>
         </a>
       </div>
     </div>
@@ -560,28 +1078,164 @@
           <img src="assets/img/logo.png" alt="Surco" onerror="this.style.display='none'">
           <span class="foot-logo-name">Surco</span>
         </a>
-        <p>Herramientas de IA para la agricultura colombiana. TecnologÃ­a que siembra resultados reales.</p>
+        <p>Herramientas de IA para la agricultura colombiana. Tecnología que siembra resultados reales.</p>
       </div>
       <div class="foot-col">
         <h4>Producto</h4>
         <a href="#features">Funciones</a>
         <a href="#crops">Cultivos</a>
-        <a href="#tech">TecnologÃ­a</a>
+        <a href="#tech">Tecnología</a>
         <a href="#cta">Descargar</a>
       </div>
       <div class="foot-col">
         <h4>Legal</h4>
-        <a href="privacy-policy-surco.html">PolÃ­tica de privacidad</a>
-        <a href="#">TÃ©rminos de uso</a>
+        <a href="privacy-policy-surco.html">Política de privacidad</a>
+        <a href="#">Términos de uso</a>
       </div>
     </div>
     <div class="foot-bottom">
-      <p>Â© 2025 Surco. Todos los derechos reservados.</p>
-      <p>Hecho con â¤ï¸ para el campo colombiano</p>
+      <p>© 2025 Surco. Todos los derechos reservados.</p>
+      <p>Hecho con ❤️ para el campo colombiano</p>
     </div>
   </div>
 </footer>
 
-  <script src="js/main.js"></script>
+<script>
+  // Scroll reveal
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('on'), i * 50);
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal, .reveal-l, .reveal-r').forEach(el => io.observe(el));
+
+  // Nav scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 20), { passive: true });
+
+  // Tilt effect on interactive cards
+  const tiltCards = document.querySelectorAll('.bc, .ai-card, .cov-card, .tech-card');
+  tiltCards.forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width  - 0.5;
+      const y = (e.clientY - r.top)  / r.height - 0.5;
+      card.style.transform = `translateY(-4px) perspective(700px) rotateX(${-y*5}deg) rotateY(${x*5}deg) scale(1.01)`;
+    });
+    card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+  });
+
+  // Stagger bento cards
+  document.querySelectorAll('.bc').forEach((c, i) => { c.style.transitionDelay = `${(i % 5) * 55}ms`; });
+
+  // ── AI Chat simulation ──────────────────────────────────
+  (function() {
+    const chat = document.getElementById('aichat');
+    if (!chat) return;
+
+    const convs = [
+      [
+        { r:'u', t:'¿Cómo va mi papa en el Lote Norte hoy?' },
+        { r:'a', lines:['📍 Papa Pastusa · Lote Norte', '🌡️ Tuberización — GDD: 847 °C·día', '💧 Humedad suelo: 82% — Óptima', '⚠️ Condiciones favorables para tizón esta semana.'] },
+        { r:'u', t:'¿Qué me recomiendas hacer?' },
+        { r:'a', lines:['🔍 Realiza monitoreo visual hoy.', '📅 Revisa el lote antes del jueves.', '🌬️ Buen momento: viento < 10 km/h', '📋 Registro guardado en cuaderno.'] },
+      ],
+      [
+        { r:'u', t:'¿Necesito regar el lote mañana?' },
+        { r:'a', lines:['💧 No es necesario por ahora.', 'Humedad actual: 82% — Óptima', '🌧️ Lluvia prevista: 12 mm mañana', '📅 Próximo riego recomendado: jueves.'] },
+        { r:'u', t:'¿Cuándo puedo cosechar?' },
+        { r:'a', lines:['🌱 Madurez estimada: 18 días.', 'GDD restantes: ~240 °C·día', '🔍 Monitorea el lote cada 3 días.', '📊 Reporte disponible en tu cuaderno.'] },
+      ],
+      [
+        { r:'u', t:'Detecté manchas en las hojas, ¿qué es?' },
+        { r:'a', lines:['🔬 Imagen analizada con TFLite.', 'Diagnóstico: Tizón tardío 87%', '📋 Alerta registrada en monitoreo.', '🧑‍🌾 Consulta a tu técnico de campo.'] },
+        { r:'u', t:'¿Afecta la producción esperada?' },
+        { r:'a', lines:['📉 Impacto estimado: 8–12%', 'si se actúa antes del viernes.', '💰 Presupuesto del lote: en rango.', '📊 Varianza registrada en economía.'] },
+      ],
+    ];
+
+    let ci = 0, mi = 0;
+    let typEl = null;
+
+    function delay(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+    function addTyping() {
+      typEl = document.createElement('div');
+      typEl.className = 'ctyping';
+      typEl.innerHTML = '<span></span><span></span><span></span>';
+      chat.appendChild(typEl);
+      requestAnimationFrame(() => typEl.classList.add('show'));
+    }
+    function removeTyping() { if (typEl) { typEl.remove(); typEl = null; } }
+
+    function addBubble(msg) {
+      const d = document.createElement('div');
+      if (msg.r === 'u') {
+        d.className = 'cmsg cmsg-user';
+        d.textContent = msg.t;
+      } else {
+        d.className = 'cmsg cmsg-ai';
+        d.innerHTML = '<div class="cmsg-ai-tag">Surco · Asesor IA</div>' +
+          msg.lines.join('<br>');
+      }
+      chat.appendChild(d);
+      requestAnimationFrame(() => requestAnimationFrame(() => d.classList.add('show')));
+    }
+
+    // keep only last N bubbles visible
+    function trim() {
+      const msgs = chat.querySelectorAll('.cmsg');
+      if (msgs.length > 6) msgs[0].remove();
+    }
+
+    async function run() {
+      while (true) {
+        const conv = convs[ci];
+        const msg  = conv[mi];
+
+        if (msg.r === 'a') {
+          addTyping();
+          await delay(1500);
+          removeTyping();
+          addBubble(msg);
+        } else {
+          addBubble(msg);
+        }
+        trim();
+
+        mi++;
+        if (mi >= conv.length) {
+          await delay(4200);
+          // fade out all messages
+          chat.querySelectorAll('.cmsg').forEach(el => {
+            el.style.transition = 'opacity .5s';
+            el.style.opacity = '0';
+          });
+          await delay(600);
+          chat.innerHTML = '';
+          ci = (ci + 1) % convs.length;
+          mi = 0;
+          await delay(400);
+        } else {
+          await delay(msg.r === 'u' ? 900 : 1300);
+        }
+      }
+    }
+
+    setTimeout(run, 800);
+  })();
+
+  // Hero image slider
+  const sliderImgs = document.querySelectorAll('#heroSlider img');
+  let current = 0;
+  setInterval(() => {
+    sliderImgs[current].classList.remove('active');
+    current = (current + 1) % sliderImgs.length;
+    sliderImgs[current].classList.add('active');
+  }, 3000);
+</script>
 </body>
 </html>

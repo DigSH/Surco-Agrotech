@@ -1,4 +1,4 @@
-﻿  // Scroll reveal
+  // Scroll reveal
   const io = new IntersectionObserver((entries) => {
     entries.forEach((e, i) => {
       if (e.isIntersecting) {
@@ -28,29 +28,29 @@
   // Stagger bento cards
   document.querySelectorAll('.bc').forEach((c, i) => { c.style.transitionDelay = `${(i % 5) * 55}ms`; });
 
-  // â”€â”€ AI Chat simulation â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── AI Chat simulation ────────────────────────────────────────────────
   (function() {
     const chat = document.getElementById('aichat');
     if (!chat) return;
 
     const convs = [
       [
-        { r:'u', t:'Â¿CÃ³mo va mi papa en el Lote Norte hoy?' },
-        { r:'a', lines:['ðŸ“ Papa Pastusa Â· Lote Norte', 'ðŸŒ¡ï¸ TuberizaciÃ³n â€” GDD: 847 Â°CÂ·dÃ­a', 'ðŸ’§ Humedad suelo: 82% â€” Ã“ptima', 'âš ï¸ Condiciones favorables para tizÃ³n esta semana.'] },
-        { r:'u', t:'Â¿QuÃ© me recomiendas hacer?' },
-        { r:'a', lines:['ðŸ” Realiza monitoreo visual hoy.', 'ðŸ“… Revisa el lote antes del jueves.', 'ðŸŒ¬ï¸ Buen momento: viento < 10 km/h', 'ðŸ“‹ Registro guardado en cuaderno.'] },
+        { r:'u', t:'¿Cómo va mi papa en el Lote Norte hoy?' },
+        { r:'a', lines:['📍 Papa Pastusa · Lote Norte', '🌡️ Tuberización – GDD: 847 °C·día', '💧 Humedad suelo: 82% – Óptima', '⚠️ Condiciones favorables para tizón esta semana.'] },
+        { r:'u', t:'¿Qué me recomiendas hacer?' },
+        { r:'a', lines:['🔍 Realiza monitoreo visual hoy.', '📅 Revisa el lote antes del jueves.', '🌬️ Buen momento: viento < 10 km/h', '📋 Registro guardado en cuaderno.'] },
       ],
       [
-        { r:'u', t:'Â¿Necesito regar el lote maÃ±ana?' },
-        { r:'a', lines:['ðŸ’§ No es necesario por ahora.', 'Humedad actual: 82% â€” Ã“ptima', 'ðŸŒ§ï¸ Lluvia prevista: 12 mm maÃ±ana', 'ðŸ“… PrÃ³ximo riego recomendado: jueves.'] },
-        { r:'u', t:'Â¿CuÃ¡ndo puedo cosechar?' },
-        { r:'a', lines:['ðŸŒ± Madurez estimada: 18 dÃ­as.', 'GDD restantes: ~240 Â°CÂ·dÃ­a', 'ðŸ” Monitorea el lote cada 3 dÃ­as.', 'ðŸ“Š Reporte disponible en tu cuaderno.'] },
+        { r:'u', t:'¿Necesito regar el lote mañana?' },
+        { r:'a', lines:['💧 No es necesario por ahora.', 'Humedad actual: 82% – Óptima', '🌧️ Lluvia prevista: 12 mm mañana', '📅 Próximo riego recomendado: jueves.'] },
+        { r:'u', t:'¿Cuándo puedo cosechar?' },
+        { r:'a', lines:['🌱 Madurez estimada: 18 días.', 'GDD restantes: ~240 °C·día', '🔍 Monitorea el lote cada 3 días.', '📊 Reporte disponible en tu cuaderno.'] },
       ],
       [
-        { r:'u', t:'DetectÃ© manchas en las hojas, Â¿quÃ© es?' },
-        { r:'a', lines:['ðŸ”¬ Imagen analizada con TFLite.', 'DiagnÃ³stico: TizÃ³n tardÃ­o 87%', 'ðŸ“‹ Alerta registrada en monitoreo.', 'ðŸ§‘â€ðŸŒ¾ Consulta a tu tÃ©cnico de campo.'] },
-        { r:'u', t:'Â¿Afecta la producciÃ³n esperada?' },
-        { r:'a', lines:['ðŸ“‰ Impacto estimado: 8â€“12%', 'si se actÃºa antes del viernes.', 'ðŸ’° Presupuesto del lote: en rango.', 'ðŸ“Š Varianza registrada en economÃ­a.'] },
+        { r:'u', t:'Detecté manchas en las hojas, ¿qué es?' },
+        { r:'a', lines:['🔬 Imagen analizada con TFLite.', 'Diagnóstico: Tizón tardío 87%', '📋 Alerta registrada en monitoreo.', '🧑‍🌾 Consulta a tu técnico de campo.'] },
+        { r:'u', t:'¿Afecta la producción esperada?' },
+        { r:'a', lines:['📉 Impacto estimado: 8–12%', 'si se actúa antes del viernes.', '💰 Presupuesto del lote: en rango.', '📊 Varianza registrada en economía.'] },
       ],
     ];
 
@@ -75,7 +75,7 @@
         d.textContent = msg.t;
       } else {
         d.className = 'cmsg cmsg-ai';
-        d.innerHTML = '<div class="cmsg-ai-tag">Surco Â· Asesor IA</div>' +
+        d.innerHTML = '<div class="cmsg-ai-tag">Surco · Asesor IA</div>' +
           msg.lines.join('<br>');
       }
       chat.appendChild(d);

@@ -1,96 +1,583 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="PolÃ­tica de Privacidad de Surco â€“ TecnologÃ­a que siembra. InformaciÃ³n sobre el tratamiento de datos personales en la aplicaciÃ³n Surco." />
-  <title>PolÃ­tica de Privacidad â€“ Surco</title>
+  <meta name="description" content="Política de Privacidad de Surco – Tecnología que siembra. Información sobre el tratamiento de datos personales en la aplicación Surco." />
+  <title>Política de Privacidad – Surco</title>
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="css/privacy.css">
+  <style>
+    /* ── Brand tokens ─────────────────────────────────────────────────── */
+    :root {
+      --tierra-oscura:  #1C1008;
+      --arcilla:        #C4501A;
+      --crema-campo:    #F5EDD8;
+      --verde-surco:    #2A5C3F;
+      --verde-brote:    #8DC49A;
+      --azul-dato:      #1A3D5C;
+      --card-bg:        #FFFBF4;
+      --surface:        #FFFFFF;
+      --border:         #E8DFC8;
+      --text-muted:     #6B5B44;
+      --shadow:         0 2px 16px rgba(28,16,8,.08);
+    }
+
+    /* ── Reset & base ────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 400;
+      background: var(--crema-campo);
+      color: var(--tierra-oscura);
+      line-height: 1.75;
+      font-size: 16px;
+    }
+
+    /* ── Header ─────────────────────────────────────────────────────── */
+    header {
+      background: var(--tierra-oscura);
+      color: var(--crema-campo);
+      padding: 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 56px 32px 48px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .logo-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+
+    .logo-mark {
+      width: 48px;
+      height: 48px;
+      background: var(--arcilla);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .logo-mark svg { display: block; }
+
+    .logo-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+      color: var(--crema-campo);
+    }
+
+    .logo-tagline {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--verde-brote);
+      display: block;
+      margin-top: 2px;
+    }
+
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 5vw, 40px);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+
+    header h1 span { color: var(--arcilla); }
+
+    .header-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .meta-pill {
+      background: rgba(245,237,216,.10);
+      border: 1px solid rgba(245,237,216,.18);
+      border-radius: 100px;
+      padding: 6px 16px;
+      font-size: 13px;
+      color: var(--crema-campo);
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .meta-pill .dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--verde-brote);
+      flex-shrink: 0;
+    }
+
+    /* ── Decoration blobs ────────────────────────────────────────────── */
+    header::before {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 320px; height: 320px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(196,80,26,.20) 0%, transparent 70%);
+    }
+
+    header::after {
+      content: '';
+      position: absolute;
+      bottom: -60px; left: 40%;
+      width: 220px; height: 220px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(42,92,63,.25) 0%, transparent 70%);
+    }
+
+    /* ── TOC ──────────────────────────────────────────────────────────── */
+    .toc-wrapper {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    .toc {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 28px 32px;
+      margin-top: -28px;
+      margin-bottom: 0;
+      box-shadow: var(--shadow);
+      position: relative;
+      z-index: 2;
+    }
+
+    .toc h2 {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .toc ol {
+      padding-left: 20px;
+      columns: 2;
+      column-gap: 40px;
+    }
+
+    @media (max-width: 600px) { .toc ol { columns: 1; } }
+
+    .toc li {
+      margin-bottom: 8px;
+    }
+
+    .toc a {
+      color: var(--verde-surco);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color .15s;
+    }
+
+    .toc a:hover { color: var(--arcilla); text-decoration: underline; }
+
+    /* ── Main content ─────────────────────────────────────────────────── */
+    main {
+      max-width: 860px;
+      margin: 48px auto 80px;
+      padding: 0 32px;
+    }
+
+    /* ── Sections ────────────────────────────────────────────────────── */
+    .section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 36px 40px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow);
+      scroll-margin-top: 24px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 18px;
+      margin-bottom: 24px;
+    }
+
+    .section-icon {
+      width: 48px; height: 48px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 22px;
+    }
+
+    .section-icon.green  { background: rgba(42,92,63,.10);  }
+    .section-icon.orange { background: rgba(196,80,26,.10); }
+    .section-icon.blue   { background: rgba(26,61,92,.10);  }
+    .section-icon.teal   { background: rgba(141,196,154,.20); }
+    .section-icon.red    { background: rgba(196,60,60,.10); }
+    .section-icon.gold   { background: rgba(196,160,26,.10); }
+    .section-icon.purple { background: rgba(92,42,130,.10); }
+    .section-icon.dark   { background: rgba(28,16,8,.08);   }
+
+    .section-title-group { flex: 1; }
+
+    .section-number {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--tierra-oscura);
+      line-height: 1.25;
+    }
+
+    .section h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--tierra-oscura);
+      margin: 24px 0 10px;
+    }
+
+    .section p {
+      color: var(--tierra-oscura);
+      margin-bottom: 14px;
+      font-size: 15px;
+    }
+
+    .section p:last-child { margin-bottom: 0; }
+
+    /* ── Data table ────────────────────────────────────────────────────── */
+    .data-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      margin: 18px 0;
+      font-size: 14px;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .data-table thead tr {
+      background: var(--tierra-oscura);
+      color: var(--crema-campo);
+    }
+
+    .data-table th {
+      padding: 12px 16px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 12px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .data-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.5;
+    }
+
+    .data-table tbody tr:last-child td { border-bottom: none; }
+
+    .data-table tbody tr:nth-child(even) { background: var(--card-bg); }
+
+    .data-table .basis { color: var(--verde-surco); font-weight: 600; }
+
+    /* ── Permission cards ──────────────────────────────────────────────── */
+    .permission-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 16px;
+      margin: 18px 0;
+    }
+
+    .permission-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px;
+    }
+
+    .permission-card .perm-icon {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .permission-card .perm-name {
+      font-weight: 600;
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+
+    .permission-card .perm-reason {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* ── Third party list ──────────────────────────────────────────────── */
+    .third-party-list {
+      list-style: none;
+      margin: 16px 0;
+    }
+
+    .third-party-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 16px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      margin-bottom: 10px;
+      background: var(--card-bg);
+    }
+
+    .third-party-list .tp-icon {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      background: var(--tierra-oscura);
+      color: var(--crema-campo);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .third-party-list .tp-name {
+      font-weight: 600;
+      font-size: 14px;
+      margin-bottom: 3px;
+    }
+
+    .third-party-list .tp-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .third-party-list a {
+      color: var(--verde-surco);
+      font-size: 12px;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .third-party-list a:hover { text-decoration: underline; }
+
+    /* ── Rights grid ───────────────────────────────────────────────────── */
+    .rights-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 14px;
+      margin: 16px 0;
+    }
+
+    .right-card {
+      background: rgba(42,92,63,.06);
+      border: 1px solid rgba(42,92,63,.15);
+      border-radius: 14px;
+      padding: 16px;
+    }
+
+    .right-card .right-icon { font-size: 22px; margin-bottom: 8px; }
+    .right-card .right-title { font-weight: 600; font-size: 14px; margin-bottom: 4px; }
+    .right-card .right-desc { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+
+    /* ── Highlight box ─────────────────────────────────────────────────── */
+    .highlight {
+      background: rgba(196,80,26,.06);
+      border-left: 4px solid var(--arcilla);
+      border-radius: 0 12px 12px 0;
+      padding: 16px 20px;
+      margin: 18px 0;
+      font-size: 14px;
+    }
+
+    .highlight strong { color: var(--arcilla); }
+
+    /* ── Contact card ──────────────────────────────────────────────────── */
+    .contact-card {
+      background: var(--tierra-oscura);
+      color: var(--crema-campo);
+      border-radius: 16px;
+      padding: 28px 32px;
+      margin-top: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .contact-card .contact-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--verde-brote);
+      margin-bottom: 6px;
+    }
+
+    .contact-card .contact-value {
+      font-size: 15px;
+      font-weight: 500;
+    }
+
+    .contact-card a {
+      color: var(--crema-campo);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    /* ── Footer ──────────────────────────────────────────────────────── */
+    footer {
+      background: var(--tierra-oscura);
+      color: rgba(245,237,216,.55);
+      text-align: center;
+      padding: 32px;
+      font-size: 13px;
+    }
+
+    footer strong { color: var(--crema-campo); }
+    footer a { color: var(--verde-brote); text-decoration: none; }
+
+    /* ── Utility ─────────────────────────────────────────────────────── */
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 24px 0;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(42,92,63,.10);
+      color: var(--verde-surco);
+      border: 1px solid rgba(42,92,63,.20);
+      border-radius: 100px;
+      padding: 2px 10px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-left: 8px;
+    }
+
+    .badge.red {
+      background: rgba(196,80,26,.10);
+      color: var(--arcilla);
+      border-color: rgba(196,80,26,.20);
+    }
+
+    /* ── Responsive ──────────────────────────────────────────────────── */
+    @media (max-width: 640px) {
+      .header-inner { padding: 40px 20px 36px; }
+      .toc-wrapper { padding: 0 16px; }
+      main { padding: 0 16px; margin-top: 32px; }
+      .section { padding: 24px 20px; }
+      .section h2 { font-size: 19px; }
+      .toc ol { columns: 1; }
+      .contact-card { padding: 20px; }
+    }
+  </style>
 </head>
 <body>
 
-<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• HEADER -->
+<!-- ════════════════════════════════════════════════════════════════════ HEADER -->
 <header>
   <div class="header-inner">
-    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;">
-      <div class="logo-row" style="margin-bottom:0;">
-        <div class="logo-mark">
-          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M14 24V10M14 10C14 10 8 6 4 8C4 8 6 18 14 18M14 10C14 10 20 6 24 8C24 8 22 18 14 18" stroke="#F5EDD8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <div>
-          <span class="logo-text">Surco</span>
-          <span class="logo-tagline">TecnologÃ­a que siembra</span>
-        </div>
+    <div class="logo-row">
+      <div class="logo-mark">
+        <!-- Surco leaf/sprout icon -->
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M14 24V10M14 10C14 10 8 6 4 8C4 8 6 18 14 18M14 10C14 10 20 6 24 8C24 8 22 18 14 18" stroke="#F5EDD8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
       </div>
-      <a href="index.html" style="
-        display:inline-flex;align-items:center;gap:8px;
-        background:rgba(245,237,216,.12);
-        border:1px solid rgba(245,237,216,.25);
-        border-radius:12px;padding:10px 18px;
-        color:#F5EDD8;text-decoration:none;
-        font-family:'Outfit',sans-serif;font-size:.88rem;font-weight:600;
-        transition:background .2s;
-      " onmouseover="this.style.background='rgba(245,237,216,.22)'" onmouseout="this.style.background='rgba(245,237,216,.12)'">
-        â† Volver al inicio
-      </a>
+      <div>
+        <span class="logo-text">Surco</span>
+        <span class="logo-tagline">Tecnología que siembra</span>
+      </div>
     </div>
 
-    <h1>PolÃ­tica de <span>Privacidad</span></h1>
+    <h1>Política de <span>Privacidad</span></h1>
     <p style="font-size:15px; color:rgba(245,237,216,.75); max-width:560px;">
-      Tu privacidad es fundamental para nosotros. Este documento explica de forma clara y transparente quÃ© datos recopilamos, por quÃ© los necesitamos y cÃ³mo los protegemos.
+      Tu privacidad es fundamental para nosotros. Este documento explica de forma clara y transparente qué datos recopilamos, por qué los necesitamos y cómo los protegemos.
     </p>
 
     <div class="header-meta">
-      <div class="meta-pill"><span class="dot"></span> VersiÃ³n 1.0</div>
+      <div class="meta-pill"><span class="dot"></span> Versión 1.0</div>
       <div class="meta-pill"><span class="dot"></span> Vigente desde: 1 de enero de 2025</div>
-      <div class="meta-pill"><span class="dot"></span> Ãšltima actualizaciÃ³n: Marzo 2025</div>
+      <div class="meta-pill"><span class="dot"></span> Última actualización: Marzo 2025</div>
     </div>
   </div>
 </header>
 
-<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• TABLE OF CONTENTS -->
+<!-- ══════════════════════════════════════════════════════════════ TABLE OF CONTENTS -->
 <div class="toc-wrapper">
   <nav class="toc">
     <h2>Contenido</h2>
     <ol>
       <li><a href="#responsable">Responsable del tratamiento</a></li>
-      <li><a href="#que-recopilamos">QuÃ© datos recopilamos</a></li>
+      <li><a href="#que-recopilamos">Qué datos recopilamos</a></li>
       <li><a href="#permisos">Permisos del dispositivo</a></li>
-      <li><a href="#como-usamos">CÃ³mo usamos los datos</a></li>
+      <li><a href="#como-usamos">Cómo usamos los datos</a></li>
       <li><a href="#terceros">Terceros y servicios externos</a></li>
-      <li><a href="#almacenamiento">Almacenamiento y retenciÃ³n</a></li>
+      <li><a href="#almacenamiento">Almacenamiento y retención</a></li>
       <li><a href="#seguridad">Seguridad</a></li>
       <li><a href="#derechos">Tus derechos</a></li>
       <li><a href="#menores">Menores de edad</a></li>
-      <li><a href="#cambios">Cambios a esta polÃ­tica</a></li>
+      <li><a href="#cambios">Cambios a esta política</a></li>
       <li><a href="#contacto">Contacto</a></li>
     </ol>
   </nav>
 </div>
 
-<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• MAIN -->
+<!-- ════════════════════════════════════════════════════════════════════ MAIN -->
 <main>
 
-  <!-- â”€â”€ 1. Responsable â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
+  <!-- ── 1. Responsable ──────────────────────────────────────────────── -->
   <section class="section" id="responsable">
     <div class="section-header">
-      <div class="section-icon green">ðŸ¢</div>
+      <div class="section-icon green">🏢</div>
       <div class="section-title-group">
-        <div class="section-number">SecciÃ³n 01</div>
+        <div class="section-number">Sección 01</div>
         <h2>Responsable del tratamiento</h2>
       </div>
     </div>
 
     <p>
-      La aplicaciÃ³n <strong>Surco</strong> es desarrollada y operada por:
+      La aplicación <strong>Surco</strong> es desarrollada y operada por:
     </p>
 
     <div class="contact-card" style="margin-top:0; margin-bottom:20px;">
@@ -99,7 +586,7 @@
         <div class="contact-value">Diego Sanabria</div>
       </div>
       <div>
-        <div class="contact-label">PaÃ­s</div>
+        <div class="contact-label">País</div>
         <div class="contact-value">Colombia</div>
       </div>
       <div>
@@ -109,134 +596,134 @@
     </div>
 
     <p>
-      Al usar Surco, aceptas el tratamiento de tus datos segÃºn lo descrito en esta PolÃ­tica de Privacidad, de conformidad con la <strong>Ley 1581 de 2012</strong> (Ley de ProtecciÃ³n de Datos Personales de Colombia) y el Decreto reglamentario 1377 de 2013.
+      Al usar Surco, aceptas el tratamiento de tus datos según lo descrito en esta Política de Privacidad, de conformidad con la <strong>Ley 1581 de 2012</strong> (Ley de Protección de Datos Personales de Colombia) y el Decreto reglamentario 1377 de 2013.
     </p>
   </section>
 
-  <!-- â”€â”€ 2. QuÃ© recopilamos â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
+  <!-- ── 2. Qué recopilamos ──────────────────────────────────────────── -->
   <section class="section" id="que-recopilamos">
     <div class="section-header">
-      <div class="section-icon orange">ðŸ“‹</div>
+      <div class="section-icon orange">📋</div>
       <div class="section-title-group">
-        <div class="section-number">SecciÃ³n 02</div>
-        <h2>QuÃ© datos recopilamos</h2>
+        <div class="section-number">Sección 02</div>
+        <h2>Qué datos recopilamos</h2>
       </div>
     </div>
 
-    <p>Recopilamos Ãºnicamente los datos necesarios para brindarte las funciones de la aplicaciÃ³n. A continuaciÃ³n el detalle:</p>
+    <p>Recopilamos únicamente los datos necesarios para brindarte las funciones de la aplicación. A continuación el detalle:</p>
 
     <table class="data-table">
       <thead>
         <tr>
-          <th>CategorÃ­a</th>
-          <th>Datos especÃ­ficos</th>
+          <th>Categoría</th>
+          <th>Datos específicos</th>
           <th>Base legal</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td><strong>Datos de cuenta</strong></td>
-          <td>Correo electrÃ³nico, contraseÃ±a (cifrada)</td>
+          <td>Correo electrónico, contraseña (cifrada)</td>
           <td><span class="basis">Consentimiento</span></td>
         </tr>
         <tr>
           <td><strong>Datos de finca</strong></td>
-          <td>Nombre de la finca, descripciÃ³n, Ã¡rea, cultivos, lotes, variedades, etapas fenolÃ³gicas</td>
-          <td><span class="basis">EjecuciÃ³n del contrato</span></td>
+          <td>Nombre de la finca, descripción, área, cultivos, lotes, variedades, etapas fenológicas</td>
+          <td><span class="basis">Ejecución del contrato</span></td>
         </tr>
         <tr>
-          <td><strong>Eventos agrÃ­colas</strong></td>
+          <td><strong>Eventos agrícolas</strong></td>
           <td>Registros de labores, aplicaciones de productos, monitoreo de plagas, costos, observaciones</td>
-          <td><span class="basis">EjecuciÃ³n del contrato</span></td>
+          <td><span class="basis">Ejecución del contrato</span></td>
         </tr>
         <tr>
-          <td><strong>UbicaciÃ³n</strong></td>
-          <td>Coordenadas GPS de las fincas (lat/lon), solo cuando el usuario la proporciona explÃ­citamente</td>
+          <td><strong>Ubicación</strong></td>
+          <td>Coordenadas GPS de las fincas (lat/lon), solo cuando el usuario la proporciona explícitamente</td>
           <td><span class="basis">Consentimiento</span></td>
         </tr>
         <tr>
-          <td><strong>ImÃ¡genes</strong></td>
-          <td>Fotos de hojas/cultivos capturadas para diagnÃ³stico de enfermedades o anÃ¡lisis de clorofila</td>
+          <td><strong>Imágenes</strong></td>
+          <td>Fotos de hojas/cultivos capturadas para diagnóstico de enfermedades o análisis de clorofila</td>
           <td><span class="basis">Consentimiento</span></td>
         </tr>
         <tr>
           <td><strong>Datos de uso</strong></td>
-          <td>Eventos de navegaciÃ³n en la app, funciones utilizadas, errores y crashes (anÃ³nimos)</td>
-          <td><span class="basis">InterÃ©s legÃ­timo</span></td>
+          <td>Eventos de navegación en la app, funciones utilizadas, errores y crashes (anónimos)</td>
+          <td><span class="basis">Interés legítimo</span></td>
         </tr>
         <tr>
           <td><strong>Datos del dispositivo</strong></td>
-          <td>Modelo, versiÃ³n del SO Android, identificador de instalaciÃ³n (anÃ³nimo)</td>
-          <td><span class="basis">InterÃ©s legÃ­timo</span></td>
+          <td>Modelo, versión del SO Android, identificador de instalación (anónimo)</td>
+          <td><span class="basis">Interés legítimo</span></td>
         </tr>
       </tbody>
     </table>
 
     <div class="highlight">
-      <strong>Nota importante:</strong> Surco <strong>NO recopila</strong> datos financieros personales, nÃºmeros de identificaciÃ³n, informaciÃ³n de salud ni datos de menores de edad. Los datos de costos agrÃ­colas que registras son de tu operaciÃ³n y permanecen bajo tu control.
+      <strong>Nota importante:</strong> Surco <strong>NO recopila</strong> datos financieros personales, números de identificación, información de salud ni datos de menores de edad. Los datos de costos agrícolas que registras son de tu operación y permanecen bajo tu control.
     </div>
   </section>
 
-  <!-- â”€â”€ 3. Permisos â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
+  <!-- ── 3. Permisos ─────────────────────────────────────────────────── -->
   <section class="section" id="permisos">
     <div class="section-header">
-      <div class="section-icon blue">ðŸ”</div>
+      <div class="section-icon blue">🔐</div>
       <div class="section-title-group">
-        <div class="section-number">SecciÃ³n 03</div>
+        <div class="section-number">Sección 03</div>
         <h2>Permisos del dispositivo</h2>
       </div>
     </div>
 
-    <p>Surco solicita los siguientes permisos en Android. Todos son opcionales: si los denegas, las funciones relacionadas no estarÃ¡n disponibles pero el resto de la app seguirÃ¡ funcionando.</p>
+    <p>Surco solicita los siguientes permisos en Android. Todos son opcionales: si los denegas, las funciones relacionadas no estarán disponibles pero el resto de la app seguirá funcionando.</p>
 
     <div class="permission-grid">
 
       <div class="permission-card">
-        <div class="perm-icon">ðŸ“</div>
-        <div class="perm-name">UbicaciÃ³n precisa / aproximada</div>
+        <div class="perm-icon">📍</div>
+        <div class="perm-name">Ubicación precisa / aproximada</div>
         <div class="perm-reason">
-          Para centrar el mapa en tu finca y vincular eventos climÃ¡ticos a tu ubicaciÃ³n. Solo se accede cuando estÃ¡s usando la app.
+          Para centrar el mapa en tu finca y vincular eventos climáticos a tu ubicación. Solo se accede cuando estás usando la app.
         </div>
       </div>
 
       <div class="permission-card">
-        <div class="perm-icon">ðŸ“·</div>
-        <div class="perm-name">CÃ¡mara</div>
+        <div class="perm-icon">📷</div>
+        <div class="perm-name">Cámara</div>
         <div class="perm-reason">
-          Para capturar fotos de hojas o cultivos y analizarlas con IA (detecciÃ³n de enfermedades, estimaciÃ³n de clorofila).
+          Para capturar fotos de hojas o cultivos y analizarlas con IA (detección de enfermedades, estimación de clorofila).
         </div>
       </div>
 
       <div class="permission-card">
-        <div class="perm-icon">ðŸ–¼ï¸</div>
-        <div class="perm-name">GalerÃ­a / Almacenamiento</div>
+        <div class="perm-icon">🖼️</div>
+        <div class="perm-name">Galería / Almacenamiento</div>
         <div class="perm-reason">
-          Para seleccionar imÃ¡genes existentes de tus cultivos y exportar PDFs del cuaderno de campo.
+          Para seleccionar imágenes existentes de tus cultivos y exportar PDFs del cuaderno de campo.
         </div>
       </div>
 
       <div class="permission-card">
-        <div class="perm-icon">ðŸŒ</div>
+        <div class="perm-icon">🌐</div>
         <div class="perm-name">Internet</div>
         <div class="perm-reason">
-          Para sincronizar tus datos con la nube, consultar el pronÃ³stico climÃ¡tico y acceder al asistente de IA agronÃ³mica.
+          Para sincronizar tus datos con la nube, consultar el pronóstico climático y acceder al asistente de IA agronómica.
         </div>
       </div>
 
     </div>
 
     <p style="font-size:14px; color: var(--text-muted); margin-top:8px;">
-      Puedes revocar cualquier permiso en cualquier momento desde <em>ConfiguraciÃ³n â†’ Aplicaciones â†’ Surco â†’ Permisos</em> en tu dispositivo Android.
+      Puedes revocar cualquier permiso en cualquier momento desde <em>Configuración → Aplicaciones → Surco → Permisos</em> en tu dispositivo Android.
     </p>
   </section>
 
-  <!-- â”€â”€ 4. CÃ³mo usamos los datos â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
+  <!-- ── 4. Cómo usamos los datos ────────────────────────────────────── -->
   <section class="section" id="como-usamos">
     <div class="section-header">
-      <div class="section-icon teal">âš™ï¸</div>
+      <div class="section-icon teal">⚙️</div>
       <div class="section-title-group">
-        <div class="section-number">SecciÃ³n 04</div>
-        <h2>CÃ³mo usamos los datos</h2>
+        <div class="section-number">Sección 04</div>
+        <h2>Cómo usamos los datos</h2>
       </div>
     </div>
 
@@ -244,203 +731,203 @@
 
     <ul style="list-style:none; margin:12px 0 20px; display:flex; flex-direction:column; gap:12px;">
       <li style="display:flex;gap:12px;align-items:flex-start;">
-        <span style="font-size:18px; flex-shrink:0;">ðŸŒ±</span>
-        <span><strong>GestiÃ³n de fincas y cultivos.</strong> Almacenar y mostrarte la informaciÃ³n de tus predios, lotes, cultivos, labores y eventos agrÃ­colas.</span>
+        <span style="font-size:18px; flex-shrink:0;">🌱</span>
+        <span><strong>Gestión de fincas y cultivos.</strong> Almacenar y mostrarte la información de tus predios, lotes, cultivos, labores y eventos agrícolas.</span>
       </li>
       <li style="display:flex;gap:12px;align-items:flex-start;">
-        <span style="font-size:18px; flex-shrink:0;">ðŸ¤–</span>
-        <span><strong>DiagnÃ³stico con IA.</strong> Analizar las imÃ¡genes de hojas que envÃ­as para detectar enfermedades y estimar el contenido de clorofila (SPAD) directamente en tu dispositivo o mediante modelos en la nube.</span>
+        <span style="font-size:18px; flex-shrink:0;">🤖</span>
+        <span><strong>Diagnóstico con IA.</strong> Analizar las imágenes de hojas que envías para detectar enfermedades y estimar el contenido de clorofila (SPAD) directamente en tu dispositivo o mediante modelos en la nube.</span>
       </li>
       <li style="display:flex;gap:12px;align-items:flex-start;">
-        <span style="font-size:18px; flex-shrink:0;">ðŸ’§</span>
-        <span><strong>Recomendaciones agronÃ³micas.</strong> Calcular el balance hÃ­drico, las unidades de calor acumuladas (GDD), el Ã­ndice de presiÃ³n de plagas y generar alertas personalizadas para tu cultivo.</span>
+        <span style="font-size:18px; flex-shrink:0;">💧</span>
+        <span><strong>Recomendaciones agronómicas.</strong> Calcular el balance hídrico, las unidades de calor acumuladas (GDD), el índice de presión de plagas y generar alertas personalizadas para tu cultivo.</span>
       </li>
       <li style="display:flex;gap:12px;align-items:flex-start;">
-        <span style="font-size:18px; flex-shrink:0;">ðŸ“‹</span>
-        <span><strong>Cuaderno de campo y trazabilidad.</strong> Registrar aplicaciones de productos, generar reportes PDF con firma tÃ©cnica y verificar el semÃ¡foro IIH para cumplimiento de plazos de seguridad.</span>
+        <span style="font-size:18px; flex-shrink:0;">📋</span>
+        <span><strong>Cuaderno de campo y trazabilidad.</strong> Registrar aplicaciones de productos, generar reportes PDF con firma técnica y verificar el semáforo IIH para cumplimiento de plazos de seguridad.</span>
       </li>
       <li style="display:flex;gap:12px;align-items:flex-start;">
-        <span style="font-size:18px; flex-shrink:0;">ðŸ”</span>
-        <span><strong>AutenticaciÃ³n.</strong> Verificar tu identidad para proteger tus datos y asegurar que solo tÃº puedas acceder a tu informaciÃ³n.</span>
+        <span style="font-size:18px; flex-shrink:0;">🔐</span>
+        <span><strong>Autenticación.</strong> Verificar tu identidad para proteger tus datos y asegurar que solo tú puedas acceder a tu información.</span>
       </li>
       <li style="display:flex;gap:12px;align-items:flex-start;">
-        <span style="font-size:18px; flex-shrink:0;">ðŸ“Š</span>
-        <span><strong>Mejora del servicio.</strong> Analizar de forma agregada y anÃ³nima el uso de funciones para priorizar mejoras y corregir errores.</span>
+        <span style="font-size:18px; flex-shrink:0;">📊</span>
+        <span><strong>Mejora del servicio.</strong> Analizar de forma agregada y anónima el uso de funciones para priorizar mejoras y corregir errores.</span>
       </li>
     </ul>
 
     <div class="highlight">
-      <strong>Lo que NO hacemos:</strong> No vendemos tus datos a terceros. No usamos tu informaciÃ³n agrÃ­cola para publicidad. No compartimos datos personales identificables sin tu consentimiento, salvo requerimiento legal.
+      <strong>Lo que NO hacemos:</strong> No vendemos tus datos a terceros. No usamos tu información agrícola para publicidad. No compartimos datos personales identificables sin tu consentimiento, salvo requerimiento legal.
     </div>
   </section>
 
-  <!-- â”€â”€ 5. Terceros â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
+  <!-- ── 5. Terceros ─────────────────────────────────────────────────── -->
   <section class="section" id="terceros">
     <div class="section-header">
-      <div class="section-icon red">ðŸ”—</div>
+      <div class="section-icon red">🔗</div>
       <div class="section-title-group">
-        <div class="section-number">SecciÃ³n 05</div>
+        <div class="section-number">Sección 05</div>
         <h2>Terceros y servicios externos</h2>
       </div>
     </div>
 
-    <p>Surco integra servicios de terceros para proporcionar sus funciones. Cada proveedor tiene sus propias polÃ­ticas de privacidad:</p>
+    <p>Surco integra servicios de terceros para proporcionar sus funciones. Cada proveedor tiene sus propias políticas de privacidad:</p>
 
     <ul class="third-party-list">
 
       <li>
-        <div class="tp-icon">ðŸ”¥</div>
+        <div class="tp-icon">🔥</div>
         <div>
           <div class="tp-name">Firebase Authentication (Google LLC)</div>
-          <div class="tp-desc">Gestiona el inicio de sesiÃ³n seguro con correo electrÃ³nico. Google puede procesar datos como direcciÃ³n IP y credenciales cifradas.</div>
-          <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">â†’ PolÃ­tica de Firebase</a>
+          <div class="tp-desc">Gestiona el inicio de sesión seguro con correo electrónico. Google puede procesar datos como dirección IP y credenciales cifradas.</div>
+          <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">→ Política de Firebase</a>
         </div>
       </li>
 
       <li>
-        <div class="tp-icon">â˜ï¸</div>
+        <div class="tp-icon">☁️</div>
         <div>
           <div class="tp-name">Cloud Firestore (Google LLC)</div>
-          <div class="tp-desc">Base de datos en la nube donde se almacenan tus fincas, lotes y datos agrÃ­colas. Los servidores pueden estar en EE. UU. o la UniÃ³n Europea.</div>
-          <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">â†’ PolÃ­tica de Firebase</a>
+          <div class="tp-desc">Base de datos en la nube donde se almacenan tus fincas, lotes y datos agrícolas. Los servidores pueden estar en EE. UU. o la Unión Europea.</div>
+          <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">→ Política de Firebase</a>
         </div>
       </li>
 
       <li>
-        <div class="tp-icon">ðŸ§ </div>
+        <div class="tp-icon">🧠</div>
         <div>
           <div class="tp-name">Google Gemini API (Google LLC)</div>
-          <div class="tp-desc">Motor de IA que procesa tus consultas al asistente agronÃ³mico. Las imÃ¡genes y textos que envÃ­as al chat son procesados por Google en sus servidores. No se usan para entrenar modelos sin consentimiento explÃ­cito.</div>
-          <a href="https://ai.google.dev/gemini-api/terms" target="_blank" rel="noopener">â†’ TÃ©rminos de la API de Gemini</a>
+          <div class="tp-desc">Motor de IA que procesa tus consultas al asistente agronómico. Las imágenes y textos que envías al chat son procesados por Google en sus servidores. No se usan para entrenar modelos sin consentimiento explícito.</div>
+          <a href="https://ai.google.dev/gemini-api/terms" target="_blank" rel="noopener">→ Términos de la API de Gemini</a>
         </div>
       </li>
 
       <li>
-        <div class="tp-icon">ðŸ“Š</div>
+        <div class="tp-icon">📊</div>
         <div>
           <div class="tp-name">Firebase Analytics (Google LLC)</div>
-          <div class="tp-desc">Recopila datos anonimizados sobre cÃ³mo se usan las funciones de la app. No recopila datos personales identificables. Puedes optar por no participar en la configuraciÃ³n del dispositivo.</div>
-          <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">â†’ PolÃ­tica de Google</a>
+          <div class="tp-desc">Recopila datos anonimizados sobre cómo se usan las funciones de la app. No recopila datos personales identificables. Puedes optar por no participar en la configuración del dispositivo.</div>
+          <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">→ Política de Google</a>
         </div>
       </li>
 
       <li>
-        <div class="tp-icon">ðŸ›</div>
+        <div class="tp-icon">🐛</div>
         <div>
           <div class="tp-name">Firebase Crashlytics (Google LLC)</div>
-          <div class="tp-desc">Registra reportes de errores y crashes de forma automÃ¡tica para ayudarnos a mejorar la estabilidad. Los reportes incluyen informaciÃ³n del dispositivo (modelo, versiÃ³n de Android) pero no datos personales.</div>
-          <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">â†’ PolÃ­tica de Firebase</a>
+          <div class="tp-desc">Registra reportes de errores y crashes de forma automática para ayudarnos a mejorar la estabilidad. Los reportes incluyen información del dispositivo (modelo, versión de Android) pero no datos personales.</div>
+          <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">→ Política de Firebase</a>
         </div>
       </li>
 
       <li>
-        <div class="tp-icon">ðŸ—ºï¸</div>
+        <div class="tp-icon">🗺️</div>
         <div>
           <div class="tp-name">OpenStreetMap</div>
-          <div class="tp-desc">Proveedor de mapas de cÃ³digo abierto. Al visualizar el mapa, tu dispositivo descarga teselas (tiles) del servidor de OpenStreetMap, que puede registrar tu direcciÃ³n IP.</div>
-          <a href="https://osmfoundation.org/wiki/Privacy_Policy" target="_blank" rel="noopener">â†’ PolÃ­tica de OpenStreetMap</a>
+          <div class="tp-desc">Proveedor de mapas de código abierto. Al visualizar el mapa, tu dispositivo descarga teselas (tiles) del servidor de OpenStreetMap, que puede registrar tu dirección IP.</div>
+          <a href="https://osmfoundation.org/wiki/Privacy_Policy" target="_blank" rel="noopener">→ Política de OpenStreetMap</a>
         </div>
       </li>
 
     </ul>
 
     <p style="font-size:14px; color: var(--text-muted);">
-      Todos los proveedores listados son miembros del Marco de Privacidad de Datos UE-EE.UU. o cuentan con clÃ¡usulas contractuales estÃ¡ndar aprobadas para la transferencia internacional de datos.
+      Todos los proveedores listados son miembros del Marco de Privacidad de Datos UE-EE.UU. o cuentan con cláusulas contractuales estándar aprobadas para la transferencia internacional de datos.
     </p>
   </section>
 
-  <!-- â”€â”€ 6. Almacenamiento y retenciÃ³n â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
+  <!-- ── 6. Almacenamiento y retención ────────────────────────────────── -->
   <section class="section" id="almacenamiento">
     <div class="section-header">
-      <div class="section-icon gold">ðŸ—„ï¸</div>
+      <div class="section-icon gold">🗄️</div>
       <div class="section-title-group">
-        <div class="section-number">SecciÃ³n 06</div>
-        <h2>Almacenamiento y retenciÃ³n</h2>
+        <div class="section-number">Sección 06</div>
+        <h2>Almacenamiento y retención</h2>
       </div>
     </div>
 
-    <h3>DÃ³nde se almacenan tus datos</h3>
+    <h3>Dónde se almacenan tus datos</h3>
     <ul style="margin: 12px 0 20px 20px; display:flex; flex-direction:column; gap:8px;">
-      <li><strong>Localmente en tu dispositivo:</strong> Hive (base de datos NoSQL local). Tus datos estÃ¡n disponibles sin conexiÃ³n a internet.</li>
-      <li><strong>En la nube:</strong> Google Cloud (Firebase / Firestore). Los servidores pueden estar en EE.UU., Europa o cualquier regiÃ³n disponible de Google Cloud.</li>
-      <li><strong>ImÃ¡genes de anÃ¡lisis:</strong> Se procesan en memoria o en almacenamiento local temporal. No se suben permanentemente a ningÃºn servidor sin tu acciÃ³n explÃ­cita.</li>
+      <li><strong>Localmente en tu dispositivo:</strong> Hive (base de datos NoSQL local). Tus datos están disponibles sin conexión a internet.</li>
+      <li><strong>En la nube:</strong> Google Cloud (Firebase / Firestore). Los servidores pueden estar en EE.UU., Europa o cualquier región disponible de Google Cloud.</li>
+      <li><strong>Imágenes de análisis:</strong> Se procesan en memoria o en almacenamiento local temporal. No se suben permanentemente a ningún servidor sin tu acción explícita.</li>
     </ul>
 
-    <h3>Por cuÃ¡nto tiempo conservamos tus datos</h3>
+    <h3>Por cuánto tiempo conservamos tus datos</h3>
     <table class="data-table">
       <thead>
         <tr>
           <th>Tipo de dato</th>
-          <th>PerÃ­odo de retenciÃ³n</th>
+          <th>Período de retención</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td>Datos de cuenta y fincas</td>
-          <td>Mientras tu cuenta estÃ© activa. Se eliminan a los 30 dÃ­as de solicitar la eliminaciÃ³n.</td>
+          <td>Mientras tu cuenta esté activa. Se eliminan a los 30 días de solicitar la eliminación.</td>
         </tr>
         <tr>
-          <td>Eventos y registros agrÃ­colas</td>
-          <td>Mientras tu cuenta estÃ© activa o hasta que los elimines manualmente.</td>
+          <td>Eventos y registros agrícolas</td>
+          <td>Mientras tu cuenta esté activa o hasta que los elimines manualmente.</td>
         </tr>
         <tr>
-          <td>Datos de analÃ­tica (Firebase Analytics)</td>
-          <td>MÃ¡ximo 14 meses segÃºn configuraciÃ³n de Firebase. Datos agrupados y anÃ³nimos.</td>
+          <td>Datos de analítica (Firebase Analytics)</td>
+          <td>Máximo 14 meses según configuración de Firebase. Datos agrupados y anónimos.</td>
         </tr>
         <tr>
           <td>Reportes de crashes (Crashlytics)</td>
-          <td>90 dÃ­as en los servidores de Firebase.</td>
+          <td>90 días en los servidores de Firebase.</td>
         </tr>
       </tbody>
     </table>
   </section>
 
-  <!-- â”€â”€ 7. Seguridad â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
+  <!-- ── 7. Seguridad ────────────────────────────────────────────────── -->
   <section class="section" id="seguridad">
     <div class="section-header">
-      <div class="section-icon blue">ðŸ›¡ï¸</div>
+      <div class="section-icon blue">🛡️</div>
       <div class="section-title-group">
-        <div class="section-number">SecciÃ³n 07</div>
+        <div class="section-number">Sección 07</div>
         <h2>Seguridad</h2>
       </div>
     </div>
 
-    <p>Implementamos medidas tÃ©cnicas y organizativas para proteger tus datos:</p>
+    <p>Implementamos medidas técnicas y organizativas para proteger tus datos:</p>
 
     <div class="rights-grid" style="margin-top:16px;">
       <div class="right-card">
-        <div class="right-icon">ðŸ”’</div>
-        <div class="right-title">Cifrado en trÃ¡nsito</div>
-        <div class="right-desc">Toda comunicaciÃ³n entre la app y los servidores usa HTTPS/TLS 1.3.</div>
+        <div class="right-icon">🔒</div>
+        <div class="right-title">Cifrado en tránsito</div>
+        <div class="right-desc">Toda comunicación entre la app y los servidores usa HTTPS/TLS 1.3.</div>
       </div>
       <div class="right-card">
-        <div class="right-icon">ðŸ”‘</div>
-        <div class="right-title">ContraseÃ±as seguras</div>
-        <div class="right-desc">Las contraseÃ±as se cifran con bcrypt por Firebase Authentication. Nunca las almacenamos en texto plano.</div>
+        <div class="right-icon">🔑</div>
+        <div class="right-title">Contraseñas seguras</div>
+        <div class="right-desc">Las contraseñas se cifran con bcrypt por Firebase Authentication. Nunca las almacenamos en texto plano.</div>
       </div>
       <div class="right-card">
-        <div class="right-icon">ðŸ“µ</div>
+        <div class="right-icon">📵</div>
         <div class="right-title">Acceso restringido</div>
-        <div class="right-desc">Solo tÃº puedes acceder a tus fincas. Las reglas de seguridad de Firestore verifican identidad en cada operaciÃ³n.</div>
+        <div class="right-desc">Solo tú puedes acceder a tus fincas. Las reglas de seguridad de Firestore verifican identidad en cada operación.</div>
       </div>
       <div class="right-card">
-        <div class="right-icon">ðŸ¤–</div>
+        <div class="right-icon">🤖</div>
         <div class="right-title">IA on-device</div>
-        <div class="right-desc">El modelo de detecciÃ³n de enfermedades corre directamente en tu dispositivo (TFLite) sin enviar imÃ¡genes a servidores.</div>
+        <div class="right-desc">El modelo de detección de enfermedades corre directamente en tu dispositivo (TFLite) sin enviar imágenes a servidores.</div>
       </div>
     </div>
 
     <div class="highlight" style="margin-top:20px;">
-      <strong>Responsabilidad compartida:</strong> NingÃºn sistema es 100% seguro. Te recomendamos usar una contraseÃ±a fuerte y no compartir tu cuenta con terceros. Si detectas acceso no autorizado, contÃ¡ctanos de inmediato.
+      <strong>Responsabilidad compartida:</strong> Ningún sistema es 100% seguro. Te recomendamos usar una contraseña fuerte y no compartir tu cuenta con terceros. Si detectas acceso no autorizado, contáctanos de inmediato.
     </div>
   </section>
 
-  <!-- â”€â”€ 8. Derechos â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
+  <!-- ── 8. Derechos ────────────────────────────────────────────────── -->
   <section class="section" id="derechos">
     <div class="section-header">
-      <div class="section-icon green">âš–ï¸</div>
+      <div class="section-icon green">⚖️</div>
       <div class="section-title-group">
-        <div class="section-number">SecciÃ³n 08</div>
+        <div class="section-number">Sección 08</div>
         <h2>Tus derechos</h2>
       </div>
     </div>
@@ -449,128 +936,128 @@
 
     <div class="rights-grid" style="margin-top:16px; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));">
       <div class="right-card">
-        <div class="right-icon">ðŸ‘ï¸</div>
+        <div class="right-icon">👁️</div>
         <div class="right-title">Acceso</div>
-        <div class="right-desc">Conocer quÃ© datos tuyos tenemos y cÃ³mo los usamos.</div>
+        <div class="right-desc">Conocer qué datos tuyos tenemos y cómo los usamos.</div>
       </div>
       <div class="right-card">
-        <div class="right-icon">âœï¸</div>
-        <div class="right-title">RectificaciÃ³n</div>
+        <div class="right-icon">✏️</div>
+        <div class="right-title">Rectificación</div>
         <div class="right-desc">Corregir datos inexactos o incompletos. Puedes editarlos directamente en la app.</div>
       </div>
       <div class="right-card">
-        <div class="right-icon">ðŸ—‘ï¸</div>
-        <div class="right-title">EliminaciÃ³n</div>
+        <div class="right-icon">🗑️</div>
+        <div class="right-title">Eliminación</div>
         <div class="right-desc">Solicitar que eliminemos tu cuenta y todos tus datos asociados.</div>
       </div>
       <div class="right-card">
-        <div class="right-icon">ðŸ“¤</div>
+        <div class="right-icon">📤</div>
         <div class="right-title">Portabilidad</div>
         <div class="right-desc">Recibir una copia de tus datos en formato estructurado y legible.</div>
       </div>
       <div class="right-card">
-        <div class="right-icon">ðŸš«</div>
-        <div class="right-title">OposiciÃ³n</div>
-        <div class="right-desc">Oponerte al tratamiento de tus datos para fines de analÃ­tica.</div>
+        <div class="right-icon">🚫</div>
+        <div class="right-title">Oposición</div>
+        <div class="right-desc">Oponerte al tratamiento de tus datos para fines de analítica.</div>
       </div>
       <div class="right-card">
-        <div class="right-icon">â¸ï¸</div>
-        <div class="right-title">LimitaciÃ³n</div>
+        <div class="right-icon">⏸️</div>
+        <div class="right-title">Limitación</div>
         <div class="right-desc">Solicitar que suspendamos el procesamiento de tus datos en ciertos casos.</div>
       </div>
     </div>
 
     <div class="divider"></div>
 
-    <p>Para ejercer cualquiera de estos derechos, escrÃ­benos a <strong><a href="mailto:privacidad@surco.app" style="color: var(--verde-surco);">privacidad@surco.app</a></strong> con el asunto <em>"Ejercicio de derechos HABEAS DATA"</em>. Responderemos dentro de los <strong>15 dÃ­as hÃ¡biles</strong> siguientes a la recepciÃ³n de tu solicitud.</p>
+    <p>Para ejercer cualquiera de estos derechos, escríbenos a <strong><a href="mailto:privacidad@surco.app" style="color: var(--verde-surco);">privacidad@surco.app</a></strong> con el asunto <em>"Ejercicio de derechos HABEAS DATA"</em>. Responderemos dentro de los <strong>15 días hábiles</strong> siguientes a la recepción de tu solicitud.</p>
   </section>
 
-  <!-- â”€â”€ 9. Menores â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
+  <!-- ── 9. Menores ──────────────────────────────────────────────────── -->
   <section class="section" id="menores">
     <div class="section-header">
-      <div class="section-icon red">ðŸ‘¶</div>
+      <div class="section-icon red">👶</div>
       <div class="section-title-group">
-        <div class="section-number">SecciÃ³n 09</div>
+        <div class="section-number">Sección 09</div>
         <h2>Menores de edad</h2>
       </div>
     </div>
 
     <p>
-      Surco es una aplicaciÃ³n diseÃ±ada para agricultores, tÃ©cnicos agropecuarios y profesionales del campo. <strong>No estÃ¡ dirigida a personas menores de 14 aÃ±os</strong> y no recopilamos conscientemente datos de menores.
+      Surco es una aplicación diseñada para agricultores, técnicos agropecuarios y profesionales del campo. <strong>No está dirigida a personas menores de 14 años</strong> y no recopilamos conscientemente datos de menores.
     </p>
     <p>
-      Si eres padre/madre o tutor y crees que tu hijo ha proporcionado datos personales en nuestra app, contÃ¡ctanos a <a href="mailto:privacidad@surco.app" style="color: var(--verde-surco);">privacidad@surco.app</a> para que los eliminemos de inmediato.
+      Si eres padre/madre o tutor y crees que tu hijo ha proporcionado datos personales en nuestra app, contáctanos a <a href="mailto:privacidad@surco.app" style="color: var(--verde-surco);">privacidad@surco.app</a> para que los eliminemos de inmediato.
     </p>
   </section>
 
-  <!-- â”€â”€ 10. Cambios â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
+  <!-- ── 10. Cambios ─────────────────────────────────────────────────── -->
   <section class="section" id="cambios">
     <div class="section-header">
-      <div class="section-icon purple">ðŸ”„</div>
+      <div class="section-icon purple">🔄</div>
       <div class="section-title-group">
-        <div class="section-number">SecciÃ³n 10</div>
-        <h2>Cambios a esta polÃ­tica</h2>
+        <div class="section-number">Sección 10</div>
+        <h2>Cambios a esta política</h2>
       </div>
     </div>
 
     <p>
-      Podemos actualizar esta PolÃ­tica de Privacidad para reflejar cambios en la app, en la legislaciÃ³n aplicable o en nuestras prÃ¡cticas. Cuando lo hagamos:
+      Podemos actualizar esta Política de Privacidad para reflejar cambios en la app, en la legislación aplicable o en nuestras prácticas. Cuando lo hagamos:
     </p>
     <ul style="margin: 12px 0 16px 24px; display:flex; flex-direction:column; gap:8px;">
-      <li>Actualizaremos la fecha de "Ãšltima actualizaciÃ³n" en la parte superior de este documento.</li>
+      <li>Actualizaremos la fecha de "Última actualización" en la parte superior de este documento.</li>
       <li>Te notificaremos mediante un aviso dentro de la app si los cambios son significativos.</li>
-      <li>Te pediremos que aceptes la nueva polÃ­tica antes de continuar usando la app si el cambio afecta la base legal del tratamiento.</li>
+      <li>Te pediremos que aceptes la nueva política antes de continuar usando la app si el cambio afecta la base legal del tratamiento.</li>
     </ul>
     <p>
-      El uso continuado de Surco tras la publicaciÃ³n de cambios constituye la aceptaciÃ³n de la PolÃ­tica de Privacidad actualizada.
+      El uso continuado de Surco tras la publicación de cambios constituye la aceptación de la Política de Privacidad actualizada.
     </p>
   </section>
 
-  <!-- â”€â”€ 11. Contacto â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
+  <!-- ── 11. Contacto ────────────────────────────────────────────────── -->
   <section class="section" id="contacto">
     <div class="section-header">
-      <div class="section-icon dark">âœ‰ï¸</div>
+      <div class="section-icon dark">✉️</div>
       <div class="section-title-group">
-        <div class="section-number">SecciÃ³n 11</div>
+        <div class="section-number">Sección 11</div>
         <h2>Contacto</h2>
       </div>
     </div>
 
-    <p>Si tienes preguntas, comentarios o solicitudes relacionadas con esta PolÃ­tica de Privacidad o el tratamiento de tus datos, puedes contactarnos por los siguientes medios:</p>
+    <p>Si tienes preguntas, comentarios o solicitudes relacionadas con esta Política de Privacidad o el tratamiento de tus datos, puedes contactarnos por los siguientes medios:</p>
 
     <div class="contact-card">
       <div>
-        <div class="contact-label">Correo electrÃ³nico</div>
+        <div class="contact-label">Correo electrónico</div>
         <div class="contact-value"><a href="mailto:privacidad@surco.app">privacidad@surco.app</a></div>
       </div>
       <div>
         <div class="contact-label">Asunto sugerido</div>
-        <div class="contact-value">PolÃ­tica de Privacidad â€“ Surco</div>
+        <div class="contact-value">Política de Privacidad – Surco</div>
       </div>
       <div>
         <div class="contact-label">Tiempo de respuesta</div>
-        <div class="contact-value">MÃ¡ximo 15 dÃ­as hÃ¡biles</div>
+        <div class="contact-value">Máximo 15 días hábiles</div>
       </div>
     </div>
 
     <p style="margin-top:20px; font-size:14px; color: var(--text-muted);">
-      Si no estÃ¡s satisfecho con nuestra respuesta, tienes derecho a presentar una reclamaciÃ³n ante la <strong>Superintendencia de Industria y Comercio (SIC)</strong> de Colombia, autoridad de protecciÃ³n de datos personales: <a href="https://www.sic.gov.co" target="_blank" rel="noopener" style="color: var(--verde-surco);">www.sic.gov.co</a>.
+      Si no estás satisfecho con nuestra respuesta, tienes derecho a presentar una reclamación ante la <strong>Superintendencia de Industria y Comercio (SIC)</strong> de Colombia, autoridad de protección de datos personales: <a href="https://www.sic.gov.co" target="_blank" rel="noopener" style="color: var(--verde-surco);">www.sic.gov.co</a>.
     </p>
   </section>
 
 </main>
 
-<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• FOOTER -->
+<!-- ═══════════════════════════════════════════════════════════════════ FOOTER -->
 <footer>
   <p>
-    <strong>Surco</strong> Â· TecnologÃ­a que siembra Â· Colombia
+    <strong>Surco</strong> · Tecnología que siembra · Colombia
   </p>
   <p style="margin-top:8px;">
-    Â© 2025 Surco. Todos los derechos reservados. Â·
+    © 2025 Surco. Todos los derechos reservados. ·
     <a href="mailto:privacidad@surco.app">privacidad@surco.app</a>
   </p>
   <p style="margin-top:6px; font-size:12px;">
-    Esta polÃ­tica se rige por la legislaciÃ³n colombiana (Ley 1581 de 2012) y aplica a todos los usuarios de la aplicaciÃ³n Surco en Google Play Store.
+    Esta política se rige por la legislación colombiana (Ley 1581 de 2012) y aplica a todos los usuarios de la aplicación Surco en Google Play Store.
   </p>
 </footer>
 
