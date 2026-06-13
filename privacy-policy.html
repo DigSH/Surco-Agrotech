@@ -430,6 +430,13 @@
 
     .highlight strong { color: var(--arcilla); }
 
+    .highlight.green {
+      background: rgba(42,92,63,.06);
+      border-left-color: var(--verde-surco);
+    }
+
+    .highlight.green strong { color: var(--verde-surco); }
+
     /* ── Contact card ──────────────────────────────────────────────────── */
     .contact-card {
       background: var(--tierra-oscura);
@@ -519,7 +526,6 @@
   <div class="header-inner">
     <div class="logo-row">
       <div class="logo-mark">
-        <!-- Surco leaf/sprout icon -->
         <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M14 24V10M14 10C14 10 8 6 4 8C4 8 6 18 14 18M14 10C14 10 20 6 24 8C24 8 22 18 14 18" stroke="#F5EDD8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
@@ -536,9 +542,9 @@
     </p>
 
     <div class="header-meta">
-      <div class="meta-pill"><span class="dot"></span> Versión 1.0</div>
+      <div class="meta-pill"><span class="dot"></span> Versión 2.0</div>
       <div class="meta-pill"><span class="dot"></span> Vigente desde: 1 de enero de 2025</div>
-      <div class="meta-pill"><span class="dot"></span> Última actualización: Marzo 2025</div>
+      <div class="meta-pill"><span class="dot"></span> Última actualización: 13 de junio de 2026</div>
     </div>
   </div>
 </header>
@@ -554,7 +560,8 @@
       <li><a href="#como-usamos">Cómo usamos los datos</a></li>
       <li><a href="#terceros">Terceros y servicios externos</a></li>
       <li><a href="#almacenamiento">Almacenamiento y retención</a></li>
-      <li><a href="#seguridad">Seguridad</a></li>
+      <li><a href="#seguridad">Seguridad e incidentes</a></li>
+      <li><a href="#transferencias">Transferencias internacionales</a></li>
       <li><a href="#derechos">Tus derechos</a></li>
       <li><a href="#menores">Menores de edad</a></li>
       <li><a href="#cambios">Cambios a esta política</a></li>
@@ -591,12 +598,12 @@
       </div>
       <div>
         <div class="contact-label">Correo de contacto</div>
-        <div class="contact-value"><a href="mailto:privacidad@surco.app">diego.san1296@gmail.com</a></div>
+        <div class="contact-value"><a href="mailto:privacidad@surco.app">privacidad@surco.app</a></div>
       </div>
     </div>
 
     <p>
-      Al usar Surco, aceptas el tratamiento de tus datos según lo descrito en esta Política de Privacidad, de conformidad con la <strong>Ley 1581 de 2012</strong> (Ley de Protección de Datos Personales de Colombia) y el Decreto reglamentario 1377 de 2013.
+      Al usar Surco, aceptas el tratamiento de tus datos según lo descrito en esta Política de Privacidad, de conformidad con la <strong>Ley 1581 de 2012</strong> (Ley de Protección de Datos Personales de Colombia) y el Decreto reglamentario 1377 de 2013. Para usuarios en la Unión Europea o el Reino Unido, también aplica el <strong>Reglamento General de Protección de Datos (RGPD/GDPR)</strong>.
     </p>
   </section>
 
@@ -623,18 +630,28 @@
       <tbody>
         <tr>
           <td><strong>Datos de cuenta</strong></td>
-          <td>Correo electrónico, contraseña (cifrada)</td>
+          <td>Correo electrónico, contraseña (gestionada por Firebase Authentication)</td>
           <td><span class="basis">Consentimiento</span></td>
         </tr>
         <tr>
           <td><strong>Datos de finca</strong></td>
-          <td>Nombre de la finca, descripción, área, cultivos, lotes, variedades, etapas fenológicas</td>
+          <td>Nombre de la finca, descripción, área, cultivos, lotes, variedades, etapas fenológicas, coordenadas de polígonos (GeoJSON)</td>
           <td><span class="basis">Ejecución del contrato</span></td>
         </tr>
         <tr>
           <td><strong>Eventos agrícolas</strong></td>
-          <td>Registros de labores, aplicaciones de productos, monitoreo de plagas, costos, observaciones</td>
+          <td>Registros de labores, aplicaciones de productos, monitoreo de plagas, costos, observaciones, cuaderno de campo</td>
           <td><span class="basis">Ejecución del contrato</span></td>
+        </tr>
+        <tr>
+          <td><strong>Datos pecuarios</strong></td>
+          <td>Información de hato (bovinos, porcinos), eventos reproductivos, vacunaciones, registros de peso y condición corporal, aforos de pastura</td>
+          <td><span class="basis">Ejecución del contrato</span></td>
+        </tr>
+        <tr>
+          <td><strong>Datos de cumplimiento EUDR</strong></td>
+          <td>Polígonos geoespaciales (GeoJSON) de predios, declaraciones de no-deforestación, registros de cosecha para exportación a la Unión Europea, referencias DDS</td>
+          <td><span class="basis">Obligación legal / Ejecución del contrato</span></td>
         </tr>
         <tr>
           <td><strong>Ubicación</strong></td>
@@ -643,8 +660,18 @@
         </tr>
         <tr>
           <td><strong>Imágenes</strong></td>
-          <td>Fotos de hojas/cultivos capturadas para diagnóstico de enfermedades o análisis de clorofila</td>
+          <td>Fotos de hojas, cultivos y animales capturadas para diagnóstico de enfermedades, análisis de clorofila o estimación de peso</td>
           <td><span class="basis">Consentimiento</span></td>
+        </tr>
+        <tr>
+          <td><strong>Voz (widget)</strong></td>
+          <td>Grabaciones de voz procesadas localmente para programar labores agrícolas desde el widget de pantalla de inicio. No se almacena ni transmite audio.</td>
+          <td><span class="basis">Consentimiento</span></td>
+        </tr>
+        <tr>
+          <td><strong>Datos de suscripción</strong></td>
+          <td>Estado de suscripción (free/pro/proTécnico), historial de compras e identificador anónimo de dispositivo, gestionados por RevenueCat</td>
+          <td><span class="basis">Ejecución del contrato</span></td>
         </tr>
         <tr>
           <td><strong>Datos de uso</strong></td>
@@ -653,14 +680,14 @@
         </tr>
         <tr>
           <td><strong>Datos del dispositivo</strong></td>
-          <td>Modelo, versión del SO Android, identificador de instalación (anónimo)</td>
+          <td>Modelo, versión del SO Android/iOS, identificador de instalación (anónimo)</td>
           <td><span class="basis">Interés legítimo</span></td>
         </tr>
       </tbody>
     </table>
 
     <div class="highlight">
-      <strong>Nota importante:</strong> Surco <strong>NO recopila</strong> datos financieros personales, números de identificación, información de salud ni datos de menores de edad. Los datos de costos agrícolas que registras son de tu operación y permanecen bajo tu control.
+      <strong>Nota importante:</strong> Surco <strong>NO recopila</strong> datos financieros personales (números de tarjeta, cuentas bancarias), números de identificación personal, información de salud humana ni datos de menores de edad. Los datos de costos agrícolas que registras son de tu operación y permanecen bajo tu control.
     </div>
   </section>
 
@@ -674,7 +701,7 @@
       </div>
     </div>
 
-    <p>Surco solicita los siguientes permisos en Android. Todos son opcionales: si los denegas, las funciones relacionadas no estarán disponibles pero el resto de la app seguirá funcionando.</p>
+    <p>Surco solicita los siguientes permisos en Android e iOS. Todos son opcionales: si los denegas, las funciones relacionadas no estarán disponibles pero el resto de la app seguirá funcionando.</p>
 
     <div class="permission-grid">
 
@@ -682,7 +709,7 @@
         <div class="perm-icon">📍</div>
         <div class="perm-name">Ubicación precisa / aproximada</div>
         <div class="perm-reason">
-          Para centrar el mapa en tu finca y vincular eventos climáticos a tu ubicación. Solo se accede cuando estás usando la app.
+          Para centrar el mapa en tu finca y vincular eventos climáticos a tu ubicación. Solo se accede cuando estás usando la app activamente.
         </div>
       </div>
 
@@ -690,7 +717,7 @@
         <div class="perm-icon">📷</div>
         <div class="perm-name">Cámara</div>
         <div class="perm-reason">
-          Para capturar fotos de hojas o cultivos y analizarlas con IA (detección de enfermedades, estimación de clorofila).
+          Para capturar fotos de hojas, cultivos o animales y analizarlas con IA (detección de enfermedades, estimación de clorofila o peso).
         </div>
       </div>
 
@@ -703,17 +730,33 @@
       </div>
 
       <div class="permission-card">
+        <div class="perm-icon">🎤</div>
+        <div class="perm-name">Micrófono</div>
+        <div class="perm-reason">
+          Exclusivamente para el widget de pantalla de inicio: permite dictar labores agrícolas por voz sin abrir la app. El audio se procesa localmente y no se almacena ni transmite.
+        </div>
+      </div>
+
+      <div class="permission-card">
+        <div class="perm-icon">🔔</div>
+        <div class="perm-name">Notificaciones push</div>
+        <div class="perm-reason">
+          Para enviarte alertas agronómicas contextuales: alertas fitosanitarias, recordatorios de riego, eventos fenológicos y alertas del hato.
+        </div>
+      </div>
+
+      <div class="permission-card">
         <div class="perm-icon">🌐</div>
         <div class="perm-name">Internet</div>
         <div class="perm-reason">
-          Para sincronizar tus datos con la nube, consultar el pronóstico climático y acceder al asistente de IA agronómica.
+          Para sincronizar tus datos con la nube, consultar el pronóstico climático, acceder al asistente de IA agronómica y procesar pagos de suscripción.
         </div>
       </div>
 
     </div>
 
     <p style="font-size:14px; color: var(--text-muted); margin-top:8px;">
-      Puedes revocar cualquier permiso en cualquier momento desde <em>Configuración → Aplicaciones → Surco → Permisos</em> en tu dispositivo Android.
+      Puedes revocar cualquier permiso en cualquier momento desde <em>Configuración → Aplicaciones → Surco → Permisos</em> en Android, o <em>Configuración → Surco</em> en iOS.
     </p>
   </section>
 
@@ -735,16 +778,28 @@
         <span><strong>Gestión de fincas y cultivos.</strong> Almacenar y mostrarte la información de tus predios, lotes, cultivos, labores y eventos agrícolas.</span>
       </li>
       <li style="display:flex;gap:12px;align-items:flex-start;">
+        <span style="font-size:18px; flex-shrink:0;">🐄</span>
+        <span><strong>Gestión pecuaria.</strong> Registrar y consultar datos del hato bovino y porcino: eventos reproductivos, vacunaciones, pesos, aforos y alertas sanitarias.</span>
+      </li>
+      <li style="display:flex;gap:12px;align-items:flex-start;">
         <span style="font-size:18px; flex-shrink:0;">🤖</span>
-        <span><strong>Diagnóstico con IA.</strong> Analizar las imágenes de hojas que envías para detectar enfermedades y estimar el contenido de clorofila (SPAD) directamente en tu dispositivo o mediante modelos en la nube.</span>
+        <span><strong>Diagnóstico con IA.</strong> Analizar las imágenes que envías para detectar enfermedades, estimar clorofila (SPAD) y peso animal. Los modelos básicos corren en tu dispositivo (TFLite/on-device); el <strong>asistente agronómico avanzado procesa tu consulta en servidores de Anthropic y Google</strong> con cifrado en tránsito.</span>
       </li>
       <li style="display:flex;gap:12px;align-items:flex-start;">
         <span style="font-size:18px; flex-shrink:0;">💧</span>
         <span><strong>Recomendaciones agronómicas.</strong> Calcular el balance hídrico, las unidades de calor acumuladas (GDD), el índice de presión de plagas y generar alertas personalizadas para tu cultivo.</span>
       </li>
       <li style="display:flex;gap:12px;align-items:flex-start;">
+        <span style="font-size:18px; flex-shrink:0;">🇪🇺</span>
+        <span><strong>Cumplimiento EUDR.</strong> Gestionar la documentación requerida por el Reglamento (UE) 2023/1115 para exportadores a la Unión Europea: polígonos geoespaciales, declaraciones de diligencia debida (DDS) y trazabilidad de cosecha.</span>
+      </li>
+      <li style="display:flex;gap:12px;align-items:flex-start;">
         <span style="font-size:18px; flex-shrink:0;">📋</span>
-        <span><strong>Cuaderno de campo y trazabilidad.</strong> Registrar aplicaciones de productos, generar reportes PDF con firma técnica y verificar el semáforo IIH para cumplimiento de plazos de seguridad.</span>
+        <span><strong>Cuaderno de campo y trazabilidad.</strong> Registrar aplicaciones de productos, generar reportes PDF y verificar plazos de seguridad.</span>
+      </li>
+      <li style="display:flex;gap:12px;align-items:flex-start;">
+        <span style="font-size:18px; flex-shrink:0;">💳</span>
+        <span><strong>Gestión de suscripción.</strong> Verificar y mantener tu plan (free/pro/proTécnico) a través de Google Play o App Store, con reconciliación mediante RevenueCat.</span>
       </li>
       <li style="display:flex;gap:12px;align-items:flex-start;">
         <span style="font-size:18px; flex-shrink:0;">🔐</span>
@@ -757,7 +812,7 @@
     </ul>
 
     <div class="highlight">
-      <strong>Lo que NO hacemos:</strong> No vendemos tus datos a terceros. No usamos tu información agrícola para publicidad. No compartimos datos personales identificables sin tu consentimiento, salvo requerimiento legal.
+      <strong>Lo que NO hacemos:</strong> No vendemos tus datos a terceros. No usamos tu información agrícola para publicidad. No compartimos datos personales identificables sin tu consentimiento, salvo requerimiento legal expreso. Anthropic y Google no utilizan los datos enviados a través de la API para entrenar sus modelos según sus términos de servicio para API empresarial.
     </div>
   </section>
 
@@ -771,7 +826,7 @@
       </div>
     </div>
 
-    <p>Surco integra servicios de terceros para proporcionar sus funciones. Cada proveedor tiene sus propias políticas de privacidad:</p>
+    <p>Surco integra los siguientes servicios de terceros para proporcionar sus funciones. Al usar la app, aceptas el tratamiento de datos por parte de cada proveedor conforme a sus propias políticas:</p>
 
     <ul class="third-party-list">
 
@@ -779,7 +834,7 @@
         <div class="tp-icon">🔥</div>
         <div>
           <div class="tp-name">Firebase Authentication (Google LLC)</div>
-          <div class="tp-desc">Gestiona el inicio de sesión seguro con correo electrónico. Google puede procesar datos como dirección IP y credenciales cifradas.</div>
+          <div class="tp-desc">Gestiona el inicio de sesión seguro con correo electrónico. Google procesa datos como dirección IP y credenciales de acceso mediante sus mecanismos de seguridad propios. <strong>Datos compartidos:</strong> correo electrónico, dirección IP durante autenticación.</div>
           <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">→ Política de Firebase</a>
         </div>
       </li>
@@ -788,7 +843,7 @@
         <div class="tp-icon">☁️</div>
         <div>
           <div class="tp-name">Cloud Firestore (Google LLC)</div>
-          <div class="tp-desc">Base de datos en la nube donde se almacenan tus fincas, lotes y datos agrícolas. Los servidores pueden estar en EE. UU. o la Unión Europea.</div>
+          <div class="tp-desc">Base de datos en la nube donde se almacenan tus fincas, lotes, datos agrícolas y pecuarios. Los servidores pueden estar en EE. UU. o la Unión Europea. <strong>Datos compartidos:</strong> toda la información de finca y eventos que sincronizas.</div>
           <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">→ Política de Firebase</a>
         </div>
       </li>
@@ -796,9 +851,36 @@
       <li>
         <div class="tp-icon">🧠</div>
         <div>
+          <div class="tp-name">Anthropic Claude API (Anthropic PBC)</div>
+          <div class="tp-desc">Motor de IA que procesa consultas al asistente agronómico avanzado. Cuando usas el chat de IA o el diagnóstico por imágenes con el asistente cloud, tu mensaje, contexto de finca e imágenes son procesados por Anthropic en sus servidores en EE.UU. Según los términos de API de Anthropic, los datos no se utilizan para entrenar modelos. <strong>Datos compartidos:</strong> texto de consulta, contexto de finca (nombre, cultivo, lote), imágenes cuando se adjuntan.</div>
+          <a href="https://www.anthropic.com/legal/privacy" target="_blank" rel="noopener">→ Política de privacidad de Anthropic</a>
+        </div>
+      </li>
+
+      <li>
+        <div class="tp-icon">🤖</div>
+        <div>
           <div class="tp-name">Google Gemini API (Google LLC)</div>
-          <div class="tp-desc">Motor de IA que procesa tus consultas al asistente agronómico. Las imágenes y textos que envías al chat son procesados por Google en sus servidores. No se usan para entrenar modelos sin consentimiento explícito.</div>
+          <div class="tp-desc">Motor de IA alternativo que procesa consultas al asistente agronómico. Las imágenes y textos que envías al chat son procesados por Google en sus servidores. Según los términos de la API de Gemini para uso empresarial, no se usan para entrenar modelos sin consentimiento explícito. <strong>Datos compartidos:</strong> texto de consulta, contexto de finca, imágenes cuando se adjuntan.</div>
           <a href="https://ai.google.dev/gemini-api/terms" target="_blank" rel="noopener">→ Términos de la API de Gemini</a>
+        </div>
+      </li>
+
+      <li>
+        <div class="tp-icon">🔀</div>
+        <div>
+          <div class="tp-name">Proxy IA (Hugging Face / Google Cloud Run)</div>
+          <div class="tp-desc">Las consultas al asistente de IA se enrutan a través de un servidor intermediario (proxy) operado por Surco, alojado en Hugging Face Spaces o Google Cloud Run según el entorno. Este proxy recibe y reenvía el texto e imágenes de tu consulta a los proveedores de IA (Anthropic o Google). El proxy no almacena permanentemente el contenido de las consultas y opera bajo cifrado HTTPS. <strong>Datos en tránsito:</strong> texto de consulta, contexto de finca, imágenes adjuntas.</div>
+          <a href="https://huggingface.co/privacy" target="_blank" rel="noopener">→ Política de Hugging Face</a>
+        </div>
+      </li>
+
+      <li>
+        <div class="tp-icon">💳</div>
+        <div>
+          <div class="tp-name">RevenueCat (RevenueCat Inc.)</div>
+          <div class="tp-desc">Plataforma de gestión de suscripciones in-app. Recibe y procesa datos relacionados con tus compras en Google Play o App Store para verificar y mantener tu plan de suscripción. <strong>Datos compartidos:</strong> identificador anónimo de usuario (UID de Firebase), historial de compras, estado de suscripción, plataforma (Android/iOS), país inferido por tienda.</div>
+          <a href="https://www.revenuecat.com/privacy" target="_blank" rel="noopener">→ Política de RevenueCat</a>
         </div>
       </li>
 
@@ -806,7 +888,7 @@
         <div class="tp-icon">📊</div>
         <div>
           <div class="tp-name">Firebase Analytics (Google LLC)</div>
-          <div class="tp-desc">Recopila datos anonimizados sobre cómo se usan las funciones de la app. No recopila datos personales identificables. Puedes optar por no participar en la configuración del dispositivo.</div>
+          <div class="tp-desc">Recopila datos anonimizados sobre cómo se usan las funciones de la app para ayudarnos a mejorar el producto. No recopila datos personales identificables. Puedes optar por no participar en la configuración del dispositivo. <strong>Datos compartidos:</strong> eventos de uso anónimos, modelo de dispositivo, versión de app.</div>
           <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">→ Política de Google</a>
         </div>
       </li>
@@ -815,8 +897,17 @@
         <div class="tp-icon">🐛</div>
         <div>
           <div class="tp-name">Firebase Crashlytics (Google LLC)</div>
-          <div class="tp-desc">Registra reportes de errores y crashes de forma automática para ayudarnos a mejorar la estabilidad. Los reportes incluyen información del dispositivo (modelo, versión de Android) pero no datos personales.</div>
+          <div class="tp-desc">Registra reportes de errores y crashes de forma automática para ayudarnos a mejorar la estabilidad. Los reportes incluyen información del dispositivo (modelo, versión de Android/iOS) pero no datos personales ni contenido de finca. <strong>Datos compartidos:</strong> stack trace del error, modelo y versión del SO del dispositivo.</div>
           <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">→ Política de Firebase</a>
+        </div>
+      </li>
+
+      <li>
+        <div class="tp-icon">☁️</div>
+        <div>
+          <div class="tp-name">Open-Meteo</div>
+          <div class="tp-desc">Proveedor de datos meteorológicos de código abierto. Al consultar el pronóstico climático, la app envía las coordenadas de tu finca al servidor de Open-Meteo para obtener el pronóstico local. <strong>Datos compartidos:</strong> coordenadas GPS de tu finca, dirección IP del dispositivo.</div>
+          <a href="https://open-meteo.com/en/terms" target="_blank" rel="noopener">→ Términos de Open-Meteo</a>
         </div>
       </li>
 
@@ -824,16 +915,16 @@
         <div class="tp-icon">🗺️</div>
         <div>
           <div class="tp-name">OpenStreetMap</div>
-          <div class="tp-desc">Proveedor de mapas de código abierto. Al visualizar el mapa, tu dispositivo descarga teselas (tiles) del servidor de OpenStreetMap, que puede registrar tu dirección IP.</div>
+          <div class="tp-desc">Proveedor de mapas de código abierto. Al visualizar el mapa, tu dispositivo descarga teselas (tiles) del servidor de OpenStreetMap, que puede registrar tu dirección IP. <strong>Datos compartidos:</strong> dirección IP del dispositivo.</div>
           <a href="https://osmfoundation.org/wiki/Privacy_Policy" target="_blank" rel="noopener">→ Política de OpenStreetMap</a>
         </div>
       </li>
 
     </ul>
 
-    <p style="font-size:14px; color: var(--text-muted);">
-      Todos los proveedores listados son miembros del Marco de Privacidad de Datos UE-EE.UU. o cuentan con cláusulas contractuales estándar aprobadas para la transferencia internacional de datos.
-    </p>
+    <div class="highlight green">
+      <strong>Compromiso:</strong> Evaluamos periódicamente a nuestros proveedores para asegurarnos de que cumplen estándares de privacidad equivalentes o superiores a los requeridos por la legislación colombiana y el RGPD. Si incorporamos un nuevo proveedor que acceda a datos personales, actualizaremos esta política antes de activarlo.
+    </div>
   </section>
 
   <!-- ── 6. Almacenamiento y retención ────────────────────────────────── -->
@@ -848,9 +939,10 @@
 
     <h3>Dónde se almacenan tus datos</h3>
     <ul style="margin: 12px 0 20px 20px; display:flex; flex-direction:column; gap:8px;">
-      <li><strong>Localmente en tu dispositivo:</strong> Hive (base de datos NoSQL local). Tus datos están disponibles sin conexión a internet.</li>
-      <li><strong>En la nube:</strong> Google Cloud (Firebase / Firestore). Los servidores pueden estar en EE.UU., Europa o cualquier región disponible de Google Cloud.</li>
-      <li><strong>Imágenes de análisis:</strong> Se procesan en memoria o en almacenamiento local temporal. No se suben permanentemente a ningún servidor sin tu acción explícita.</li>
+      <li><strong>Localmente en tu dispositivo:</strong> Base de datos cifrada local (Hive). Tus datos agrícolas y pecuarios están disponibles sin conexión a internet.</li>
+      <li><strong>En la nube:</strong> Google Cloud (Firebase / Firestore). Los servidores pueden estar en EE.UU., Europa u otras regiones disponibles de Google Cloud.</li>
+      <li><strong>Imágenes de análisis:</strong> Se procesan en memoria o en almacenamiento local temporal para el diagnóstico on-device. Las imágenes enviadas al asistente de IA cloud se transmiten cifradas y no se almacenan permanentemente en los servidores de Surco.</li>
+      <li><strong>Suscripciones:</strong> El estado y el historial de suscripción se almacenan en los servidores de RevenueCat y se sincronizan con Firestore.</li>
     </ul>
 
     <h3>Por cuánto tiempo conservamos tus datos</h3>
@@ -864,11 +956,19 @@
       <tbody>
         <tr>
           <td>Datos de cuenta y fincas</td>
-          <td>Mientras tu cuenta esté activa. Se eliminan a los 30 días de solicitar la eliminación.</td>
+          <td>Mientras tu cuenta esté activa. Se eliminan dentro de los <strong>60 días hábiles</strong> siguientes a solicitar la eliminación.</td>
         </tr>
         <tr>
-          <td>Eventos y registros agrícolas</td>
+          <td>Eventos y registros agrícolas / pecuarios</td>
           <td>Mientras tu cuenta esté activa o hasta que los elimines manualmente.</td>
+        </tr>
+        <tr>
+          <td>Datos de cumplimiento EUDR</td>
+          <td>Mínimo 5 años desde la declaración, según lo exige el Reglamento (UE) 2023/1115, o hasta eliminación de cuenta si no aplica obligación legal.</td>
+        </tr>
+        <tr>
+          <td>Datos de suscripción (RevenueCat)</td>
+          <td>Máximo 3 años desde la última transacción, según la política de retención de RevenueCat y requisitos contables aplicables.</td>
         </tr>
         <tr>
           <td>Datos de analítica (Firebase Analytics)</td>
@@ -878,17 +978,21 @@
           <td>Reportes de crashes (Crashlytics)</td>
           <td>90 días en los servidores de Firebase.</td>
         </tr>
+        <tr>
+          <td>Logs del proxy IA</td>
+          <td>No se almacenan de forma permanente. Los logs operativos del servidor se eliminan en un máximo de 30 días.</td>
+        </tr>
       </tbody>
     </table>
   </section>
 
-  <!-- ── 7. Seguridad ────────────────────────────────────────────────── -->
+  <!-- ── 7. Seguridad e incidentes ──────────────────────────────────── -->
   <section class="section" id="seguridad">
     <div class="section-header">
       <div class="section-icon blue">🛡️</div>
       <div class="section-title-group">
         <div class="section-number">Sección 07</div>
-        <h2>Seguridad</h2>
+        <h2>Seguridad e incidentes</h2>
       </div>
     </div>
 
@@ -902,32 +1006,109 @@
       </div>
       <div class="right-card">
         <div class="right-icon">🔑</div>
-        <div class="right-title">Contraseñas seguras</div>
-        <div class="right-desc">Las contraseñas se cifran con bcrypt por Firebase Authentication. Nunca las almacenamos en texto plano.</div>
+        <div class="right-title">Autenticación segura</div>
+        <div class="right-desc">Las credenciales son gestionadas por Firebase Authentication usando mecanismos de seguridad de nivel enterprise. Nunca almacenamos contraseñas en texto plano.</div>
       </div>
       <div class="right-card">
         <div class="right-icon">📵</div>
         <div class="right-title">Acceso restringido</div>
-        <div class="right-desc">Solo tú puedes acceder a tus fincas. Las reglas de seguridad de Firestore verifican identidad en cada operación.</div>
+        <div class="right-desc">Solo tú puedes acceder a tus fincas. Las reglas de seguridad de Firestore verifican identidad en cada operación de lectura y escritura.</div>
       </div>
       <div class="right-card">
         <div class="right-icon">🤖</div>
         <div class="right-title">IA on-device</div>
-        <div class="right-desc">El modelo de detección de enfermedades corre directamente en tu dispositivo (TFLite) sin enviar imágenes a servidores.</div>
+        <div class="right-desc">Los modelos de detección básica de enfermedades corren localmente en tu dispositivo (TFLite) sin enviar imágenes a servidores. El asistente agronómico avanzado sí utiliza servidores externos con cifrado.</div>
+      </div>
+      <div class="right-card">
+        <div class="right-icon">🔐</div>
+        <div class="right-title">Datos locales cifrados</div>
+        <div class="right-desc">La base de datos local (Hive) que contiene datos sensibles (animales, eventos) está cifrada con AES-256 en tu dispositivo.</div>
+      </div>
+      <div class="right-card">
+        <div class="right-icon">🛡️</div>
+        <div class="right-title">Integridad de la app</div>
+        <div class="right-desc">La app publicada en Google Play está protegida mediante Play App Signing, que garantiza que solo versiones auténticas de Surco pueden autenticarse con nuestros servicios.</div>
       </div>
     </div>
 
+    <h3>Notificación de incidentes de seguridad</h3>
+    <p>
+      En caso de una brecha de seguridad que pueda afectar tus datos personales, nos comprometemos a:
+    </p>
+    <ul style="margin: 12px 0 16px 24px; display:flex; flex-direction:column; gap:8px;">
+      <li>Notificarte a tu correo electrónico registrado dentro de los <strong>5 días hábiles</strong> siguientes a la confirmación del incidente.</li>
+      <li>Informar a la <strong>Superintendencia de Industria y Comercio (SIC)</strong> conforme a los plazos establecidos por la Ley 1581 de 2012.</li>
+      <li>Notificar a las autoridades de protección de datos competentes en la UE o UK en un plazo máximo de 72 horas cuando aplique el RGPD.</li>
+      <li>Describir en la notificación la naturaleza del incidente, los datos afectados, las medidas tomadas y los pasos recomendados para los usuarios.</li>
+    </ul>
+
     <div class="highlight" style="margin-top:20px;">
-      <strong>Responsabilidad compartida:</strong> Ningún sistema es 100% seguro. Te recomendamos usar una contraseña fuerte y no compartir tu cuenta con terceros. Si detectas acceso no autorizado, contáctanos de inmediato.
+      <strong>Responsabilidad compartida:</strong> Ningún sistema es 100% seguro. Te recomendamos usar una contraseña fuerte y no compartir tu cuenta con terceros. Si detectas acceso no autorizado o actividad sospechosa en tu cuenta, contáctanos de inmediato a <a href="mailto:privacidad@surco.app" style="color: var(--arcilla);">privacidad@surco.app</a>.
     </div>
   </section>
 
-  <!-- ── 8. Derechos ────────────────────────────────────────────────── -->
+  <!-- ── 8. Transferencias internacionales ──────────────────────────── -->
+  <section class="section" id="transferencias">
+    <div class="section-header">
+      <div class="section-icon purple">🌍</div>
+      <div class="section-title-group">
+        <div class="section-number">Sección 08</div>
+        <h2>Transferencias internacionales de datos</h2>
+      </div>
+    </div>
+
+    <p>
+      Algunos de nuestros proveedores almacenan o procesan datos fuera de Colombia. Cuando esto ocurre, garantizamos que existen salvaguardas adecuadas:
+    </p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Proveedor</th>
+          <th>País / Región</th>
+          <th>Mecanismo de garantía</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Google (Firebase, Firestore, Gemini)</td>
+          <td>EE.UU. / UE (según región)</td>
+          <td>Cláusulas Contractuales Estándar (SCCs) de la UE · Marco de Privacidad UE-EE.UU.</td>
+        </tr>
+        <tr>
+          <td>Anthropic (Claude API)</td>
+          <td>EE.UU.</td>
+          <td>Términos de servicio API con cláusulas de protección de datos · Sin entrenamiento con datos de API</td>
+        </tr>
+        <tr>
+          <td>Hugging Face (proxy staging)</td>
+          <td>EE.UU. / UE</td>
+          <td>Política de privacidad de Hugging Face · Datos en tránsito, sin almacenamiento permanente</td>
+        </tr>
+        <tr>
+          <td>RevenueCat</td>
+          <td>EE.UU.</td>
+          <td>Cláusulas Contractuales Estándar (SCCs) · Política de privacidad empresarial</td>
+        </tr>
+        <tr>
+          <td>Open-Meteo</td>
+          <td>Alemania (UE)</td>
+          <td>Operado bajo legislación RGPD · Código abierto sin retención de datos personales</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>
+      Al aceptar esta Política de Privacidad, consientes expresamente la transferencia de tus datos a los países indicados, en los términos aquí descritos y de conformidad con el artículo 26 de la Ley 1581 de 2012.
+    </p>
+  </section>
+
+  <!-- ── 9. Derechos ────────────────────────────────────────────────── -->
   <section class="section" id="derechos">
     <div class="section-header">
       <div class="section-icon green">⚖️</div>
       <div class="section-title-group">
-        <div class="section-number">Sección 08</div>
+        <div class="section-number">Sección 09</div>
         <h2>Tus derechos</h2>
       </div>
     </div>
@@ -948,77 +1129,82 @@
       <div class="right-card">
         <div class="right-icon">🗑️</div>
         <div class="right-title">Eliminación</div>
-        <div class="right-desc">Solicitar que eliminemos tu cuenta y todos tus datos asociados.</div>
+        <div class="right-desc">Solicitar que eliminemos tu cuenta y todos tus datos asociados. Los datos de cumplimiento EUDR sujetos a obligación legal pueden conservarse por el período legalmente requerido.</div>
       </div>
       <div class="right-card">
         <div class="right-icon">📤</div>
         <div class="right-title">Portabilidad</div>
-        <div class="right-desc">Recibir una copia de tus datos en formato estructurado y legible.</div>
+        <div class="right-desc">Recibir una copia de tus datos en formato estructurado y legible (JSON o CSV).</div>
       </div>
       <div class="right-card">
         <div class="right-icon">🚫</div>
         <div class="right-title">Oposición</div>
-        <div class="right-desc">Oponerte al tratamiento de tus datos para fines de analítica.</div>
+        <div class="right-desc">Oponerte al tratamiento de tus datos para fines de analítica o marketing.</div>
       </div>
       <div class="right-card">
         <div class="right-icon">⏸️</div>
         <div class="right-title">Limitación</div>
-        <div class="right-desc">Solicitar que suspendamos el procesamiento de tus datos en ciertos casos.</div>
+        <div class="right-desc">Solicitar que suspendamos el procesamiento de tus datos en ciertos casos mientras se resuelve una disputa.</div>
       </div>
     </div>
 
     <div class="divider"></div>
 
     <p>Para ejercer cualquiera de estos derechos, escríbenos a <strong><a href="mailto:privacidad@surco.app" style="color: var(--verde-surco);">privacidad@surco.app</a></strong> con el asunto <em>"Ejercicio de derechos HABEAS DATA"</em>. Responderemos dentro de los <strong>15 días hábiles</strong> siguientes a la recepción de tu solicitud.</p>
+
+    <p style="margin-top:14px; font-size:14px; color: var(--text-muted);">
+      Si no estás satisfecho con nuestra respuesta, puedes presentar una reclamación ante la <strong>Superintendencia de Industria y Comercio (SIC)</strong>: <a href="https://www.sic.gov.co" target="_blank" rel="noopener" style="color: var(--verde-surco);">www.sic.gov.co</a>. Los usuarios en la UE pueden acudir a la autoridad de protección de datos de su país miembro.
+    </p>
   </section>
 
-  <!-- ── 9. Menores ──────────────────────────────────────────────────── -->
+  <!-- ── 10. Menores ──────────────────────────────────────────────────── -->
   <section class="section" id="menores">
     <div class="section-header">
       <div class="section-icon red">👶</div>
       <div class="section-title-group">
-        <div class="section-number">Sección 09</div>
+        <div class="section-number">Sección 10</div>
         <h2>Menores de edad</h2>
       </div>
     </div>
 
     <p>
-      Surco es una aplicación diseñada para agricultores, técnicos agropecuarios y profesionales del campo. <strong>No está dirigida a personas menores de 14 años</strong> y no recopilamos conscientemente datos de menores.
+      Surco es una aplicación diseñada para agricultores, técnicos agropecuarios y profesionales del campo. <strong>No está dirigida a personas menores de 14 años</strong> (18 años en jurisdicciones donde el RGPD aplique con mayoría de edad digital superior) y no recopilamos conscientemente datos de menores.
     </p>
     <p>
-      Si eres padre/madre o tutor y crees que tu hijo ha proporcionado datos personales en nuestra app, contáctanos a <a href="mailto:privacidad@surco.app" style="color: var(--verde-surco);">privacidad@surco.app</a> para que los eliminemos de inmediato.
+      Si eres padre/madre o tutor y crees que tu hijo ha proporcionado datos personales en nuestra app, contáctanos a <a href="mailto:privacidad@surco.app" style="color: var(--verde-surco);">privacidad@surco.app</a> para que los eliminemos de inmediato y sin costo.
     </p>
   </section>
 
-  <!-- ── 10. Cambios ─────────────────────────────────────────────────── -->
+  <!-- ── 11. Cambios ─────────────────────────────────────────────────── -->
   <section class="section" id="cambios">
     <div class="section-header">
       <div class="section-icon purple">🔄</div>
       <div class="section-title-group">
-        <div class="section-number">Sección 10</div>
+        <div class="section-number">Sección 11</div>
         <h2>Cambios a esta política</h2>
       </div>
     </div>
 
     <p>
-      Podemos actualizar esta Política de Privacidad para reflejar cambios en la app, en la legislación aplicable o en nuestras prácticas. Cuando lo hagamos:
+      Podemos actualizar esta Política de Privacidad para reflejar cambios en la app, en los servicios de terceros, en la legislación aplicable o en nuestras prácticas. Cuando lo hagamos:
     </p>
     <ul style="margin: 12px 0 16px 24px; display:flex; flex-direction:column; gap:8px;">
       <li>Actualizaremos la fecha de "Última actualización" en la parte superior de este documento.</li>
       <li>Te notificaremos mediante un aviso dentro de la app si los cambios son significativos.</li>
-      <li>Te pediremos que aceptes la nueva política antes de continuar usando la app si el cambio afecta la base legal del tratamiento.</li>
+      <li>Te pediremos que aceptes la nueva política antes de continuar usando la app si el cambio afecta la base legal del tratamiento o incorpora nuevos terceros con acceso a datos personales.</li>
+      <li>Mantendremos versiones anteriores de esta política disponibles bajo solicitud a <a href="mailto:privacidad@surco.app" style="color: var(--verde-surco);">privacidad@surco.app</a>.</li>
     </ul>
     <p>
-      El uso continuado de Surco tras la publicación de cambios constituye la aceptación de la Política de Privacidad actualizada.
+      El uso continuado de Surco tras la publicación de cambios no significativos constituye la aceptación de la Política de Privacidad actualizada.
     </p>
   </section>
 
-  <!-- ── 11. Contacto ────────────────────────────────────────────────── -->
+  <!-- ── 12. Contacto ────────────────────────────────────────────────── -->
   <section class="section" id="contacto">
     <div class="section-header">
       <div class="section-icon dark">✉️</div>
       <div class="section-title-group">
-        <div class="section-number">Sección 11</div>
+        <div class="section-number">Sección 12</div>
         <h2>Contacto</h2>
       </div>
     </div>
@@ -1041,7 +1227,7 @@
     </div>
 
     <p style="margin-top:20px; font-size:14px; color: var(--text-muted);">
-      Si no estás satisfecho con nuestra respuesta, tienes derecho a presentar una reclamación ante la <strong>Superintendencia de Industria y Comercio (SIC)</strong> de Colombia, autoridad de protección de datos personales: <a href="https://www.sic.gov.co" target="_blank" rel="noopener" style="color: var(--verde-surco);">www.sic.gov.co</a>.
+      Si no estás satisfecho con nuestra respuesta, tienes derecho a presentar una reclamación ante la <strong>Superintendencia de Industria y Comercio (SIC)</strong> de Colombia, autoridad de protección de datos personales: <a href="https://www.sic.gov.co" target="_blank" rel="noopener" style="color: var(--verde-surco);">www.sic.gov.co</a>. Usuarios en la Unión Europea pueden acudir a la autoridad de protección de datos de su país miembro.
     </p>
   </section>
 
@@ -1053,11 +1239,11 @@
     <strong>Surco</strong> · Tecnología que siembra · Colombia
   </p>
   <p style="margin-top:8px;">
-    © 2025 Surco. Todos los derechos reservados. ·
+    © 2026 Surco. Todos los derechos reservados. ·
     <a href="mailto:privacidad@surco.app">privacidad@surco.app</a>
   </p>
   <p style="margin-top:6px; font-size:12px;">
-    Esta política se rige por la legislación colombiana (Ley 1581 de 2012) y aplica a todos los usuarios de la aplicación Surco en Google Play Store.
+    Esta política se rige por la legislación colombiana (Ley 1581 de 2012) y aplica a todos los usuarios de la aplicación Surco en Google Play Store y App Store. Para usuarios en la UE/UK aplica adicionalmente el RGPD.
   </p>
 </footer>
 
