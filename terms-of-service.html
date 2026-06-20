@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<!--
+  ╔══════════════════════════════════════════════════════════════════════════╗
+  ║  BORRADOR — REVISAR CON UN ABOGADO ANTES DE PUBLICAR                       ║
+  ║  Este documento NO es asesoría legal. Antes de publicarlo, que lo revise   ║
+  ║  un abogado con licencia en Colombia (y en EE.UU. si listas allí).         ║
+  ║                                                                            ║
+  ║  TODO / placeholders a confirmar por Diego:                                ║
+  ║   1. Entidad legal: si Surco se constituye como sociedad (SAS, etc.),      ║
+  ║      reemplazar "Diego Sanabria" por la razón social + NIT.                ║
+  ║   2. Agente / correo para avisos legales y de derechos de autor            ║
+  ║      (§7). Considera crear legal@surco.app o dmca@surco.app.               ║
+  ║   3. Arbitraje (§14): confirmar centro/sede en Colombia y, si listas en    ║
+  ║      EE.UU., el administrador (AAA o JAMS) y la sede.                       ║
+  ║   4. Fecha de vigencia y versión.                                          ║
+  ║   5. Si registras agente DMCA en copyright.gov, añade sus datos en §7.     ║
+  ╚══════════════════════════════════════════════════════════════════════════╝
+-->
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Términos de Servicio de Surco — condiciones de uso de la aplicación de IA para agricultura y ganadería." />
+  <title>Términos de Servicio — Surco</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --ink:         #111008;
+      --ink-soft:    #3D3228;
+      --muted:       #6B5B44;
+      --rule:        #E0D5C0;
+      --surface:     #FFFFFF;
+      --bg:          #FAF7F2;
+      --accent:      #C4501A;
+      --green:       #2A5C3F;
+      --green-light: #EBF4EE;
+      --link:        #1A3D5C;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 400;
+      background: var(--bg);
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.8;
+    }
+
+    /* ── Top bar ── */
+    .topbar {
+      background: var(--ink);
+      padding: 0 40px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .topbar-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .topbar-leaf {
+      width: 32px; height: 32px;
+      background: var(--accent);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .topbar-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 800;
+      color: #FAF7F2;
+      letter-spacing: -0.2px;
+    }
+
+    .topbar-legal {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(250,247,242,.45);
+    }
+
+    /* ── Document header ── */
+    .doc-header {
+      max-width: 720px;
+      margin: 72px auto 0;
+      padding: 0 40px;
+      border-bottom: 1px solid var(--rule);
+      padding-bottom: 48px;
+    }
+
+    .doc-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    .doc-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(32px, 5vw, 48px);
+      font-weight: 700;
+      line-height: 1.15;
+      color: var(--ink);
+      margin-bottom: 24px;
+    }
+
+    .doc-intro {
+      font-size: 17px;
+      color: var(--ink-soft);
+      line-height: 1.75;
+      max-width: 600px;
+      margin-bottom: 32px;
+    }
+
+    .doc-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 28px;
+    }
+
+    .meta-item { }
+    .meta-item .meta-key {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 2px;
+    }
+    .meta-item .meta-val {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    /* ── Layout ── */
+    .layout {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 40px;
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+
+    /* ── TOC ── */
+    .toc-block {
+      margin: 56px 0 0;
+      padding: 32px 36px;
+      background: var(--surface);
+      border: 1px solid var(--rule);
+      border-radius: 16px;
+    }
+
+    .toc-block h2 {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    .toc-block ol {
+      padding-left: 20px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px 40px;
+    }
+
+    .toc-block a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--link);
+      text-decoration: none;
+      line-height: 2;
+    }
+
+    .toc-block a:hover { color: var(--accent); text-decoration: underline; }
+
+    @media (max-width: 560px) { .toc-block ol { grid-template-columns: 1fr; } }
+
+    /* ── Sections ── */
+    .section {
+      margin-top: 72px;
+      scroll-margin-top: 32px;
+    }
+
+    .section-number {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.25;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 2px solid var(--rule);
+    }
+
+    .section h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--ink);
+      margin: 32px 0 10px;
+    }
+
+    .section p {
+      font-size: 15px;
+      color: var(--ink-soft);
+      margin-bottom: 16px;
+      line-height: 1.8;
+    }
+
+    .section p:last-child { margin-bottom: 0; }
+
+    .section ul, .section ol {
+      margin: 12px 0 20px 0;
+      padding-left: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .section ul li, .section ol li {
+      font-size: 15px;
+      color: var(--ink-soft);
+      padding-left: 20px;
+      position: relative;
+      line-height: 1.7;
+    }
+
+    .section ul li::before {
+      content: '–';
+      position: absolute;
+      left: 0;
+      color: var(--muted);
+    }
+
+    .section ol { counter-reset: li; }
+    .section ol li { counter-increment: li; }
+    .section ol li::before {
+      content: counter(li) '.';
+      position: absolute;
+      left: 0;
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 13px;
+    }
+
+    /* ── Callout ── */
+    .callout {
+      margin: 28px 0;
+      padding: 20px 24px;
+      border-left: 3px solid var(--accent);
+      background: rgba(196,80,26,.05);
+      border-radius: 0 8px 8px 0;
+      font-size: 14px;
+      color: var(--ink-soft);
+      line-height: 1.7;
+    }
+
+    .callout.green {
+      border-left-color: var(--green);
+      background: var(--green-light);
+    }
+
+    .callout strong { color: var(--ink); }
+
+    /* ── Contact card ── */
+    .contact-block {
+      margin-top: 28px;
+      padding: 28px 32px;
+      background: var(--ink);
+      border-radius: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 28px;
+    }
+
+    .contact-field .cf-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: rgba(250,247,242,.5);
+      margin-bottom: 4px;
+    }
+
+    .contact-field .cf-value {
+      font-size: 15px;
+      font-weight: 500;
+      color: #FAF7F2;
+    }
+
+    .contact-field a { color: #8DC49A; text-decoration: none; }
+    .contact-field a:hover { text-decoration: underline; }
+
+    /* ── Footer ── */
+    footer {
+      margin-top: 96px;
+      border-top: 1px solid var(--rule);
+      padding: 40px;
+      text-align: center;
+    }
+
+    footer p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    footer a { color: var(--link); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    /* ── Responsive ── */
+    @media (max-width: 640px) {
+      .topbar { padding: 0 20px; }
+      .topbar-legal { display: none; }
+      .doc-header { padding: 0 20px 40px; margin-top: 48px; }
+      .layout { padding: 0 20px; }
+      .toc-block { padding: 24px 20px; }
+      .section h2 { font-size: 22px; }
+      footer { padding: 32px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Top bar ─────────────────────────────────────────────────────── -->
+<nav class="topbar">
+  <a class="topbar-brand" href="#">
+    <div class="topbar-leaf">
+      <svg width="18" height="18" viewBox="0 0 28 28" fill="none">
+        <path d="M14 24V10M14 10C14 10 8 6 4 8C4 8 6 18 14 18M14 10C14 10 20 6 24 8C24 8 22 18 14 18" stroke="#FAF7F2" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <span class="topbar-name">Surco</span>
+  </a>
+  <span class="topbar-legal">Políticas legales</span>
+</nav>
+
+<!-- ── Document header ────────────────────────────────────────────── -->
+<header class="doc-header">
+  <div class="doc-label">Documento legal</div>
+  <h1 class="doc-title">Términos de Servicio</h1>
+  <p class="doc-intro">
+    Estos términos son el acuerdo entre tú y Surco sobre el uso de la aplicación. Los escribimos para que se puedan leer y entender. Al crear una cuenta o usar Surco, aceptas estas condiciones; si no estás de acuerdo, por favor no uses el servicio.
+  </p>
+  <div class="doc-meta">
+    <div class="meta-item">
+      <div class="meta-key">Versión</div>
+      <div class="meta-val">1.0</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-key">Fecha de vigencia</div>
+      <div class="meta-val">19 de junio de 2026</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-key">Aplica a</div>
+      <div class="meta-val">Surco para Android e iOS</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-key">Ley aplicable</div>
+      <div class="meta-val">República de Colombia</div>
+    </div>
+  </div>
+</header>
+
+<!-- ── Body ───────────────────────────────────────────────────────── -->
+<div class="layout">
+
+  <!-- TOC -->
+  <nav class="toc-block">
+    <h2>En esta página</h2>
+    <ol>
+      <li><a href="#aceptacion">Aceptación de los términos</a></li>
+      <li><a href="#servicio">Qué es Surco</a></li>
+      <li><a href="#cuenta">Cuenta y elegibilidad</a></li>
+      <li><a href="#uso-aceptable">Uso aceptable</a></li>
+      <li><a href="#contenido">Tu contenido y datos</a></li>
+      <li><a href="#propiedad">Propiedad intelectual de Surco</a></li>
+      <li><a href="#derechos-autor">Derechos de autor y retiro</a></li>
+      <li><a href="#ia">Inteligencia artificial y diagnósticos</a></li>
+      <li><a href="#suscripcion">Suscripciones y pagos</a></li>
+      <li><a href="#terceros">Servicios y datos de terceros</a></li>
+      <li><a href="#garantias">Exención de garantías</a></li>
+      <li><a href="#responsabilidad">Limitación de responsabilidad</a></li>
+      <li><a href="#indemnizacion">Indemnización</a></li>
+      <li><a href="#disputas">Resolución de disputas y ley aplicable</a></li>
+      <li><a href="#terminacion">Suspensión y terminación</a></li>
+      <li><a href="#cambios">Cambios a los términos</a></li>
+      <li><a href="#general">Disposiciones generales</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ol>
+  </nav>
+
+  <!-- ── 1. Aceptación ───────────────────────────────────────────── -->
+  <section class="section" id="aceptacion">
+    <div class="section-number">Sección 1</div>
+    <h2>Aceptación de los términos</h2>
+
+    <p>Estos Términos de Servicio (los «Términos») constituyen un acuerdo legalmente vinculante entre tú (el «usuario») y Diego Sanabria, con sede en Colombia, desarrollador y operador de la aplicación Surco (en adelante «Surco», «nosotros» o «el servicio»). Al descargar, instalar, crear una cuenta o usar Surco de cualquier forma, declaras que has leído, entendido y aceptado estos Términos y nuestra <a href="privacy-policy.html" style="color:var(--link);">Política de Privacidad</a>, que forma parte integral de este acuerdo.</p>
+
+    <p>Si usas Surco en nombre de una organización (por ejemplo, una hacienda, cooperativa o empresa agropecuaria), declaras que tienes autoridad para vincular a esa organización a estos Términos, y «tú» se refiere también a dicha organización.</p>
+
+    <p>Si no aceptas estos Términos, no debes usar el servicio.</p>
+  </section>
+
+  <!-- ── 2. Qué es Surco ─────────────────────────────────────────── -->
+  <section class="section" id="servicio">
+    <div class="section-number">Sección 2</div>
+    <h2>Qué es Surco</h2>
+
+    <p>Surco es una aplicación móvil de apoyo a la gestión agrícola y ganadera que ofrece, entre otras funciones: detección asistida de enfermedades en cultivos mediante visión por computadora, estimación de peso de bovinos y porcinos a partir de imágenes, análisis de clorofila, gestión de fincas y lotes, alertas fitosanitarias, fenología, riego, economía, módulo pecuario, un asesor con inteligencia artificial, consulta de precios de referencia (SIPSA/DANE), notificaciones, herramientas de cumplimiento normativo (incluido el módulo EUDR) y un canal de WhatsApp.</p>
+
+    <p>Surco es una <strong>herramienta de apoyo a la decisión</strong>. No presta servicios de asesoría profesional agronómica, veterinaria, financiera, jurídica ni de ninguna otra índole regulada, y no sustituye el criterio de un profesional. Las decisiones que tomes con base en la información de la app son de tu exclusiva responsabilidad. Consulta la <a href="#ia" style="color:var(--link);">Sección 8</a> para los detalles sobre la inteligencia artificial.</p>
+
+    <p>Nos reservamos el derecho de modificar, suspender o descontinuar cualquier función del servicio, total o parcialmente, en cualquier momento. Algunas funciones pueden requerir conexión a internet, permisos del dispositivo o una suscripción de pago.</p>
+  </section>
+
+  <!-- ── 3. Cuenta y elegibilidad ────────────────────────────────── -->
+  <section class="section" id="cuenta">
+    <div class="section-number">Sección 3</div>
+    <h2>Cuenta y elegibilidad</h2>
+
+    <p>Para usar la mayoría de las funciones debes crear una cuenta. Te comprometes a proporcionar información veraz y a mantenerla actualizada. Eres responsable de la confidencialidad de tus credenciales y de toda la actividad que ocurra en tu cuenta. Notifícanos de inmediato si detectas un uso no autorizado.</p>
+
+    <p>Surco está destinada a personas mayores de edad o a menores que la usen bajo la supervisión y con el consentimiento de un adulto responsable. El servicio no está dirigido a menores de 13 años y no recopilamos conscientemente sus datos. Si eres responsable de un menor y crees que nos ha facilitado información, contáctanos para eliminarla.</p>
+
+    <p>Puedes eliminar tu cuenta y tus datos en cualquier momento desde <em>Ajustes → Eliminar cuenta</em> dentro de la app, o escribiéndonos al correo de contacto.</p>
+  </section>
+
+  <!-- ── 4. Uso aceptable ────────────────────────────────────────── -->
+  <section class="section" id="uso-aceptable">
+    <div class="section-number">Sección 4</div>
+    <h2>Uso aceptable</h2>
+
+    <p>Al usar Surco aceptas <strong>no</strong>:</p>
+    <ul>
+      <li>Usar el servicio para fines ilícitos o en violación de cualquier ley o reglamento aplicable.</li>
+      <li>Subir contenido que infrinja derechos de propiedad intelectual, de privacidad o de imagen de terceros.</li>
+      <li>Cargar imágenes o datos que no tengas derecho a usar, o que contengan datos personales de terceros sin su autorización.</li>
+      <li>Intentar acceder sin autorización a los sistemas, cuentas o datos de otros usuarios.</li>
+      <li>Realizar ingeniería inversa, descompilar o extraer los modelos de inteligencia artificial, el código o los datos de la app, salvo en la medida permitida por la ley.</li>
+      <li>Introducir malware, sobrecargar la infraestructura, eludir límites de uso o de seguridad, o automatizar el acceso sin nuestro permiso.</li>
+      <li>Manipular las funciones de IA mediante instrucciones diseñadas para inducir respuestas dañinas, falsas o que evadan las salvaguardas del sistema.</li>
+      <li>Revender, sublicenciar o explotar comercialmente el servicio sin autorización escrita.</li>
+    </ul>
+
+    <p>El incumplimiento de esta sección puede dar lugar a la suspensión o terminación de tu cuenta, sin perjuicio de otras acciones legales.</p>
+  </section>
+
+  <!-- ── 5. Tu contenido ─────────────────────────────────────────── -->
+  <section class="section" id="contenido">
+    <div class="section-number">Sección 5</div>
+    <h2>Tu contenido y datos</h2>
+
+    <p>Conservas la titularidad de todo el contenido que creas o subes a Surco: fotografías de cultivos y animales, polígonos y coordenadas de tus fincas, registros de labores, datos del hato, documentos de cumplimiento y cualquier otra información que aportes (tu «Contenido»).</p>
+
+    <p>Para poder operar el servicio, nos concedes una licencia mundial, no exclusiva, libre de regalías y limitada para alojar, almacenar, procesar, copiar y mostrar tu Contenido con el único fin de prestarte y mejorar el servicio (por ejemplo, ejecutar el diagnóstico, sincronizar tus datos entre dispositivos o generar reportes). Esta licencia termina cuando eliminas el Contenido o tu cuenta, salvo copias de respaldo o cuando la ley exija conservarlo. El tratamiento de tus datos personales se rige por la <a href="privacy-policy.html" style="color:var(--link);">Política de Privacidad</a>.</p>
+
+    <p>Eres responsable de tu Contenido y declaras que tienes los derechos necesarios para subirlo. Podemos eliminar Contenido que infrinja estos Términos o la ley.</p>
+
+    <div class="callout">
+      <strong>Datos de cumplimiento (EUDR y similares).</strong> Cuando generes declaraciones, polígonos o documentos de debida diligencia (por ejemplo, para el Reglamento UE 2023/1115), eres el único responsable de la exactitud y veracidad de la información que ingresas. Surco facilita la elaboración y el formato de estos documentos, pero no certifica su contenido ni garantiza su aceptación ante ninguna autoridad.
+    </div>
+  </section>
+
+  <!-- ── 6. Propiedad intelectual de Surco ───────────────────────── -->
+  <section class="section" id="propiedad">
+    <div class="section-number">Sección 6</div>
+    <h2>Propiedad intelectual de Surco</h2>
+
+    <p>El servicio, incluido su software, diseño, interfaz, marca, logotipos, textos, modelos de inteligencia artificial y bases de datos propias, es propiedad de Surco o de sus licenciantes y está protegido por las leyes de propiedad intelectual. Te concedemos una licencia personal, limitada, revocable, intransferible y no exclusiva para usar la app conforme a estos Términos.</p>
+
+    <p>Nada en estos Términos te transfiere derechos de propiedad intelectual sobre el servicio. Las marcas, nombres y logotipos de terceros que aparezcan en la app pertenecen a sus respectivos titulares y se muestran únicamente con fines informativos o de atribución.</p>
+  </section>
+
+  <!-- ── 7. Derechos de autor y retiro ───────────────────────────── -->
+  <section class="section" id="derechos-autor">
+    <div class="section-number">Sección 7</div>
+    <h2>Derechos de autor y política de retiro</h2>
+
+    <p>Respetamos la propiedad intelectual y esperamos que nuestros usuarios hagan lo mismo. Si crees que contenido disponible en el servicio infringe tus derechos de autor, envíanos un aviso al correo de contacto que incluya:</p>
+    <ol>
+      <li>Tu nombre, firma (física o electrónica) y datos de contacto.</li>
+      <li>La identificación de la obra protegida que consideras infringida.</li>
+      <li>La identificación y ubicación del material presuntamente infractor dentro del servicio.</li>
+      <li>Una declaración de buena fe de que el uso no está autorizado por el titular, su agente o la ley.</li>
+      <li>Una declaración, bajo tu responsabilidad, de que la información del aviso es veraz y de que estás autorizado para actuar en nombre del titular.</li>
+    </ol>
+
+    <p>Retiraremos con prontitud el material que corresponda tras un aviso válido y podremos terminar las cuentas de quienes infrinjan de forma reiterada. Si tu contenido fue retirado por error, puedes enviarnos una contranotificación.</p>
+
+    <div class="callout">
+      <strong>Usuarios y titulares en Estados Unidos.</strong> Para reclamaciones bajo la <em>Digital Millennium Copyright Act</em> (DMCA, 17 U.S.C. § 512), dirige los avisos a nuestro agente designado en el correo de contacto. <!-- TODO: si registras un agente DMCA en copyright.gov, indica aquí su nombre, dirección y correo. -->
+    </div>
+  </section>
+
+  <!-- ── 8. IA ───────────────────────────────────────────────────── -->
+  <section class="section" id="ia">
+    <div class="section-number">Sección 8</div>
+    <h2>Inteligencia artificial y diagnósticos</h2>
+
+    <p>Surco utiliza inteligencia artificial —modelos que se ejecutan en tu dispositivo y asistentes en la nube— como <strong>herramienta de apoyo a la decisión</strong>. Es importante que entiendas sus límites:</p>
+
+    <ul>
+      <li>Los resultados (detección de enfermedades, estimaciones de peso, recomendaciones del asesor, análisis de imágenes) son <strong>estimaciones probabilísticas</strong>, no diagnósticos profesionales ni mediciones certificadas.</li>
+      <li>Su exactitud varía según la calidad de la imagen, el cultivo o especie, la iluminación, las condiciones de captura y otros factores. Las métricas de desempeño que podamos publicar (por ejemplo, mAP en validación) se obtienen en condiciones de laboratorio y no garantizan el mismo resultado en campo.</li>
+      <li>La IA puede equivocarse, producir resultados incompletos o inexactos («alucinaciones») y no debe usarse como única base para decisiones con consecuencias sanitarias, económicas, ambientales o regulatorias.</li>
+      <li>Surco <strong>no sustituye</strong> el criterio de un agrónomo, veterinario, ingeniero u otro profesional. Antes de tomar decisiones importantes, verifica los resultados críticos por medios independientes (báscula, laboratorio, inspección presencial o un especialista).</li>
+    </ul>
+
+    <p>No declaramos que la IA de Surco esté libre de error o sesgo, ni ofrecemos garantías de exactitud más allá de lo expresamente indicado. El usuario es el único responsable de las decisiones que adopte a partir de la información generada por el servicio.</p>
+
+    <div class="callout green">
+      Algunas funciones de IA se procesan a través de proveedores externos (por ejemplo, Anthropic y Google). El uso de esas funciones está sujeto también a las condiciones de dichos proveedores. El detalle de qué datos se comparten y cómo se tratan está en la <a href="privacy-policy.html" style="color:var(--link);">Política de Privacidad</a>.
+    </div>
+  </section>
+
+  <!-- ── 9. Suscripciones y pagos ────────────────────────────────── -->
+  <section class="section" id="suscripcion">
+    <div class="section-number">Sección 9</div>
+    <h2>Suscripciones y pagos</h2>
+
+    <p>Surco ofrece funciones gratuitas y planes de pago (por ejemplo, «Surco Pro»). Las suscripciones se contratan y cobran a través de las tiendas de aplicaciones (Google Play o App Store) conforme a sus condiciones y a las del procesador de pagos correspondiente.</p>
+
+    <ul>
+      <li>El precio, las funciones incluidas y la periodicidad de cada plan se muestran en la app antes de la compra.</li>
+      <li>Salvo que se indique lo contrario, las suscripciones <strong>se renuevan automáticamente</strong> al final de cada período. Puedes cancelar la renovación en cualquier momento desde la configuración de tu cuenta en la tienda; la cancelación surte efecto al final del período ya pagado.</li>
+      <li>Los <strong>reembolsos</strong> se rigen por la política de la tienda a través de la cual compraste, además de los derechos irrenunciables que te otorgue la ley de protección al consumidor aplicable (en Colombia, la Ley 1480 de 2011, incluido el derecho de retracto cuando proceda).</li>
+      <li>Podemos modificar los precios y la composición de los planes; los cambios no afectan el período ya pagado y se te comunicarán con antelación razonable.</li>
+    </ul>
+  </section>
+
+  <!-- ── 10. Terceros ────────────────────────────────────────────── -->
+  <section class="section" id="terceros">
+    <div class="section-number">Sección 10</div>
+    <h2>Servicios y datos de terceros</h2>
+
+    <p>Surco integra datos y servicios de terceros —entre otros, información meteorológica (Open-Meteo), mapas (OpenStreetMap), precios de referencia del SIPSA (DANE), registros del ICA, modelos de IA (Anthropic, Google) y servicios de infraestructura (Firebase, RevenueCat)—. Estos datos se ofrecen con fines informativos y pueden contener imprecisiones, retrasos o estar sujetos a las condiciones de sus proveedores.</p>
+
+    <div class="callout">
+      <strong>Sin afiliación gubernamental.</strong> Surco es una aplicación privada e independiente. No es una entidad gubernamental ni está afiliada, autorizada o patrocinada por el DANE, el ICA ni por ninguna entidad pública. Los precios SIPSA y los registros de plaguicidas se consultan de fuentes públicas oficiales únicamente con fines informativos.
+    </div>
+
+    <p>No somos responsables de la disponibilidad, exactitud ni del contenido de los servicios de terceros, ni de las decisiones que tomes con base en ellos.</p>
+  </section>
+
+  <!-- ── 11. Garantías ───────────────────────────────────────────── -->
+  <section class="section" id="garantias">
+    <div class="section-number">Sección 11</div>
+    <h2>Exención de garantías</h2>
+
+    <p>En la máxima medida permitida por la ley aplicable, el servicio se proporciona «<strong>tal cual</strong>» y «según disponibilidad», sin garantías de ningún tipo, expresas o implícitas, incluidas las garantías implícitas de comerciabilidad, idoneidad para un fin particular, exactitud o no infracción. No garantizamos que el servicio sea ininterrumpido, seguro o libre de errores, ni que los resultados generados sean exactos o confiables.</p>
+
+    <p>Nada en estos Términos excluye o limita las garantías o derechos que la ley imperativa de protección al consumidor te reconozca y que no puedan ser excluidos por acuerdo.</p>
+  </section>
+
+  <!-- ── 12. Limitación de responsabilidad ───────────────────────── -->
+  <section class="section" id="responsabilidad">
+    <div class="section-number">Sección 12</div>
+    <h2>Limitación de responsabilidad</h2>
+
+    <p>En la máxima medida permitida por la ley, Surco y sus desarrolladores no serán responsables por daños indirectos, incidentales, especiales, consecuenciales o punitivos, ni por pérdida de cosechas, ganado, ingresos, datos, fondo de comercio u otras pérdidas intangibles, derivados de o relacionados con el uso o la imposibilidad de usar el servicio, incluso si se nos advirtió de la posibilidad de tales daños.</p>
+
+    <p>En la máxima medida permitida por la ley, nuestra responsabilidad total acumulada por cualquier reclamación relacionada con el servicio no excederá el mayor de: (a) el monto que hayas pagado por el servicio en los doce (12) meses anteriores al hecho que origina la reclamación, o (b) cincuenta dólares de los Estados Unidos (USD 50).</p>
+
+    <p>Estas limitaciones no aplican a la responsabilidad que no pueda excluirse o limitarse conforme a la ley imperativa aplicable, incluida la derivada de dolo o culpa grave, o de los derechos irrenunciables del consumidor.</p>
+  </section>
+
+  <!-- ── 13. Indemnización ───────────────────────────────────────── -->
+  <section class="section" id="indemnizacion">
+    <div class="section-number">Sección 13</div>
+    <h2>Indemnización</h2>
+
+    <p>Aceptas mantener indemne a Surco y a sus desarrolladores frente a reclamaciones, daños, pérdidas y gastos razonables (incluidos honorarios de abogados) derivados de: (a) tu uso del servicio en infracción de estos Términos o de la ley; (b) tu Contenido; o (c) la vulneración de derechos de terceros por tu parte. Esta obligación se aplica en la medida permitida por la ley y no respecto de los consumidores cuando dicha ley lo prohíba.</p>
+  </section>
+
+  <!-- ── 14. Disputas ────────────────────────────────────────────── -->
+  <section class="section" id="disputas">
+    <div class="section-number">Sección 14</div>
+    <h2>Resolución de disputas y ley aplicable</h2>
+
+    <p>Estos Términos se rigen por las leyes de la República de Colombia, sin perjuicio de las normas imperativas de protección al consumidor del país donde residas.</p>
+
+    <h3>Resolución amistosa previa</h3>
+    <p>Antes de iniciar cualquier acción formal, aceptas intentar resolver la controversia de buena fe contactándonos en el correo de contacto. La mayoría de las dudas se resuelven así. Si no se llega a una solución en un plazo de sesenta (60) días, cualquiera de las partes podrá acudir a las vías que correspondan.</p>
+
+    <h3>Jurisdicción (general)</h3>
+    <p>Salvo lo dispuesto para usuarios en Estados Unidos, las controversias que no se resuelvan amistosamente se someterán a los jueces y tribunales competentes de Colombia. Si eres consumidor, conservas el derecho de acudir a las autoridades de protección al consumidor de tu país de residencia (en Colombia, la Superintendencia de Industria y Comercio).</p>
+
+    <h3>Usuarios en Estados Unidos — arbitraje y renuncia a acciones colectivas</h3>
+    <p>Si resides en Estados Unidos, tú y Surco acuerdan que cualquier disputa que surja de o se relacione con estos Términos o el servicio se resolverá mediante <strong>arbitraje individual, definitivo y vinculante</strong>, y no ante un tribunal, salvo que puedas presentar reclamaciones que califiquen ante un tribunal de menor cuantía (<em>small claims court</em>). Tú y Surco renuncian al juicio por jurado y a participar en cualquier acción de clase, colectiva o representativa. El arbitraje será administrado por <!-- TODO: AAA o JAMS -->[administrador de arbitraje] conforme a sus reglas aplicables, con sede en <!-- TODO: ciudad/estado -->[sede]. Esta subsección se interpreta conforme a la <em>Federal Arbitration Act</em>.</p>
+
+    <div class="callout">
+      Esta cláusula de arbitraje y renuncia a acciones colectivas aplica <strong>únicamente</strong> a usuarios residentes en Estados Unidos y solo en la medida permitida por la ley. No limita los derechos irrenunciables de los consumidores en Colombia ni en otras jurisdicciones cuya ley imperativa impida tales renuncias.
+    </div>
+  </section>
+
+  <!-- ── 15. Terminación ─────────────────────────────────────────── -->
+  <section class="section" id="terminacion">
+    <div class="section-number">Sección 15</div>
+    <h2>Suspensión y terminación</h2>
+
+    <p>Puedes dejar de usar Surco y eliminar tu cuenta en cualquier momento. Podemos suspender o terminar tu acceso, total o parcialmente, si incumples estos Términos, si tu uso representa un riesgo legal o de seguridad, o si dejamos de prestar el servicio. Cuando sea razonable y legalmente posible, te avisaremos con antelación.</p>
+
+    <p>Tras la terminación, cesan las licencias que te concedimos. Las secciones que por su naturaleza deban subsistir (propiedad intelectual, exención de garantías, limitación de responsabilidad, indemnización, resolución de disputas y disposiciones generales) seguirán vigentes.</p>
+  </section>
+
+  <!-- ── 16. Cambios ─────────────────────────────────────────────── -->
+  <section class="section" id="cambios">
+    <div class="section-number">Sección 16</div>
+    <h2>Cambios a los términos</h2>
+
+    <p>Podemos actualizar estos Términos para reflejar cambios en el servicio o en la ley. Cuando los cambios sean significativos, te lo notificaremos por medios razonables (por ejemplo, dentro de la app o por correo) antes de que entren en vigor. La fecha de vigencia en la cabecera indica la última actualización. Si continúas usando Surco después de la entrada en vigor, se entenderá que aceptas los Términos revisados; si no estás de acuerdo, debes dejar de usar el servicio.</p>
+  </section>
+
+  <!-- ── 17. Disposiciones generales ─────────────────────────────── -->
+  <section class="section" id="general">
+    <div class="section-number">Sección 17</div>
+    <h2>Disposiciones generales</h2>
+
+    <ul>
+      <li><strong>Acuerdo íntegro.</strong> Estos Términos y la Política de Privacidad constituyen el acuerdo completo entre tú y Surco respecto del servicio.</li>
+      <li><strong>Divisibilidad.</strong> Si alguna disposición se declara inválida o inaplicable, las demás seguirán en pleno vigor.</li>
+      <li><strong>No renuncia.</strong> El que no ejerzamos un derecho no implica renuncia a él.</li>
+      <li><strong>Cesión.</strong> No puedes ceder estos Términos sin nuestro consentimiento; nosotros podemos cederlos en el marco de una reorganización o transferencia del servicio, preservando tus derechos.</li>
+      <li><strong>Fuerza mayor.</strong> No seremos responsables por incumplimientos derivados de causas fuera de nuestro control razonable.</li>
+      <li><strong>Idioma.</strong> La versión en español de estos Términos prevalece sobre cualquier traducción.</li>
+    </ul>
+  </section>
+
+  <!-- ── 18. Contacto ────────────────────────────────────────────── -->
+  <section class="section" id="contacto">
+    <div class="section-number">Sección 18</div>
+    <h2>Contacto</h2>
+
+    <p>Para cualquier asunto relacionado con estos Términos, avisos legales o de derechos de autor:</p>
+
+    <div class="contact-block">
+      <div class="contact-field">
+        <div class="cf-label">Correo electrónico</div>
+        <div class="cf-value"><a href="mailto:privacidad@surco.app">privacidad@surco.app</a></div>
+      </div>
+      <div class="contact-field">
+        <div class="cf-label">Asunto</div>
+        <div class="cf-value">Términos de Servicio — Surco</div>
+      </div>
+      <div class="contact-field">
+        <div class="cf-label">Tiempo de respuesta</div>
+        <div class="cf-value">15 días hábiles</div>
+      </div>
+      <div class="contact-field">
+        <div class="cf-label">Responsable</div>
+        <div class="cf-value">Diego Sanabria · Colombia</div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ── Footer ─────────────────────────────────────────────────────── -->
+<footer>
+  <p>
+    <strong style="color:var(--ink);">Surco</strong> · Tecnología que siembra · Colombia
+  </p>
+  <p style="margin-top:6px;">
+    © 2026 Surco. Todos los derechos reservados. ·
+    <a href="privacy-policy.html">Política de Privacidad</a> ·
+    <a href="mailto:privacidad@surco.app">privacidad@surco.app</a>
+  </p>
+  <p style="margin-top:8px; font-size:12px;">
+    Ley aplicable: República de Colombia · Protección al consumidor: Ley 1480 de 2011
+  </p>
+</footer>
+
+</body>
+</html>
